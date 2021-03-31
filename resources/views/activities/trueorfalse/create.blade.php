@@ -17,11 +17,11 @@
                     <div class="form-group">
                         <label for="options">La respuesta es: </label>
                         <div class="inline ml-2">
-                            <input type="radio" name="option_trueorfalse" id="options"
-                                class="w-5 h-5 text-green-500 form-radio" checked>
+                            <input type="radio" name="answer" id="options" class="w-5 h-5 text-green-500 form-radio"
+                                value="true" checked>
                             <span class="ml-2">Verdadera</span>
-                            <input type="radio" name="option_trueorfalse" id="options"
-                                class="w-5 h-5 ml-4 text-red-500 form-radio">
+                            <input type="radio" name="answer" id="options" class="w-5 h-5 ml-4 text-red-500 form-radio"
+                                value="false">
                             <span class="ml-2">Falsa</span>
                         </div>
                     </div>
