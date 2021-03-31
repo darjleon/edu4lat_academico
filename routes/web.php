@@ -14,5 +14,5 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, '__invoke'])->name('home.index');
-    Route::get('/true-or-false', [ActivitiesController::class, 'index'])->name('act_true_or_false');
+    Route::get('/true-or-false', [ActivitiesController::class, 'create_trueorfalse'])->name('act_true_or_false');
 });

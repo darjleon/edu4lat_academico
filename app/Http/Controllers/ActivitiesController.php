@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class ActivitiesController extends Controller
 {
-    public function index()
+    public function create_trueorfalse()
     {
         return view('activities.trueorfalse.create');
     }
