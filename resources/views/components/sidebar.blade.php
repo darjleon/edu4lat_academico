@@ -1,5 +1,5 @@
 <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
-<div x-show="open" class="fixed inset-0 flex z-40 md:hidden"
+<div x-show="open" class="fixed inset-0 z-40 flex md:hidden"
     x-description="Off-canvas menu for mobile, show/hide based on off-canvas menu state." x-ref="dialog" role="dialog"
     aria-modal="true">
 
@@ -16,18 +16,18 @@
         x-transition:leave="transition ease-in-out duration-300 transform" x-transition:leave-start="translate-x-0"
         x-transition:leave-end="-translate-x-full"
         x-description="Off-canvas menu, show/hide based on off-canvas menu state."
-        class="relative flex-1 flex flex-col max-w-xs w-full bg-gray-800">
+        class="relative flex flex-col flex-1 w-full max-w-xs bg-gray-800">
 
         <div x-show="open" x-transition:enter="ease-in-out duration-300" x-transition:enter-start="opacity-0"
             x-transition:enter-end="opacity-100" x-transition:leave="ease-in-out duration-300"
             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
             x-description="Close button, show/hide based on off-canvas menu state."
-            class="absolute top-0 right-0 -mr-12 pt-2">
+            class="absolute top-0 right-0 pt-2 -mr-12">
             <button
-                class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                class="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                 @click="open = false">
                 <span class="sr-only">Close sidebar</span>
-                <svg class="h-6 w-6 text-white" x-description="Heroicon name: outline/x"
+                <svg class="w-6 h-6 text-white" x-description="Heroicon name: outline/x"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
@@ -37,18 +37,18 @@
         </div>
 
         <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
-            <div class="flex-shrink-0 flex items-center px-4">
-                <img class="h-8 w-auto"
+            <div class="flex items-center flex-shrink-0 px-4">
+                <img class="w-auto h-8"
                     src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg" alt="Workflow">
             </div>
-            <nav class="mt-5 px-2 space-y-1">
+            <nav class="px-2 mt-5 space-y-1">
 
 
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a href="{{ route('home.index') }}"
-                    class="bg-gray-900 text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                    class="flex items-center px-2 py-2 text-base font-medium text-white bg-gray-900 rounded-md group">
                     <!-- Current: "text-gray-300", Default: "text-gray-400 group-hover:text-gray-300" -->
-                    <svg class="text-gray-300 mr-4 h-6 w-6" x-description="Heroicon name: outline/home"
+                    <svg class="w-6 h-6 mr-4 text-gray-300" x-description="Heroicon name: outline/home"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                         aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -60,8 +60,8 @@
 
 
                 {{-- <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                    <svg class="text-gray-400 group-hover:text-gray-300 mr-4 h-6 w-6"
+                    class="flex items-center px-2 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                    <svg class="w-6 h-6 mr-4 text-gray-400 group-hover:text-gray-300"
                         x-description="Heroicon name: outline/users" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -73,8 +73,8 @@
 
 
                 <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                    <svg class="text-gray-400 group-hover:text-gray-300 mr-4 h-6 w-6"
+                    class="flex items-center px-2 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                    <svg class="w-6 h-6 mr-4 text-gray-400 group-hover:text-gray-300"
                         x-description="Heroicon name: outline/folder" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -85,8 +85,8 @@
 
 
                 <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                    <svg class="text-gray-400 group-hover:text-gray-300 mr-4 h-6 w-6"
+                    class="flex items-center px-2 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                    <svg class="w-6 h-6 mr-4 text-gray-400 group-hover:text-gray-300"
                         x-description="Heroicon name: outline/calendar" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -98,8 +98,8 @@
 
 
                 <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                    <svg class="text-gray-400 group-hover:text-gray-300 mr-4 h-6 w-6"
+                    class="flex items-center px-2 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                    <svg class="w-6 h-6 mr-4 text-gray-400 group-hover:text-gray-300"
                         x-description="Heroicon name: outline/inbox" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -111,8 +111,8 @@
 
 
                 <a href="#"
-                    class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-base font-medium rounded-md">
-                    <svg class="text-gray-400 group-hover:text-gray-300 mr-4 h-6 w-6"
+                    class="flex items-center px-2 py-2 text-base font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                    <svg class="w-6 h-6 mr-4 text-gray-400 group-hover:text-gray-300"
                         x-description="Heroicon name: outline/chart-bar" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -124,11 +124,11 @@
 
             </nav>
         </div>
-        <div class="flex-shrink-0 flex bg-gray-700 p-4">
-            <a href="#" class="flex-shrink-0 group block">
+        <div class="flex flex-shrink-0 p-4 bg-gray-700">
+            <a href="#" class="flex-shrink-0 block group">
                 <div class="flex items-center">
                     <div>
-                        <img class="inline-block h-10 w-10 rounded-full"
+                        <img class="inline-block w-10 h-10 rounded-full"
                             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixqx=98rR53XqPJ&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
                             alt="">
                     </div>
@@ -154,19 +154,19 @@
 <div class="hidden md:flex md:flex-shrink-0">
     <div class="flex flex-col w-64">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
-        <div class="flex flex-col h-0 flex-1 bg-gray-800">
-            <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+        <div class="flex flex-col flex-1 h-0 bg-gray-800">
+            <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
                 <div class="flex items-center flex-shrink-0 px-4">
-                    <img class="h-8 w-auto"
+                    <img class="w-auto h-8"
                         src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
                         alt="Workflow">
                 </div>
-                <nav class="mt-5 flex-1 px-2 bg-gray-800 space-y-1">
+                <nav class="flex-1 px-2 mt-5 space-y-1 bg-gray-800">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     <a href="{{ route('home.index') }}"
-                        class="bg-gray-900 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                        class="flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group">
                         <!-- Current: "text-gray-300", Default: "text-gray-400 group-hover:text-gray-300" -->
-                        <svg class="text-gray-300 mr-3 h-6 w-6" x-description="Heroicon name: outline/home"
+                        <svg class="w-6 h-6 mr-3 text-gray-300" x-description="Heroicon name: outline/home"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                             aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -176,10 +176,21 @@
                         Home
                     </a>
 
+                    <a href="{{ route('quiz.index') }}"
+                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
+                            x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                            </path>
+                        </svg>
+                        Administrar pruebas
+                    </a>
 
                     <a href="#"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                        <svg class="text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6"
+                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
                             x-description="Heroicon name: outline/users" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -191,8 +202,8 @@
 
 
                     {{-- <a href="#"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                        <svg class="text-gray-400 group-hover:text-gray-300 mr-3 h-6 w-6"
+                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
                             x-description="Heroicon name: outline/users" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -204,11 +215,11 @@
 
                 </nav>
             </div>
-            <div class="flex-shrink-0 flex bg-gray-700 p-4">
-                <a href="#" class="flex-shrink-0 w-full group block">
+            <div class="flex flex-shrink-0 p-4 bg-gray-700">
+                <a href="#" class="flex-shrink-0 block w-full group">
                     <div class="flex items-center">
                         <div>
-                            <img class="inline-block h-9 w-9 rounded-full"
+                            <img class="inline-block rounded-full h-9 w-9"
                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixqx=98rR53XqPJ&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
                                 alt="">
                         </div>
