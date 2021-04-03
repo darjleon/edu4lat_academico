@@ -10,6 +10,6 @@ class Activity extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id', 'activity_type_id', 'enunciado', 'opciones', 'respuesta', 'adjunto',
+        'id', 'activity_type_id', 'nivel', 'area', 'enunciado', 'opciones', 'respuesta', 'adjunto',
     ];
 }

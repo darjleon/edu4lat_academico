@@ -19,11 +19,14 @@ class CreateQuizzesTable extends Migration
             $table->foreign('creador_id')
                 ->references('id')
                 ->on('users');
+            $table->string('curso')->nullable();
+            $table->enum('area', ['Matematicas', 'Lenguaje', 'Sociales', 'Naturales', 'Historia']);
+            $table->enum('nivel', ['Inicial', 'Basica', 'Medio', 'Bachillerato']);
             $table->string('titulo');
-            $table->text('descripcion');
-            $table->date('inicio');
-            $table->date('fin');
-            $table->enum('estado',['Sin concluir','concluida']);
+            $table->text('descripcion')->nullable();
+            $table->dateTime('inicio');
+            $table->dateTime('fin');
+            $table->enum('estado', ['Sin realizar', 'Realizada'])->default('Sin realizar');
             $table->timestamps();
         });
     }

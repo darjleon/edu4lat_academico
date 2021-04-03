@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quiz;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class QuizController extends Controller
 {
 
     public function index()
     {
-        return view('quiz.opcionQuiz');
+        $pruebas = DB::table('quizzes')
+            ->orderBy('id', 'desc')->paginate(10);
+        $usuarios = User::all();
+        return view('quiz.opcionQuiz', compact('pruebas'), compact('usuarios'));
     }
 
     public function create()
