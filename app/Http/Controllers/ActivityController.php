@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\User;
+use App\Models\Activities_type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ActivityController extends Controller
 {
@@ -14,7 +17,10 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        return view('quiz.administrarActividades');
+        $actividades = DB::table('activities')
+            ->orderBy('id', 'desc')->paginate(10);
+        $act_tipo = Activities_type::all();
+        return view('quiz.administrarActividades', compact('actividades'), compact('act_tipo'));
     }
 
     /**
