@@ -24,9 +24,10 @@ class CreateQuizzesTable extends Migration
             $table->enum('nivel', ['Inicial', 'Basica', 'Medio', 'Bachillerato']);
             $table->string('titulo');
             $table->text('descripcion')->nullable();
-            $table->dateTime('inicio');
-            $table->dateTime('fin');
-            $table->enum('estado', ['Sin realizar', 'Realizada'])->default('Sin realizar');
+            $table->date('fecha');
+            $table->Time('inicio');
+            $table->Time('fin');
+            $table->enum('estado', ['Pendiente', 'Realizada'])->default('Pendiente');
             $table->timestamps();
         });
     }
