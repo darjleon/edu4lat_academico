@@ -10,4 +10,9 @@ class ActivitiesController extends Controller
     {
         return view('activities.trueorfalse.create');
     }
+
+    public function create_complete()
+    {
+        return view('activities.complete.create');
+    }
 }
