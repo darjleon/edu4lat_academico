@@ -15,4 +15,9 @@ class ActivitiesController extends Controller
     {
         return view('activities.complete.create');
     }
+
+    public function create_select_correct()
+    {
+        return view('activities.selectthecorrect.create');
+    }
 }

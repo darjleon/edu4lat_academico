@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-header-title>
-        Completa el enunciado
+        Selecciona la Respuesta correcta
     </x-header-title>
 
     <x-container>
