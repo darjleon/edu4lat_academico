@@ -18,7 +18,18 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'email' => 'daniel@gmail.com'
         ]);
-
+        User::factory()->create([
+            'email' => 'jose@gmail.com'
+        ]);
+        User::factory()->create([
+            'email' => 'maria@gmail.com'
+        ]);
+        User::factory()->create([
+            'email' => 'pepe@gmail.com'
+        ]);
+        User::factory()->create([
+            'email' => 'mario@gmail.com'
+        ]);
         Activities_type::create([
             'nombre' => 'Verdadero o Falso',
             'descripcion' => 'El enunciado es verdadero o falso',

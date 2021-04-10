@@ -17,13 +17,26 @@
                             class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
                             placeholder="Opcional">{{ old('descripcion') }}</textarea>
                     </div>
-                    <div class="flex justify-around space-x-4">
+                    <div class="flex justify-around space-x-3">
+                        <div class="flex flex-col">
+                            <div class="input-group-prepend">
+                                <label class="leading-loose input-group-text" for="curso">Curso</label>
+                            </div>
+                            <select id="curso"
+                                class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                name="curso">
+                                <option value="{{ old('curso') }}">Curso: {{ old('curso') }}</option>
+                                @foreach ($cursos as $curso)
+                                    <option value="{{ $curso }}">{{ $curso }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="flex flex-col">
                             <div class="input-group-prepend">
                                 <label class="leading-loose input-group-text" for="area">Area</label>
                             </div>
                             <select
-                                class="w-full px-16 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                class="w-full py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
                                 id="area" name="area" required>
                                 <option value="{{ old('area') }}">Area: {{ old('area') }}</option>
                                 @foreach ($areas as $area)
@@ -36,7 +49,7 @@
                                 <label class="input-group-text" for="nivel">Nivel</label>
                             </div>
                             <select
-                                class="w-full px-16 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                class="w-full py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
                                 id="nivel" name="nivel" required>
                                 <option value="{{ old('nivel') }}">Nivel: {{ old('nivel') }}</option>
                                 @foreach ($niveles as $nivel)

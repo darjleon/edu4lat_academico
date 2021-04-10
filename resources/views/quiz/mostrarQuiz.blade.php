@@ -20,10 +20,18 @@
                     <div class="flex justify-around space-x-4">
                         <div class="flex flex-col">
                             <div class="input-group-prepend">
+                                <label class="leading-loose input-group-text" for="curso">Curso:</label>
+                            </div>
+                            <input type="text" id="curso" name="curso" value="{{ $prueba->curso }}"
+                                class="w-full py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
+                                readonly>
+                        </div>
+                        <div class="flex flex-col">
+                            <div class="input-group-prepend">
                                 <label class="leading-loose input-group-text" for="area">Area:</label>
                             </div>
                             <input type="text" id="area" name="area" value="{{ $prueba->area }}"
-                                class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
+                                class="w-full py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
                                 readonly>
                         </div>
                         <div class="flex flex-col">
@@ -31,14 +39,14 @@
                                 <label class="input-group-text" for="nivel">Nivel:</label>
                             </div>
                             <input type="text" id="nivel" name="nivel" value="{{ $prueba->nivel }}"
-                                class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
+                                class="w-full py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
                                 readonly>
                         </div>
                     </div>
                     <div class="flex flex-col">
                         <label class="leading-loose" for="fecha">Fecha de la
                             prueba</label>
-                        <input value="{{ $prueba->Fecha }}"
+                        <input value="{{ $prueba->fecha }}"
                             class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
                             name="fecha" id="fecha" type="date" readonly>
                     </div>

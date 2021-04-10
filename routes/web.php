@@ -14,8 +14,8 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, '__invoke'])->name('home.index');
-    Route::get('/prueba', [QuizController::class, 'index'])->name('quiz.index');
-    Route::get('/prueba/crear', [QuizController::class, 'create'])->name('quiz.create');
+    Route::get('/prueba/index/{id?}', [QuizController::class, 'index'])->name('quiz.index');
+    Route::get('/prueba/crear/{id?}', [QuizController::class, 'create'])->name('quiz.create');
     Route::post('/prueba/guardar', [QuizController::class, 'store'])->name('quiz.store');
     Route::get('/prueba/mostrar/{id}', [QuizController::class, 'show'])->name('quiz.show');
     Route::get('/prueba/editar/{id}', [QuizController::class, 'edit'])->name('quiz.edit');
@@ -23,5 +23,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/prueba/eliminar/{id}', [QuizController::class, 'destroy'])->name('quiz.destroy');
 
 
-    Route::get('/prueba/crear/actividades', [ActivityController::class, 'index'])->name('activity.index');
+    Route::get('/prueba/actividades/crear', [ActivityController::class, 'index'])->name('activity.index');
 });
