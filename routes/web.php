@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/prueba/editar/{id}', [QuizController::class, 'edit'])->name('quiz.edit');
     Route::post('/prueba/actualizar/{id}', [QuizController::class, 'update'])->name('quiz.update');
     Route::delete('/prueba/eliminar/{id}', [QuizController::class, 'destroy'])->name('quiz.destroy');
+    Route::get('/show-activities', [ActivitiesController::class, 'show_activities'])->name('show_activities');
     Route::get('/true-or-false', [ActivitiesController::class, 'create_trueorfalse'])->name('act_true_or_false');
     Route::get('/complete', [ActivitiesController::class, 'create_complete'])->name('act_complete');
     Route::get('/select-the-correct', [ActivitiesController::class, 'create_select_correct'])->name('act_select');
