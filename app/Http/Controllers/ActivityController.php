@@ -20,7 +20,7 @@ class ActivityController extends Controller
         $actividades = DB::table('activities')
             ->orderBy('id', 'desc')->paginate(10);
         $act_tipo = Activities_type::all();
-        return view('quiz.administrarActividades', compact('actividades'), compact('act_tipo'));
+        return view('activities.administrarActividades', compact('actividades'), compact('act_tipo'));
     }
 
     /**

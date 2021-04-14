@@ -176,43 +176,8 @@
                         Home
                     </a>
 
-                    <a href="{{ route('act_true_or_false') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
-                            x-description="Heroicon name: outline/users" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-                            </path>
-                        </svg>
-                        Verdadero o Falso
-                    </a>
 
-                    <a href="{{ route('act_complete') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
-                            x-description="Heroicon name: outline/users" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-                            </path>
-                        </svg>
-                        Completa la palabra
-                    </a>
-
-                    <a href="{{ route('act_complete') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
-                            x-description="Heroicon name: outline/users" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-                            </path>
-                        </svg>
-                        Selecciona la R. Correcta
-                    </a>
-
-                    <a href="{{ route('act_complete') }}" <a href="{{ route('quiz.index', 'Alfa') }}"
+                    <a href="{{ route('quiz.index', 'Alfa') }}"
                         class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
                         <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
                             x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -258,6 +223,17 @@
                             </path>
                         </svg>
                         Administrar pruebas
+                    </a>
+                    <a href="{{ route('activity.index') }}"
+                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
+                            x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                            </path>
+                        </svg>
+                        Administrar actividades
                     </a>
 
                     <a href="#"
