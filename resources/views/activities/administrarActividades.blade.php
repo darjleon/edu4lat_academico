@@ -81,7 +81,7 @@
     </x-header-title>
 
     <x-container>
-        <div class="grid content-start justify-center grid-flow-row grid-cols-3 gap-4 ">
+        <div class="grid w-full max-w-6xl gap-4 lg:grid-cols-3 md:grid-cols-2">
 
             <x-modal-form>
                 <x-slot name="actividad">

@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/prueba/index/{id?}', [QuizController::class, 'index'])->name('quiz.index');
     Route::get('/prueba/crear/{id?}', [QuizController::class, 'create'])->name('quiz.create');
-    Route::post('/prueba/guardar', [QuizController::class, 'store'])->name('quiz.store');
+    Route::post('/prueba/guardar/{id?}', [QuizController::class, 'store'])->name('quiz.store');
     Route::get('/prueba/mostrar/{id}', [QuizController::class, 'show'])->name('quiz.show');
     Route::get('/prueba/editar/{id}', [QuizController::class, 'edit'])->name('quiz.edit');
     Route::post('/prueba/actualizar/{id}', [QuizController::class, 'update'])->name('quiz.update');

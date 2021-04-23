@@ -2,7 +2,7 @@
 
     <x-header-title>
         <a href="{{ route('quiz.create', $curso_id) }}"
-            class="flex items-center justify-center w-1/2 px-4 py-3 text-white bg-blue-500 rounded-md focus:outline-none">
+            class="flex items-center justify-center w-1/2 px-4 py-3 text-white transform bg-blue-400 rounded-md hover:bg-blue-600 focus:outline-none">
             Aqui crea tu prueba
         </a><br>
     </x-header-title>
@@ -16,40 +16,40 @@
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         Creado
                                     </th>
                                     @if (empty($curso_id))
                                         <th scope="col"
-                                            class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                            class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Curso
                                         </th>
                                     @endif
                                     <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         Creador
                                     </th>
                                     <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         Titulo
                                     </th>
                                     <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         Area
                                     </th>
                                     <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         Nivel
                                     </th>
                                     <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         Estado
                                     </th>
                                     <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         Fecha
                                     </th>
-                                    <th colspan="1" class="relative px-6 py-3">
+                                    <th colspan="1" class="relative px-3 py-3">
                                         <span class="sr-only">Accion</span>
                                     </th>
                                 </tr>
@@ -63,15 +63,18 @@
                                             </div>
                                         </td>
                                         @if (empty($curso_id))
-                                            <td class="px-6 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
+                                            <td class="px-3 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
                                                 @if (empty($prueba->curso))
-                                                    Asigne curso
+                                                    <span
+                                                        class="inline-flex px-2 text-xs font-bold leading-6 text-red-800 bg-yellow-300 rounded-full">
+                                                        Asignar curso
+                                                    </span>
                                                 @else
                                                     {{ $prueba->curso }}
                                                 @endif
                                             </td>
                                         @endif
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-3 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                                 <div class="ml-4">
                                                     <div class="text-sm font-medium text-gray-900">
@@ -83,28 +86,44 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-3 py-4 whitespace-nowrap">
                                             <div class="text-sm font-medium text-gray-900">{{ $prueba->titulo }}
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                        <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                             {{ $prueba->area }}
                                         </td>
-                                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                        <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                             {{ $prueba->nivel }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span
-                                                class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                                {{ $prueba->estado }}
-                                            </span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span
-                                                class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                                {{ \Carbon\Carbon::parse($prueba->fecha)->toFormattedDateString() }}
-                                            </span>
-                                        </td>
+                                        @if ($prueba->estado == 'Pendiente')
+                                            <td class="px-3 py-4 whitespace-nowrap">
+                                                <span
+                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-red-500 bg-yellow-200 rounded-full">
+                                                    {{ $prueba->estado }}
+                                                </span>
+                                            </td>
+                                            <td class="px-3 py-4 whitespace-nowrap">
+                                                <span
+                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-red-500 bg-yellow-200 rounded-full">
+                                                    {{ \Carbon\Carbon::parse($prueba->fecha)->toFormattedDateString() }}
+                                                </span>
+                                            </td>
+                                        @else
+                                            <td class="px-3 py-4 whitespace-nowrap">
+                                                <span
+                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                                    {{ $prueba->estado }}
+                                                </span>
+                                            </td>
+                                            <td class="px-3 py-4 whitespace-nowrap">
+                                                <span
+                                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                                    {{ \Carbon\Carbon::parse($prueba->fecha)->toFormattedDateString() }}
+                                                </span>
+                                            </td>
+                                        @endif
+
                                         <td class="px-4 py-2 text-center whitespace-nowrap">
                                             <div class="flex justify-center item-center">
                                                 <div class="w-6 mr-2 transform hover:text-purple-500 hover:scale-110">

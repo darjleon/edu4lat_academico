@@ -1,7 +1,7 @@
 <div x-data="{ show: false }">
-    <div class="flex justify-center">
+    <div class="flex justify-center px-2 py-2 ">
         <button @click={show=true} type="button"
-            class="px-6 py-3 text-sm leading-tight text-gray-200 bg-blue-600 rounded focus:outline-none focus:border-white">
+            class="w-full px-2 py-2 uppercase transition duration-200 border-2 border-gray-900 rounded-3xl hover:bg-gray-800 hover:text-white focus:outline-none">
             {{ $actividad }}
         </Button>
     </div>
@@ -23,7 +23,8 @@
                     <div class="flex justify-end">
                         <button @click={show=false} type="button"
                             class="px-4 py-2 mr-1 text-gray-100 bg-gray-700 rounded">Cerrar</Button>
-                        <button type="button" class="px-4 py-2 text-gray-200 bg-blue-600 rounded">Guardar actividad</Button>
+                        <button type="button" class="px-4 py-2 text-gray-200 bg-blue-600 rounded">Guardar
+                            actividad</Button>
                     </div>
                 </div>
             </div>

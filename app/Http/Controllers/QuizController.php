@@ -17,6 +17,7 @@ class QuizController extends Controller
     {
         $usuario_id = Auth::id();
         $usuario = User::find($usuario_id);
+
         if ($curso_id == null) {
             $pruebas = DB::table('quizzes')->where('creador_id', '=', $usuario_id)
                 ->orderBy('id', 'desc')->paginate(5);
@@ -39,7 +40,7 @@ class QuizController extends Controller
         return view('quiz.crearQuiz', compact('niveles', 'areas'), compact('cursos', 'curso_id'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $curso_id = null)
     {
         $request->validate(
             [
@@ -66,7 +67,7 @@ class QuizController extends Controller
         $nuevaPrueba->fin = $request->hora_de_cierre;
         $nuevaPrueba->save();
 
-        return redirect()->route('activity.index');
+        return redirect()->route('quiz.index', $curso_id);
     }
 
     public function show($quizId)

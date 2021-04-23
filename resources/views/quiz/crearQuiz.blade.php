@@ -2,7 +2,7 @@
 
     <x-quiz-format-create>
         <div class="divide-y divide-gray-200">
-            <form method="post" action={{ route('quiz.store') }}>
+            <form method="post" action={{ route('quiz.store', $curso_id) }}>
                 @csrf
                 <div class="py-8 space-y-4 text-base leading-6 text-gray-700 sm:text-lg sm:leading-7">
                     <div class="flex flex-col">
@@ -86,7 +86,7 @@
                 </div>
                 <div class="flex justify-center pt-4 space-x-4">
                     <a href="#" onclick="history.back()"
-                        class="flex items-center justify-center w-full px-4 py-3 text-gray-900 bg-red-400 rounded-md focus:outline-none">
+                        class="flex items-center justify-center w-full px-4 py-3 text-gray-900 bg-red-400 rounded-md hover:bg-red-600 focus:outline-none">
                         <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -95,7 +95,7 @@
                         </svg>Cancelar
                     </a>
                     <button type="submit"
-                        class="flex items-center justify-center w-full px-4 py-3 text-white bg-blue-500 rounded-md focus:outline-none">Guardar
+                        class="flex items-center justify-center w-full px-4 py-3 text-white bg-blue-400 rounded-md hover:bg-blue-600 focus:outline-none">Guardar
                         prueba
                         <svg class="w-12 h-12 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">

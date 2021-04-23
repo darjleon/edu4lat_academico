@@ -25,7 +25,7 @@
                             <select id="curso"
                                 class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
                                 name="curso">
-                                <option value="{{ $prueba->curso }}">Area: {{ $prueba->curso }}</option>
+                                <option value="{{ $prueba->curso }}">Curso: {{ $prueba->curso }}</option>
                                 @foreach ($cursos as $curso)
                                     <option value="{{ $curso }}">{{ $curso }}</option>
                                 @endforeach
@@ -86,7 +86,7 @@
                 </div>
                 <div class="flex justify-center pt-4 space-x-4">
                     <a href="#" onclick="history.back()"
-                        class="flex items-center justify-center w-full px-4 py-3 text-gray-900 bg-red-400 rounded-md focus:outline-none">
+                        class="flex items-center justify-center w-full px-4 py-3 text-gray-900 bg-red-400 rounded-md hover:bg-red-600 focus:outline-none">
                         <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -95,7 +95,7 @@
                         </svg>Cancelar
                     </a>
                     <button type="submit"
-                        class="flex items-center justify-center w-full px-4 py-3 text-white bg-blue-500 rounded-md focus:outline-none">Guardar
+                        class="flex items-center justify-center w-full px-4 py-3 text-white bg-blue-400 rounded-md hover:bg-blue-600 focus:outline-none">Guardar
                         cambios
                         <svg class="w-12 h-12 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">

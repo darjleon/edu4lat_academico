@@ -1,5 +1,5 @@
 <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-    <div class="relative px-4 py-10 mx-8 bg-white shadow md:mx-0 rounded-3xl sm:p-10">
+    <div class="relative px-4 py-10 mx-8 bg-white shadow md:mx-0 rounded-3xl sm:p-10 ">
         <div class="flex items-center space-x-5">
             <div class="flex items-center justify-center flex-shrink-0 w-20 h-20 font-mono text-2xl rounded-full">
                 <svg class="h-36 w-36" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -13,10 +13,9 @@
                     </path>
                 </svg>
             </div>
-            <div class="self-start block pl-2 text-xl font-semibold text-gray-700">
-                <h2 class="leading-relaxed">Encabezado</h2>
-                <p class="text-sm font-normal leading-relaxed text-gray-500">Indica los datos e
-                    intrucciones necesarios para programar y realizar la prueba</p>
+            <div class="self-center block pl-2 text-lg font-semibold text-gray-700">
+                <h2 class="leading-relaxed">Indica los datos e
+                    intrucciones necesarios para programar y realizar la prueba</h2>
             </div>
         </div>
         @if (!empty($errors->all()))
