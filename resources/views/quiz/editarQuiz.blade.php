@@ -27,7 +27,7 @@
                                 name="curso">
                                 <option value="{{ $prueba->curso }}">Curso: {{ $prueba->curso }}</option>
                                 @foreach ($cursos as $curso)
-                                    <option value="{{ $curso }}">{{ $curso }}</option>
+                                    <option value="{{ $curso->nombre }}">{{ $curso->nombre }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -40,7 +40,7 @@
                                 id="area" name="area" required>
                                 <option value="{{ $prueba->area }}">Area: {{ $prueba->area }}</option>
                                 @foreach ($areas as $area)
-                                    <option value="{{ $area }}">{{ $area }}</option>
+                                    <option value="{{ $area->nombre }}">{{ $area->nombre }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -53,7 +53,7 @@
                                 id="nivel" name="nivel" required>
                                 <option value="{{ $prueba->nivel }}">Nivel: {{ $prueba->nivel }}</option>
                                 @foreach ($niveles as $nivel)
-                                    <option value="{{ $nivel }}">{{ $nivel }}</option>
+                                    <option value="{{ $nivel->nombre }}">{{ $nivel->nombre }}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
+use App\Models\Course;
+use App\Models\Grade;
 use App\Models\Quiz;
 use App\Models\User;
 use App\Rules\TiempoConSentido;
@@ -34,9 +37,9 @@ class QuizController extends Controller
 
     public function create($curso_id = null)
     {
-        $niveles = DB::getEnumValues('quizzes', 'nivel');
-        $areas = DB::getEnumValues('quizzes', 'area');
-        $cursos = ['Alfa', 'Omega', 'Gama'];
+        $niveles =  Grade::select('nombre')->get();
+        $areas =  Area::select('nombre')->get();
+        $cursos = Course::select('nombre')->get();
         return view('quiz.crearQuiz', compact('niveles', 'areas'), compact('cursos', 'curso_id'));
     }
 
@@ -79,9 +82,9 @@ class QuizController extends Controller
     public function edit($quizId)
     {
         $prueba = Quiz::find($quizId);
-        $niveles = DB::getEnumValues('quizzes', 'nivel');
-        $areas = DB::getEnumValues('quizzes', 'area');
-        $cursos = ['Alfa', 'Omega', 'Gama'];
+        $niveles =  Grade::select('nombre')->get();
+        $areas =  Area::select('nombre')->get();
+        $cursos = Course::select('nombre')->get();
         return view('quiz.editarQuiz', compact('niveles', 'areas'), compact('prueba', 'cursos'));
     }
 

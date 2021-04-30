@@ -20,8 +20,8 @@ class CreateQuizzesTable extends Migration
                 ->references('id')
                 ->on('users');
             $table->text('curso')->nullable();
-            $table->enum('area', ['Matematicas', 'Lengua y Literatura', 'Ciencias Sociales', 'Ciencias Naturales']);
-            $table->enum('nivel', ['2do grado', '3ero grado', '4to grado', '5to grado', '6to grado', '7mo grado', '8vo grado', '9no grado', '10mo grado']);
+            $table->string('area');
+            $table->string('nivel');
             $table->string('titulo');
             $table->text('descripcion')->nullable();
             $table->date('fecha');

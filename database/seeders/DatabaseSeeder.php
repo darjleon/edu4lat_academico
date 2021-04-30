@@ -4,6 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Activities_type;
 use App\Models\User;
+use App\Models\Area;
+use App\Models\Grade;
+use App\Models\Course;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -30,6 +34,70 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'email' => 'mario@gmail.com'
         ]);
+
+        Course::create([
+            'nombre' => 'Alfa',
+        ]);
+
+        Course::create([
+            'nombre' => 'Omega',
+        ]);
+
+        Course::create([
+            'nombre' => 'Gama',
+        ]);
+
+        Area::create([
+            'nombre' => 'Matematicas',
+        ]);
+
+        Area::create([
+            'nombre' => 'Lengua y Literatura',
+        ]);
+
+        Area::create([
+            'nombre' => 'Ciencias Sociales',
+        ]);
+
+        Area::create([
+            'nombre' => 'Ciencias Naturales',
+        ]);
+
+        Grade::create([
+            'nombre' => '2do grado',
+        ]);
+
+        Grade::create([
+            'nombre' => '3ero grado',
+        ]);
+
+        Grade::create([
+            'nombre' => '4to grado',
+        ]);
+
+        Grade::create([
+            'nombre' => '5to grado',
+        ]);
+
+        Grade::create([
+            'nombre' => '6to grado',
+        ]);
+
+        Grade::create([
+            'nombre' => '7mo grado',
+        ]);
+
+        Grade::create([
+            'nombre' => '8vo grado',
+        ]);
+
+        Grade::create([
+            'nombre' => '9no grado',
+        ]);
+        Grade::create([
+            'nombre' => '10mo grado',
+        ]);
+
         Activities_type::create([
             'nombre' => 'Verdadero o Falso',
             'descripcion' => 'El enunciado es verdadero o falso',
