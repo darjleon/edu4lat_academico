@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use App\Models\Activities_type;
 use App\Models\User;
 use App\Models\Area;
 use App\Models\Grade;
 use App\Models\Course;
-
-use Illuminate\Database\Seeder;
+use RolesYPermisos;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,21 +19,36 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->create([
+        /* Creacion de roles y permisos */
+
+        $this->call(RolesPermisosSeeder::class);
+
+        /* Creacion de usuarios y sus roles */
+
+        $estudiante = User::factory()->create([
             'email' => 'daniel@gmail.com'
         ]);
-        User::factory()->create([
+        $estudiante->assignRole('Estudiante');
+
+
+        $profesor = User::factory()->create([
             'email' => 'jose@gmail.com'
         ]);
-        User::factory()->create([
+        $profesor->assignRole('Docente');
+
+
+        $coordinador = User::factory()->create([
             'email' => 'maria@gmail.com'
         ]);
-        User::factory()->create([
+        $coordinador->assignRole('Coordinador');
+
+
+        $admin = User::factory()->create([
             'email' => 'pepe@gmail.com'
         ]);
-        User::factory()->create([
-            'email' => 'mario@gmail.com'
-        ]);
+        $admin->assignRole('Administrador');
+
+        /* Creacion de cursos */
 
         Course::create([
             'nombre' => 'Alfa',
@@ -46,6 +61,8 @@ class DatabaseSeeder extends Seeder
         Course::create([
             'nombre' => 'Gama',
         ]);
+
+        /* Creacion de areas */
 
         Area::create([
             'nombre' => 'Matematicas',
@@ -62,6 +79,8 @@ class DatabaseSeeder extends Seeder
         Area::create([
             'nombre' => 'Ciencias Naturales',
         ]);
+
+        /* Creacion de grados/niveles */
 
         Grade::create([
             'nombre' => '2do grado',
@@ -97,6 +116,8 @@ class DatabaseSeeder extends Seeder
         Grade::create([
             'nombre' => '10mo grado',
         ]);
+
+        /* Creacion de tipos de actividades */
 
         Activities_type::create([
             'nombre' => 'Verdadero o Falso',

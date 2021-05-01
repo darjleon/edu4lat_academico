@@ -1,6 +1,18 @@
 <x-app-layout>
     <x-header-title>
         Áreas
+        @role('Estudiante')
+        Bienvenido Estudiante
+        @endrole
+        @role('Docente')
+        Bienvenido Docente
+        @endrole
+        @role('Coordinador')
+        Bienvenido Coordinador
+        @endrole
+        @role('Administrador')
+        Bienvenido Admin
+        @endrole
     </x-header-title>
 
     <x-container>
