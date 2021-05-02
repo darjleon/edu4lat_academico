@@ -154,7 +154,7 @@ use App\Models\Course;
                 <nav class="flex-1 px-2 mt-5 space-y-1 bg-gray-800">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     <a href="{{ route('home.index') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-white bg-gray-900 rounded-md group">
+                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
                         <!-- Current: "text-gray-300", Default: "text-gray-400 group-hover:text-gray-300" -->
                         <svg class="w-6 h-6 mr-3 text-gray-300" x-description="Heroicon name: outline/home"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -166,19 +166,60 @@ use App\Models\Course;
                         Home
                     </a>
 
-                    @foreach (Course::all() as $curso)
-                        <a href="{{ route('quiz.index', $curso->nombre) }}"
-                            class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                            <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
-                                x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
-                                </path>
-                            </svg>
-                            Curso: {{ $curso->nombre }}
-                        </a>
-                    @endforeach
+                    <a href="{{ route('home.index') }}"
+                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                        <svg class="w-6 h-6 mr-3 text-gray-300" x-description="Heroicon name: outline/home"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z">
+                            </path>
+                        </svg>
+                        Institución
+                    </a>
+
+                    <div x-data="{ open: false }">
+                        <button @click="open = !open"
+                            class="flex items-center w-full px-2 py-2 text-sm font-medium text-gray-300 rounded-md cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white group">
+                            <span class="flex items-center">
+                                <svg class="w-5 h-5 mr-3" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"></path>
+                                </svg>
+                                Cursos
+                            </span>
+
+                            <span>
+                                <svg class="w-4 h-4 ml-10" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path x-show="! open" d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" style="display: none;"></path>
+                                    <path x-show="open" d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
+                        </button>
+
+                        <div x-show="open">
+                            @foreach (Course::all() as $curso)
+                                <a href="{{ route('quiz.index', $curso->nombre) }}"
+                                    class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                                    <svg class="w-6 h-6 mr-3 text-gray-400 ml-7 group-hover:text-gray-300"
+                                        x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                        </path>
+                                    </svg>
+                                    Curso: {{ $curso->nombre }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+
 
                     <a href="{{ route('quiz.index') }}"
                         class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
@@ -201,6 +242,30 @@ use App\Models\Course;
                             </path>
                         </svg>
                         Administrar actividades
+                    </a>
+
+                    <a href="{{ route('home.index') }}"
+                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                        <svg class="w-6 h-6 mr-3 text-gray-300" x-description="Heroicon name: outline/home"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4">
+                            </path>
+                        </svg>
+                        Configuración
+                    </a>
+
+                    <a href="{{ route('home.index') }}"
+                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                        <svg class="w-6 h-6 mr-3 text-gray-300" x-description="Heroicon name: outline/home"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </svg>
+                        Ayuda
                     </a>
 
                 </nav>
