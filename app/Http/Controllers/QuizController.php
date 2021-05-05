@@ -70,7 +70,7 @@ class QuizController extends Controller
         $nuevaPrueba->fin = $request->hora_de_cierre;
         $nuevaPrueba->save();
 
-        return redirect()->route('quiz.index', $curso_id);
+        return redirect()->route('activity.index', $curso_id);
     }
 
     public function show($quizId)
@@ -114,7 +114,7 @@ class QuizController extends Controller
         $pruebaEditada->fin = $request->hora_de_cierre;
         $pruebaEditada->save();
 
-        return redirect()->route('quiz.index');
+        return redirect()->route('activity.index');
     }
 
     public function destroy($quizId)

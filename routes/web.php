@@ -28,8 +28,11 @@ Route::middleware('auth')->group(function () {
 
     /*     Actividades     */
 
-    Route::get('/prueba/actividades/crear', [ActivityController::class, 'index'])->name('activity.index');
-    Route::get('/true-or-false', [ActivitiesController::class, 'create_trueorfalse'])->name('act_true_or_false');
-    Route::get('/complete', [ActivitiesController::class, 'create_complete'])->name('act_complete');
-    Route::get('/select-the-correct', [ActivitiesController::class, 'create_select_correct'])->name('act_select');
+    Route::get('/prueba/actividades/{id?}', [ActivityController::class, 'index'])->name('activity.index');
+    Route::get('/prueba/actividades/crear/{id?}', [ActivityController::class, 'create'])->name('activity.create');
+    Route::post('/prueba/actividades/guardar/{id?}', [ActivityController::class, 'store'])->name('activity.store');
+    Route::get('/prueba/actividades/mostrar/{id}', [ActivityController::class, 'show'])->name('activity.show');
+    Route::get('/prueba/actividades/editar/{id}', [ActivityController::class, 'edit'])->name('activity.edit');
+    Route::post('/prueba/actividades/actualizar/{id}', [ActivityController::class, 'update'])->name('activity.update');
+    Route::delete('/prueba/actividades/eliminar/{id}', [ActivityController::class, 'destroy'])->name('activity.destroy');
 });

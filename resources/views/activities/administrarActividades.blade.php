@@ -15,23 +15,23 @@
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         #
                                     </th>
                                     <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         Tipo de actividad
                                     </th>
                                     <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         Area
                                     </th>
                                     <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         Nivel
                                     </th>
                                     <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         Enunciado
                                     </th>
                                     <th colspan="1" class="relative px-6 py-3">
@@ -43,19 +43,20 @@
                                 @foreach ($actividades as $actividad)
                                     @foreach ($act_tipo->where('id', '=', $actividad->activity_type_id) as $tipo)
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-2 py-4 whitespace-nowrap">
                                                 <div class="text-sm text-gray-900">{{ $actividad->id }}</div>
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900">{{ $tipo->tipo }}</div>
+                                            <td class="px-2 py-4 whitespace-nowrap">
+                                                <div class="text-sm font-semibold text-gray-900">{{ $tipo->nombre }}
+                                                </div>
                                             </td>
-                                            <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                            <td class="px-2 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                 {{ $actividad->area }}
                                             </td>
-                                            <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                            <td class="px-2 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                 {{ $actividad->nivel }}
                                             </td>
-                                            <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                            <td class="px-2 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                 {{ $actividad->enunciado }}
                                             </td>
                                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
@@ -85,12 +86,12 @@
 
             <x-modal-form>
                 <x-slot name="actividad">
-                    Escojer la opción correcta
+                    Escojer la opcion correcta
                 </x-slot>
 
                 <div class="form-group">
-                    <label for="description">Enunciado</label>
-                    <textarea name="description" id="description"
+                    <label for="descripcion">Enunciado</label>
+                    <textarea name="descripcion" id="descripcion"
                         class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
                         placeholder="Escriba aquí"></textarea>
                 </div>
@@ -106,13 +107,13 @@
 
                         <input type="text" name="options1" id="options1"
                             class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la options 1"></input>
+                            placeholder="Escriba la opcion 1"></input>
                         <input type="text" name="options2" id="options2"
                             class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la options 2"></input>
+                            placeholder="Escriba la opcion 2"></input>
                         <input type="text" name="options3" id="options3"
                             class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la options 3"></input>
+                            placeholder="Escriba la opcion 3"></input>
                     </div>
                 </div>
 
@@ -124,8 +125,8 @@
                 </x-slot>
 
                 <div class="form-group">
-                    <label for="description">Enunciado</label>
-                    <textarea name="description" id="description"
+                    <label for="descripcion">Enunciado</label>
+                    <textarea name="descripcion" id="descripcion"
                         class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
                         placeholder="Escriba aquí"></textarea>
                 </div>
@@ -166,8 +167,8 @@
                 </x-slot>
 
                 <div class="form-group">
-                    <label for="description">Enunciado</label>
-                    <textarea name="description" id="description"
+                    <label for="descripcion">Enunciado</label>
+                    <textarea name="descripcion" id="descripcion"
                         class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
                         placeholder="Escriba aquí"></textarea>
                 </div>
@@ -209,22 +210,22 @@
 
             <x-modal-form>
                 <x-slot name="actividad">
-                    Verdadero y falso
+                    Verdadero o Falso
                 </x-slot>
 
                 <div class="form-group">
-                    <label for="description">Enunciado</label>
-                    <textarea name="description" id="description"
+                    <label for="descripcion">Enunciado</label>
+                    <textarea name="descripcion" id="descripcion"
                         class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
                         placeholder="Escriba aquí"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="options">La respuesta será: </label><br>
                     <div class="inline ml-2">
-                        <input type="radio" name="answer" id="options" class="w-5 h-5 text-green-500 form-radio"
+                        <input type="radio" name="respuesta" id="options" class="w-5 h-5 text-green-500 form-radio"
                             value="true" checked>
                         <span class="ml-2">Verdadera</span>
-                        <input type="radio" name="answer" id="options" class="w-5 h-5 ml-4 text-red-500 form-radio"
+                        <input type="radio" name="respuesta" id="options" class="w-5 h-5 ml-4 text-red-500 form-radio"
                             value="false">
                         <span class="ml-2">Falsa</span>
                     </div>
@@ -234,12 +235,17 @@
 
             <x-modal-form>
                 <x-slot name="actividad">
-                    Responder pregunta
+                    Responder la pregunta
                 </x-slot>
-
                 <div class="form-group">
-                    <label for="description">Enunciado/Pregunta</label>
-                    <textarea name="description" id="description"
+                    <label for="descripcion">Enunciado</label>
+                    <textarea name="descripcion" id="descripcion"
+                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                        placeholder="Escriba aquí"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="opcion">Pregunta</label>
+                    <textarea name="opcion" id="opcion"
                         class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
                         placeholder="Escriba aquí"></textarea>
                 </div>
@@ -248,25 +254,28 @@
 
             <x-modal-form>
                 <x-slot name="actividad">
-                    Complete la frase
+                    Completar la frase
                 </x-slot>
-
                 <div class="form-group">
-                    <label for="txt_init">Enunciado</label>
-                    <textarea name="txt_init" id="txt_init"
+                    <label for="descripcion">Enunciado</label>
+                    <textarea name="descripcion" id="descripcion"
+                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                        placeholder="Escriba aquí"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inicio">Inicio de la frase</label>
+                    <textarea name="inicio" id="inicio"
                         class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
                         placeholder="Escribe lo que irá antes del recuadro faltante"></textarea>
                 </div>
-                <div class="my-2 form-group">
-                    <label>Palabra</label>
-                    <div class="inline ml-2">
-                        <input type="text" name="answer" placeholder="Escribe la palabra faltante"
-                            class="px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none">
-                    </div>
-                </div>
                 <div class="form-group">
-                    <label for="txt_end">Enunciado</label>
-                    <textarea name="txt_end" id="txt_end"
+                    <label for="respuesta">Parte faltante</label>
+                    <input type="text" name="respuesta" id="respuesta" placeholder="Escribe la palabra faltante"
+                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none">
+                </div>
+                <div class="pt-4 form-group">
+                    <label for="final">Final de la frase</label>
+                    <textarea name="final" id="final"
                         class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
                         placeholder="Escribe lo que irá después del recuadro faltante"></textarea>
                 </div>
