@@ -12,4 +12,14 @@ class Activity extends Model
     protected $fillable = [
         'id', 'activity_type_id', 'nivel', 'area', 'enunciado', 'opciones', 'respuesta', 'adjunto',
     ];
+
+    public function quizzes()
+    {
+        return $this->belongsToMany(
+            Quiz::class,
+            'activities__quizzes',
+            'actividad',
+            'prueba_id'
+        );
+    }
 }

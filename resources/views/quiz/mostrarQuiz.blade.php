@@ -33,77 +33,225 @@
                 {{ $prueba->descripcion }}
             @endif
         </x-slot>
+        @foreach ($actividades->shuffle() as $actividad)
 
-        <div class="flex flex-col px-8 pt-6 pb-8 my-2 mb-4 bg-white rounded shadow-md">
-            <div class="mb-6 -mx-3 md:flex">
-                <div class="px-3 mb-6 md:w-1/2 md:mb-0">
-                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
-                        for="grid-first-name">
-                        First Name
-                    </label>
-                    <input
-                        class="block w-full px-4 py-3 mb-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-red"
-                        id="grid-first-name" type="text" placeholder="Jane">
-                    <p class="text-xs italic text-red">Please fill out this field.</p>
-                </div>
-                <div class="px-3 md:w-1/2">
-                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
-                        for="grid-last-name">
-                        Last Name
-                    </label>
-                    <input
-                        class="block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter"
-                        id="grid-last-name" type="text" placeholder="Doe">
-                </div>
-            </div>
-            <div class="mb-6 -mx-3 md:flex">
-                <div class="px-3 md:w-full">
-                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
-                        for="grid-password">
-                        Password
-                    </label>
-                    <input
-                        class="block w-full px-4 py-3 mb-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter"
-                        id="grid-password" type="password" placeholder="******************">
-                    <p class="text-xs italic text-grey-dark">Make it as long and as crazy as you'd like</p>
-                </div>
-            </div>
-            <div class="mb-2 -mx-3 md:flex">
-                <div class="px-3 mb-6 md:w-1/2 md:mb-0">
-                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
-                        for="grid-city">
-                        City
-                    </label>
-                    <input
-                        class="block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter"
-                        id="grid-city" type="text" placeholder="Albuquerque">
-                </div>
-                <div class="px-3 md:w-1/2">
-                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
-                        for="grid-state">
-                        State
-                    </label>
-                    <div class="relative">
-                        <select
-                            class="block w-full px-4 py-3 pr-8 border rounded appearance-none bg-grey-lighter border-grey-lighter text-grey-darker"
-                            id="grid-state">
-                            <option>New Mexico</option>
-                            <option>Missouri</option>
-                            <option>Texas</option>
-                        </select>
+            @if ($actividad->activity_type_id == 1)
+
+                <div class="px-4 justify-self-center">
+                    <p class="my-2 text-2xl font-semibold text-center text-red-800">Actividad: Verdadero o Falso</p>
+                    <div class="flex flex-col px-4 pt-3 pb-4 my-2 bg-white rounded shadow-md">
+                        <div class="mb-3 -mx-3 md:flex">
+                            <div class="px-3 md:w-full">
+                                <label class="block mb-6 text-lg font-bold tracking-wide uppercase text-grey-darker"
+                                    for="respuesta">
+                                    {{ $actividad->enunciado }}
+                                </label>
+                                <div class="inline ml-2">
+                                    <input type="radio" name="respuesta{{ $actividad->id }}"
+                                        id="{{ $actividad->id }}" class="w-5 h-5 text-green-500 form-radio"
+                                        value="true">
+                                    <span class="ml-2">Verdadera</span>
+                                    <input type="radio" name="respuesta{{ $actividad->id }}"
+                                        id="{{ $actividad->id }}" class="w-5 h-5 ml-4 text-red-500 form-radio"
+                                        value="false">
+                                    <span class="ml-2">Falsa</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="px-3 md:w-1/2">
-                    <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker" for="grid-zip">
-                        Zip
-                    </label>
-                    <input
-                        class="block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter"
-                        id="grid-zip" type="text" placeholder="90210">
+
+            @elseif ($actividad->activity_type_id == 2)
+
+                <div class="px-4 justify-self-center">
+                    <p class="my-2 text-2xl font-semibold text-center text-red-800">Actividad: Respuesta única
+                    </p>
+
+                    <div class="flex flex-col px-4 pt-3 pb-4 my-2 bg-white rounded shadow-md">
+                        <div class="mb-3 -mx-3 md:flex">
+                            <div class="px-3 md:w-full">
+                                <label class="block mb-6 text-lg font-bold tracking-wide uppercase text-grey-darker"
+                                    for="respuesta">
+                                    {{ $actividad->enunciado }}
+                                </label>
+
+                                <div class="flex justify-center h-full">
+                                    <div class="w-full">
+                                        <fieldset class="border rounded shadow-sm">
+
+                                            @php
+                                                $opcionN = 1;
+                                                $opciones = Arr::collapse([json_decode($actividad->opciones), json_decode($actividad->respuesta)]);
+                                            @endphp
+
+                                            @foreach (Arr::shuffle($opciones) as $opcion)
+
+                                                <div class="relative flex items-center border-b last:border-b-0">
+                                                    <input class="absolute w-5 h-5 text-green-600 cursor-pointer left-3"
+                                                        type="radio" name="opcion"
+                                                        id="opcion{{ $opcionN }}{{ $actividad->id }}"
+                                                        value="{{ $opcion }}">
+                                                    <label class="flex-1 block py-2 pl-10 pr-2 cursor-pointer"
+                                                        for="opcion{{ $opcionN }}{{ $actividad->id }}">{{ $opcion }}</label>
+                                                </div>
+
+                                                @php
+                                                    $opcionN += 1;
+                                                @endphp
+                                            @endforeach
+
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            @elseif ($actividad->activity_type_id == 3)
+
+                <div class="px-4 justify-self-center">
+                    <p class="my-2 text-2xl font-semibold text-center text-red-800">Actividad: Respuesta múltiple</p>
+                    <div class="flex flex-col px-4 pt-3 pb-4 my-2 bg-white rounded shadow-md">
+                        <div class="mb-3 -mx-3 md:flex">
+                            <div class="px-3 md:w-full">
+                                <label class="block mb-6 text-lg font-bold tracking-wide uppercase text-grey-darker"
+                                    for="respuesta">
+                                    {{ $actividad->enunciado }}
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            @elseif ($actividad->activity_type_id == 4)
+
+                <div class="px-4 justify-self-center">
+                    <p class="my-2 text-2xl font-semibold text-center text-red-800">Actividad: Dar respuesta</p>
+                    <div class="flex flex-col px-4 pt-3 pb-4 my-2 bg-white rounded shadow-md">
+                        <div class="mb-3 -mx-3 md:flex">
+                            <div class="px-3 md:w-full">
+                                <label class="block mb-6 text-lg font-bold tracking-wide uppercase text-grey-darker"
+                                    for="respuesta">
+                                    {{ $actividad->enunciado }}
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            @elseif ($actividad->activity_type_id == 5)
+
+                <div class="px-4 justify-self-center">
+                    <p class="my-2 text-2xl font-semibold text-center text-red-800">Actividad: Relación única
+                    </p>
+                    <div class="flex flex-col px-4 pt-3 pb-4 my-2 bg-white rounded shadow-md">
+                        <div class="mb-3 -mx-3 md:flex">
+                            <div class="px-3 md:w-full">
+                                <label class="block mb-6 text-lg font-bold tracking-wide uppercase text-grey-darker"
+                                    for="respuesta">
+                                    {{ $actividad->enunciado }}
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            @elseif ($actividad->activity_type_id == 6)
+
+                <div class="px-4 justify-self-center">
+                    <p class="my-2 text-2xl font-semibold text-center text-red-800">Actividad: Completar</p>
+                    <div class="flex flex-col px-4 pt-3 pb-4 my-2 bg-white rounded shadow-md">
+                        <div class="mb-3 -mx-3 md:flex">
+                            <div class="px-3 md:w-full">
+                                <label class="block mb-6 text-lg font-bold tracking-wide uppercase text-grey-darker"
+                                    for="respuesta">
+                                    {{ $actividad->enunciado }}
+                                </label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            @endif
+
+            <div class="flex flex-col px-8 pt-6 pb-8 my-2 mb-4 bg-white rounded shadow-md">
+                <div class="mb-6 -mx-3 md:flex">
+                    <div class="px-3 mb-6 md:w-1/2 md:mb-0">
+                        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
+                            for="grid-first-name">
+                            First Name
+                        </label>
+                        <input
+                            class="block w-full px-4 py-3 mb-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-red"
+                            id="grid-first-name" type="text" placeholder="Jane">
+                        <p class="text-xs italic text-red">Please fill out this field.</p>
+                    </div>
+                    <div class="px-3 md:w-1/2">
+                        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
+                            for="grid-last-name">
+                            Last Name
+                        </label>
+                        <input
+                            class="block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter"
+                            id="grid-last-name" type="text" placeholder="Doe">
+                    </div>
+                </div>
+                <div class="mb-6 -mx-3 md:flex">
+                    <div class="px-3 md:w-full">
+                        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
+                            for="grid-password">
+                            Password
+                        </label>
+                        <input
+                            class="block w-full px-4 py-3 mb-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter"
+                            id="grid-password" type="password" placeholder="******************">
+                        <p class="text-xs italic text-grey-dark">Make it as long and as crazy as you'd like</p>
+                    </div>
+                </div>
+                <div class="mb-2 -mx-3 md:flex">
+                    <div class="px-3 mb-6 md:w-1/2 md:mb-0">
+                        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
+                            for="grid-city">
+                            City
+                        </label>
+                        <input
+                            class="block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter"
+                            id="grid-city" type="text" placeholder="Albuquerque">
+                    </div>
+                    <div class="px-3 md:w-1/2">
+                        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
+                            for="grid-state">
+                            State
+                        </label>
+                        <div class="relative">
+                            <select
+                                class="block w-full px-4 py-3 pr-8 border rounded appearance-none bg-grey-lighter border-grey-lighter text-grey-darker"
+                                id="grid-state">
+                                <option>New Mexico</option>
+                                <option>Missouri</option>
+                                <option>Texas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="px-3 md:w-1/2">
+                        <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
+                            for="grid-zip">
+                            Zip
+                        </label>
+                        <input
+                            class="block w-full px-4 py-3 border rounded appearance-none bg-grey-lighter text-grey-darker border-grey-lighter"
+                            id="grid-zip" type="text" placeholder="90210">
+                    </div>
                 </div>
             </div>
+        @endforeach
 
-        </div>
         <div class="flex justify-center pt-4 space-x-4">
             <a href="#" onclick="history.back()"
                 class="flex items-center justify-center w-full px-4 py-3 text-xl font-extrabold text-gray-800 bg-blue-300 rounded-md hover:bg-blue-600 focus:outline-none">

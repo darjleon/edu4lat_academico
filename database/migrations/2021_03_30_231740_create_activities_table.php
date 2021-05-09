@@ -19,8 +19,8 @@ class CreateActivitiesTable extends Migration
             $table->foreign('activity_type_id')
                 ->references('id')
                 ->on('activities_types');
-                $table->string('area');
-                $table->string('nivel');
+            $table->string('area');
+            $table->string('nivel')->nullable();
             $table->text('enunciado');
             $table->json('opciones')->nullable();
             $table->json('respuesta')->nullable();

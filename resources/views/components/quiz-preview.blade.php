@@ -58,7 +58,7 @@
                 <textarea rows="7" class="w-full px-4 py-2 text-xl border rounded-md resize" readonly>{{ $descripcion }}
                 </textarea>
             </h3>
-            <p class="my-2 text-2xl font-semibold text-gray-800 underline ">Resuelva las actividades:</p>
+            <p class="my-2 text-2xl font-semibold text-gray-800 underline ">Resuelva las actividades:</p><br>
         </div>
 
 

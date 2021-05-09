@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activities_Quiz;
 use App\Models\Area;
 use App\Models\Course;
 use App\Models\Grade;
@@ -70,13 +71,14 @@ class QuizController extends Controller
         $nuevaPrueba->fin = $request->hora_de_cierre;
         $nuevaPrueba->save();
 
-        return redirect()->route('activity.index', $curso_id);
+        return redirect()->route('activity.index', $nuevaPrueba);
     }
 
     public function show($quizId)
     {
         $prueba = Quiz::find($quizId);
-        return view('quiz.mostrarQuiz', compact('prueba'));
+        $actividades = $prueba->activities;
+        return view('quiz.mostrarQuiz', compact('prueba'), compact('actividades'));
     }
 
     public function edit($quizId)
@@ -114,7 +116,7 @@ class QuizController extends Controller
         $pruebaEditada->fin = $request->hora_de_cierre;
         $pruebaEditada->save();
 
-        return redirect()->route('activity.index');
+        return redirect()->route('activity.index', $quizId);
     }
 
     public function destroy($quizId)

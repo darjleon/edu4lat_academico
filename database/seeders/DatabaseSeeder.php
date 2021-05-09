@@ -126,31 +126,31 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Activities_type::create([
-            'nombre' => 'Escojer la opcion correcta',
+            'nombre' => 'Respuesta única',
             'descripcion' => 'El enunciado es tiene una sola opcion correcta',
             'tipo' => 'seleccionar'
         ]);
 
         Activities_type::create([
-            'nombre' => 'Escojer las opciones correctas',
+            'nombre' => 'Respuesta múltiple',
             'descripcion' => 'El enunciado puede tener mas de una sola opcion correcta',
             'tipo' => 'seleccionar'
         ]);
 
         Activities_type::create([
-            'nombre' => 'Responder la pregunta',
+            'nombre' => 'Dar respuesta',
             'descripcion' => 'Debe responder la pregunta en cuestion',
             'tipo' => 'escrito'
         ]);
 
         Activities_type::create([
-            'nombre' => 'Relacionar las palabras',
+            'nombre' => 'Relación única',
             'descripcion' => 'Debe relacionar correctamente los enunciados, palabras, etc ',
             'tipo' => 'otros'
         ]);
 
         Activities_type::create([
-            'nombre' => 'Completar la frase',
+            'nombre' => 'Completar',
             'descripcion' => 'Debe llenar los espacios en blanco con la frase correcta ',
             'tipo' => 'escrito'
         ]);

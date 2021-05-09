@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ActivitiesController;
+use App\Http\Controllers\ActivitiesQuizController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ActivityController;
 use Illuminate\Support\Facades\Route;
@@ -31,8 +31,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/prueba/actividades/{id?}', [ActivityController::class, 'index'])->name('activity.index');
     Route::get('/prueba/actividades/crear/{id?}', [ActivityController::class, 'create'])->name('activity.create');
     Route::post('/prueba/actividades/guardar/{id?}', [ActivityController::class, 'store'])->name('activity.store');
-    Route::get('/prueba/actividades/mostrar/{id}', [ActivityController::class, 'show'])->name('activity.show');
+    Route::get('/prueba/actividades/mostrar/{id}/{quizid?}', [ActivityController::class, 'show'])->name('activity.show');
     Route::get('/prueba/actividades/editar/{id}', [ActivityController::class, 'edit'])->name('activity.edit');
     Route::post('/prueba/actividades/actualizar/{id}', [ActivityController::class, 'update'])->name('activity.update');
     Route::delete('/prueba/actividades/eliminar/{id}', [ActivityController::class, 'destroy'])->name('activity.destroy');
+
+    /*     Prueba-Actividades     */
+    Route::get('/prueba-actividad/{quiz_id}/{activity_id}', [ActivitiesQuizController::class, 'saveInQuiz'])->name('quiz.activity.save');
+    Route::get('/actividad-prueba/{quiz_id}/{activity_id}/{lugar?}', [ActivitiesQuizController::class, 'saveInActivity'])->name('quiz.activity.save');
 });

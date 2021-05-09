@@ -4,27 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Models\Activities_Quiz;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ActivitiesQuizController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function saveInQuiz($quiz_id, $activity_id)
     {
-        //
+        $existencia = Activities_Quiz::all()->where('prueba_id', $quiz_id)->where('actividad', $activity_id);
+        if ($existencia->isEmpty()) {
+            $relacion = new Activities_Quiz();
+            $relacion->prueba_id = $quiz_id;
+            $relacion->actividad = $activity_id;
+            $relacion->save();
+            return redirect()->route('activity.index', $quiz_id)->with('estado', 'Guardada');
+        } else {
+
+            foreach ($existencia as $existe)
+                $existe->delete();
+            return redirect()->route('activity.index', $quiz_id)->with('estado', 'Eliminada');
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function saveInActivity($quiz_id, $activity_id, $lugar = null)
     {
-        //
+        $existencia = Activities_Quiz::all()->where('prueba_id', $quiz_id)->where('actividad', $activity_id);
+        if ($existencia->isEmpty()) {
+            $relacion = new Activities_Quiz();
+            $relacion->prueba_id = $quiz_id;
+            $relacion->actividad = $activity_id;
+            $relacion->save();
+            return redirect()->route('activity.show', [$activity_id, $lugar])->with('estado', 'Guardada');
+        } else {
+
+            foreach ($existencia as $existe)
+                $existe->delete();
+            return redirect()->route('activity.show', [$activity_id, $lugar])->with('estado', 'Eliminada');
+        }
     }
 
     /**
