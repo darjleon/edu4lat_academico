@@ -180,7 +180,7 @@
 
             @endif
 
-            <div class="flex flex-col px-8 pt-6 pb-8 my-2 mb-4 bg-white rounded shadow-md">
+            {{-- <div class="flex flex-col px-8 pt-6 pb-8 my-2 mb-4 bg-white rounded shadow-md">
                 <div class="mb-6 -mx-3 md:flex">
                     <div class="px-3 mb-6 md:w-1/2 md:mb-0">
                         <label class="block mb-2 text-xs font-bold tracking-wide uppercase text-grey-darker"
@@ -249,7 +249,7 @@
                             id="grid-zip" type="text" placeholder="90210">
                     </div>
                 </div>
-            </div>
+            </div> --}}
         @endforeach
 
         <div class="flex justify-center pt-4 space-x-4">

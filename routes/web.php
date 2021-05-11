@@ -37,6 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/prueba/actividades/eliminar/{id}', [ActivityController::class, 'destroy'])->name('activity.destroy');
 
     /*     Prueba-Actividades     */
-    Route::get('/prueba-actividad/{quiz_id}/{activity_id}', [ActivitiesQuizController::class, 'saveInQuiz'])->name('quiz.activity.save');
-    Route::get('/actividad-prueba/{quiz_id}/{activity_id}/{lugar?}', [ActivitiesQuizController::class, 'saveInActivity'])->name('quiz.activity.save');
+    Route::get('/prueba-actividad/{quiz_id}/{activity_id}', [ActivitiesQuizController::class, 'saveInQuiz'])->name('quiz.activity.saveInQuiz');
+    Route::get('/actividad-prueba/{quiz_id}/{activity_id}/{lugar?}', [ActivitiesQuizController::class, 'saveInActivity'])->name('quiz.activity.saveInActivity');
 });

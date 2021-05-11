@@ -100,7 +100,7 @@ class ActivityController extends Controller
             $actividad->area = $prueba->area;
             $actividad->nivel = $prueba->nivel;
             $actividad->save();
-            return redirect()->route('quiz.activity.save', [$quiz_id, $actividad]);
+            return redirect()->route('quiz.activity.saveInQuiz', [$quiz_id, $actividad]);
         }
     }
 
