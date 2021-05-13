@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activities_Quiz;
 use App\Models\Area;
+use App\Models\Book;
 use App\Models\Course;
 use App\Models\Grade;
 use App\Models\Quiz;
@@ -17,39 +18,45 @@ use Illuminate\Support\Facades\DB;
 class QuizController extends Controller
 {
 
-    public function index($curso_id = null)
+    public function index($libro_id = null)
     {
         $usuario_id = Auth::id();
         $usuario = User::find($usuario_id);
 
-        if ($curso_id == null) {
+        if ($libro_id == null) {
             $pruebas = DB::table('quizzes')->where('creador_id', '=', $usuario_id)
                 ->orderBy('id', 'desc')->paginate(5);
-            return view('quiz.opcionQuiz', compact('pruebas', 'curso_id'), compact('usuario'));
+            return view('quiz.opcionQuiz', compact('pruebas', 'libro_id'), compact('usuario'));
         }
 
         $pruebas = DB::table('quizzes')->where('creador_id', '=', $usuario_id)
-            ->where('curso', 'like', '%' . $curso_id . '%')
+            ->where('libro_id', '=', $libro_id)
             ->orderBy('id', 'desc')->paginate(5);
 
-        return view('quiz.opcionQuiz', compact('pruebas', 'curso_id'), compact('usuario'));
+        return view('quiz.opcionQuiz', compact('pruebas', 'libro_id'), compact('usuario'));
     }
 
 
-    public function create($curso_id = null)
+    public function create($libro_id = null)
     {
         $niveles =  Grade::select('nombre')->get();
         $areas =  Area::select('nombre')->get();
-        $cursos = Course::select('nombre')->get();
-        return view('quiz.crearQuiz', compact('niveles', 'areas'), compact('cursos', 'curso_id'));
+        if ($libro_id == null) {
+            $libros = Book::select('id', 'titulo')->get();
+        } else {
+            $libros = Book::find($libro_id);
+        }
+
+        return view('quiz.crearQuiz', compact('niveles', 'areas'), compact('libros', 'libro_id'));
     }
 
-    public function store(Request $request, $curso_id = null)
+    public function store(Request $request, $libro_id = null)
     {
         $request->validate(
             [
                 "titulo" => ['required'],
                 "area" => ['required'],
+                "libro" => ['required'],
                 "nivel" => ['required'],
                 "hora_de_inicio" => ['required'],
                 "hora_de_cierre" => ['required', new TiempoConSentido($request->hora_de_inicio)],
@@ -60,10 +67,10 @@ class QuizController extends Controller
             ]
         );
         $nuevaPrueba = new Quiz();
+        $nuevaPrueba->libro_id = $request->libro;
         $nuevaPrueba->creador_id = Auth::id();
         $nuevaPrueba->titulo = $request->titulo;
         $nuevaPrueba->area = $request->area;
-        $nuevaPrueba->curso .= $request->curso;
         $nuevaPrueba->nivel = $request->nivel;
         $nuevaPrueba->descripcion = $request->descripcion;
         $nuevaPrueba->fecha = $request->fecha;
@@ -86,8 +93,8 @@ class QuizController extends Controller
         $prueba = Quiz::find($quizId);
         $niveles =  Grade::select('nombre')->get();
         $areas =  Area::select('nombre')->get();
-        $cursos = Course::select('nombre')->get();
-        return view('quiz.editarQuiz', compact('niveles', 'areas'), compact('prueba', 'cursos'));
+        $libros = Book::select('id', 'titulo')->get();
+        return view('quiz.editarQuiz', compact('niveles', 'areas'), compact('prueba', 'libros'));
     }
 
     public function update(Request $request, $quizId)
@@ -97,6 +104,7 @@ class QuizController extends Controller
                 "titulo" => ['required'],
                 "area" => ['required'],
                 "nivel" => ['required'],
+                "libro" => ['required'],
                 "hora_de_inicio" => ['required'],
                 "hora_de_cierre" => ['required', new TiempoConSentido($request->hora_de_inicio)],
                 "fecha" => ['required']
@@ -109,7 +117,7 @@ class QuizController extends Controller
         $pruebaEditada->titulo = $request->titulo;
         $pruebaEditada->area = $request->area;
         $pruebaEditada->nivel = $request->nivel;
-        $pruebaEditada->curso = $request->curso;
+        $pruebaEditada->libro_id = $request->libro;
         $pruebaEditada->descripcion = $request->descripcion;
         $pruebaEditada->fecha = $request->fecha;
         $pruebaEditada->inicio = $request->hora_de_inicio;

@@ -15,11 +15,11 @@ class CreateQuizzesTable extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('creador_id');
-            $table->foreign('creador_id')
+            $table->unsignedBigInteger('libro_id');
+            $table->foreign('libro_id')
                 ->references('id')
-                ->on('users');
-            $table->text('curso')->nullable();
+                ->on('books');
+            $table->unsignedBigInteger('creador_id');
             $table->string('area');
             $table->string('nivel');
             $table->string('titulo');

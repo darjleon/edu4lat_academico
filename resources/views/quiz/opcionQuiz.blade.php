@@ -1,10 +1,19 @@
 <x-app-layout>
 
     <x-header-title>
-        <a href="{{ route('quiz.create', $curso_id) }}"
-            class="flex items-center justify-center w-1/2 px-4 py-3 text-white transform bg-blue-400 rounded-md hover:bg-blue-600 focus:outline-none">
-            Aqui crea tu prueba
-        </a><br>
+        <div class="flex justify-between">
+            <a href="{{ route('quiz.create', $libro_id) }}"
+                class="flex items-center justify-center w-1/2 px-4 py-3 text-white transform bg-blue-400 rounded-md hover:bg-blue-600 focus:outline-none">
+                Aqui crea tu prueba
+            </a>
+            @if ($libro_id != null)
+                <a href="#" onclick="history.back()"
+                    class="flex items-center justify-center w-1/2 px-4 py-3 text-white transform bg-red-400 rounded-md hover:bg-red-600 focus:outline-none">
+                    Volver a libros
+                </a>
+            @endif
+        </div>
+
     </x-header-title>
     <div id="aqui"></div>
     <x-container>
@@ -19,10 +28,10 @@
                                         class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                         Creado
                                     </th>
-                                    @if (empty($curso_id))
+                                    @if (empty($libro_id))
                                         <th scope="col"
                                             class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                            Curso
+                                            Libro
                                         </th>
                                     @endif
                                     <th scope="col"
@@ -62,16 +71,9 @@
                                                 {{ \Carbon\Carbon::parse($prueba->created_at)->diffForHumans() }}
                                             </div>
                                         </td>
-                                        @if (empty($curso_id))
+                                        @if (empty($libro_id))
                                             <td class="px-3 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
-                                                @if (empty($prueba->curso))
-                                                    <span
-                                                        class="inline-flex px-2 text-xs font-bold leading-6 text-red-800 bg-yellow-300 rounded-full">
-                                                        Asignar curso
-                                                    </span>
-                                                @else
-                                                    {{ $prueba->curso }}
-                                                @endif
+                                                {{ $prueba->libro_id }}
                                             </td>
                                         @endif
                                         <td class="px-3 py-4 whitespace-nowrap">

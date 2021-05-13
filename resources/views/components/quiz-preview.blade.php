@@ -30,7 +30,7 @@
         <div class="mb-6 -mx-3 md:flex">
             <div class="px-3 mb-6 md:w-1/2 md:mb-0">
                 <div class="block w-full px-4 py-2 border rounded ">
-                    <p class="text-lg font-semibold text-gray-700">Curso: {{ $curso }}</p>
+                    <p class="text-lg font-semibold text-gray-700">Libro: {{ $libro }}</p>
                 </div>
                 <div class="block w-full px-4 py-2 border rounded ">
                     <p class="text-lg font-semibold text-gray-700 ">Area: {{ $area }}</p>

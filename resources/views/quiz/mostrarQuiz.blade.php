@@ -4,12 +4,8 @@
         <x-slot name="titulo">
             {{ $prueba->titulo }}
         </x-slot>
-        <x-slot name="curso">
-            @if (empty($prueba->curso))
-                <span class="px-2 text-gray-900 underline bg-green-100 rounded-full">Asignar curso</span>
-            @else
-                {{ $prueba->curso }}
-            @endif
+        <x-slot name="libro">
+            <span class="px-2 text-gray-900 underline bg-green-100 rounded-full">{{ $prueba->libro_id }}</span>
         </x-slot>
         <x-slot name="area">
             {{ $prueba->area }}

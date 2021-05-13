@@ -1,9 +1,13 @@
 <x-app-layout>
 
     <x-header-title>
-        <p
-            class="flex items-center justify-center w-1/2 px-4 py-3 text-white bg-green-500 rounded-md focus:outline-none">
-            Escoje las actividades que tendra la prueba</p><br>
+
+        <div class="flex justify-between">
+            <div
+                class="flex items-center justify-center w-1/2 px-4 py-3 text-white bg-green-500 rounded-md focus:outline-none">
+                Escoje las actividades que tendra la prueba</div>
+
+        </div>
     </x-header-title>
 
     <x-container>

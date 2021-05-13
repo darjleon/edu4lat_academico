@@ -20,14 +20,15 @@
                     <div class="flex justify-around space-x-4">
                         <div class="flex flex-col">
                             <div class="input-group-prepend">
-                                <label class="leading-loose input-group-text" for="curso">Curso</label>
+                                <label class="leading-loose input-group-text" for="libro">Libro</label>
                             </div>
-                            <select id="curso"
+                            <select id="libro"
                                 class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
-                                name="curso">
-                                <option value="{{ $prueba->curso }}">Curso: {{ $prueba->curso }}</option>
-                                @foreach ($cursos as $curso)
-                                    <option value="{{ $curso->nombre }}">{{ $curso->nombre }}</option>
+                                name="libro" required>
+                                <option value="{{ $prueba->libro_id }}">Libro:
+                                    {{ $libros->find($prueba->libro_id)->titulo }}</option>
+                                @foreach ($libros as $libro)
+                                    <option value="{{ $libro->id }}">{{ $libro->titulo }}</option>
                                 @endforeach
                             </select>
                         </div>

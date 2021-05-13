@@ -419,12 +419,10 @@
                                             class="px-3 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                             Creado
                                         </th>
-                                        @if (empty($curso_id))
-                                            <th scope="col"
-                                                class="px-3 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                                Curso
-                                            </th>
-                                        @endif
+                                        <th scope="col"
+                                            class="px-3 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                            Libro
+                                        </th>
                                         <th scope="col"
                                             class="px-3 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                             Titulo
@@ -462,19 +460,12 @@
                                                     {{ \Carbon\Carbon::parse($prueba->created_at)->diffForHumans() }}
                                                 </div>
                                             </td>
-                                            @if (empty($curso_id))
-                                                <td
-                                                    class="px-3 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
-                                                    @if (empty($prueba->curso))
-                                                        <span
-                                                            class="inline-flex px-2 text-xs font-bold leading-6 text-red-800 bg-yellow-300 rounded-full">
-                                                            Asignar curso
-                                                        </span>
-                                                    @else
-                                                        {{ $prueba->curso }}
-                                                    @endif
-                                                </td>
-                                            @endif
+                                            <td class="px-3 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
+                                                <span
+                                                    class="inline-flex px-2 text-xs font-bold leading-6 text-gray-800 bg-green-300 rounded-full">
+                                                    {{ $prueba->libro_id }}
+                                                </span>
+                                            </td>
                                             <td class="px-3 py-4 text-center whitespace-nowrap">
                                                 <div class="text-sm font-medium text-gray-900">{{ $prueba->titulo }}
                                                 </div>

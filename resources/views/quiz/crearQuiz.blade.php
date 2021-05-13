@@ -2,7 +2,7 @@
 
     <x-quiz-format-create>
         <div class="divide-y divide-gray-200">
-            <form method="post" action={{ route('quiz.store', $curso_id) }}>
+            <form method="post" action={{ route('quiz.store', $libro_id) }}>
                 @csrf
                 <div class="py-8 space-y-4 text-base leading-6 text-gray-700 sm:text-lg sm:leading-7">
                     <div class="flex flex-col">
@@ -18,19 +18,37 @@
                             placeholder="Opcional">{{ old('descripcion') }}</textarea>
                     </div>
                     <div class="flex justify-around space-x-3">
-                        <div class="flex flex-col">
-                            <div class="input-group-prepend">
-                                <label class="leading-loose input-group-text" for="curso">Curso</label>
+                        @if ($libro_id != null)
+                            <div class="flex flex-col">
+                                <div class="input-group-prepend">
+                                    <label class="leading-loose input-group-text" for="libro">Libro</label>
+                                </div>
+                                <select id="libro"
+                                    class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                    name="libro" required>
+                                    <option value="{{ $libros->id }}">
+                                        {{ $libros->titulo }}
+                                    </option>
+                                </select>
                             </div>
-                            <select id="curso"
-                                class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
-                                name="curso">
-                                <option value="{{ old('curso') }}">Curso: {{ old('curso') }}</option>
-                                @foreach ($cursos as $curso)
-                                    <option value="{{ $curso->nombre }}">{{ $curso->nombre }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        @else
+                            <div class="flex flex-col">
+                                <div class="input-group-prepend">
+                                    <label class="leading-loose input-group-text" for="libro">Libro</label>
+                                </div>
+                                <select id="libro"
+                                    class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                    name="libro" required>
+                                    <option value="{{ old('libro') }}">
+                                        Libro: {{ $libros->find(old('libro'))->titulo ?? '' }}
+                                    </option>
+                                    @foreach ($libros as $libro)
+                                        <option value="{{ $libro->id }}">{{ $libro->titulo }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
+
                         <div class="flex flex-col">
                             <div class="input-group-prepend">
                                 <label class="leading-loose input-group-text" for="area">Area</label>
@@ -67,17 +85,17 @@
                     </div>
                     <div class="flex justify-around space-x-4">
                         <div class="flex flex-col">
-                            <label class="leading-loose">Hora de inicio</label>
+                            <label class="leading-loose" for="hora_de_inicio">Hora de inicio</label>
                             <div class="flex flex-col text-gray-400 focus-within:text-gray-600">
-                                <input value="{{ old('hora de inicio') }}"
+                                <input value="{{ old('hora_de_inicio') }}"
                                     class="w-full px-8 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
                                     name="hora_de_inicio" id="hora_de_inicio" type="time" required>
                             </div>
                         </div>
                         <div class="flex flex-col">
-                            <label class="leading-loose">Hora de cierre</label>
+                            <label class="leading-loose" for="hora_de_inicio">Hora de cierre</label>
                             <div class="flex flex-col text-gray-400 focus-within:text-gray-600">
-                                <input value="{{ old('hora de cierre') }}"
+                                <input value="{{ old('hora_de_cierre') }}"
                                     class="w-full px-8 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
                                     name="hora_de_cierre" id="hora_de_cierre" type="time" required>
                             </div>
