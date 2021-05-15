@@ -116,7 +116,35 @@
                                     for="respuesta">
                                     {{ $actividad->enunciado }}
                                 </label>
+                                <div class="flex justify-center h-full">
+                                    <div class="w-full">
+                                        <fieldset class="border rounded shadow-sm">
 
+                                            @php
+                                                $opcionN = 1;
+                                                $opciones = Arr::collapse([json_decode($actividad->opciones), json_decode($actividad->respuesta)]);
+                                            @endphp
+
+                                            @foreach (Arr::shuffle($opciones) as $opcion)
+
+                                                <div class="relative flex items-center border-b last:border-b-0">
+                                                    <input
+                                                        class="absolute w-5 h-5 text-green-600 border border-gray-300 rounded-md cursor-pointer left-3"
+                                                        type="checkbox" name="opcion"
+                                                        id="opcion{{ $opcionN }}{{ $actividad->id }}"
+                                                        value="{{ $opcion }}">
+                                                    <label class="flex-1 block py-2 pl-10 pr-2 cursor-pointer"
+                                                        for="opcion{{ $opcionN }}{{ $actividad->id }}">{{ $opcion }}</label>
+                                                </div>
+
+                                                @php
+                                                    $opcionN += 1;
+                                                @endphp
+                                            @endforeach
+
+                                        </fieldset>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -133,6 +161,18 @@
                                     for="respuesta">
                                     {{ $actividad->enunciado }}
                                 </label>
+                                @php
+                                    $opciones = json_decode($actividad->opciones);
+                                @endphp
+                                <div class="form-group">
+                                    <label for="respuestaPregunta{{ $actividad->id }}"
+                                        class="w-full text-lg font-bold leading-tight">Pregunta:
+                                        {{ $opciones[0] }}</label>
+                                    <textarea name="respuestaPregunta{{ $actividad->id }}"
+                                        id="respuestaPregunta{{ $actividad->id }}"
+                                        class="w-full px-2 py-1 pt-4 mr-3 leading-tight text-gray-700 bg-transparent border-gray-300 border-none rounded-md appearance-none order focus:outline-none"
+                                        placeholder="Responda aquí"></textarea>
+                                </div>
 
                             </div>
                         </div>
@@ -151,7 +191,34 @@
                                     for="respuesta">
                                     {{ $actividad->enunciado }}
                                 </label>
+                                @php
+                                    $opcionN = 1;
+                                    $alternativas = json_decode($actividad->respuesta);
+                                    $opciones = json_decode($actividad->opciones);
+                                @endphp
 
+                                @foreach (Arr::shuffle($opciones) as $opcion)
+                                    <div class="relative flex flex-col items-center border-b last:border-b-3">
+                                        <div class="input-group-prepend">
+                                            <label class="leading-loose input-group-text"
+                                                for="alternativa{{ $opcionN }}{{ $actividad->id }}">{{ $opcion }}</label>
+                                        </div>
+                                        <select id="alternativa{{ $opcionN }}{{ $actividad->id }}"
+                                            class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                            name="alternativa{{ $opcionN }}">
+                                            <option value="">
+                                                Escoga:
+                                            </option>
+                                            @foreach ($alternativas as $alternativa)
+                                                <option value="{{ $alternativa }}">{{ $alternativa }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    @php
+                                        $opcionN += 1;
+                                    @endphp
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -168,6 +235,20 @@
                                     for="respuesta">
                                     {{ $actividad->enunciado }}
                                 </label>
+                                @php
+                                    $opciones = Arr::collapse([json_decode($actividad->opciones), json_decode($actividad->respuesta)]);
+                                @endphp
+                                <div class="flex items-stretch py-1 overflow-x-auto whitespace-nowrap">
+                                    <div
+                                        class="self-center text-2xl font-medium leading-loose text-justify align-middle ">
+                                        {{ $opciones[0] }}
+                                        <textarea name="respuestaPregunta{{ $actividad->id }}"
+                                            id="respuestaPregunta{{ $actividad->id }}"
+                                            class="px-2 py-1 pt-2 leading-tight text-gray-800 bg-transparent border-gray-300 border-none rounded-md appearance-none whitespace-nowrap order focus:outline-none"
+                                            placeholder="Ingrese su respuesta"></textarea> {{ $opciones[1] }}
+                                    </div>
+                                </div>
+
 
                             </div>
                         </div>

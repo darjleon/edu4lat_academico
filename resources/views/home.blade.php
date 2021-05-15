@@ -55,8 +55,9 @@ use App\Models\Course;
                         <div class="items-center justify-center w-full py-4 font-sans bg-blue-darker">
                             <div
                                 class="flex flex-row w-full max-w-lg overflow-hidden leading-normal bg-white rounded shadow-lg">
-                                <a href="#" class="flex-1 block p-4 border-b hover:bg-gray-400 focus:outline-none">
-                                    <p class="mb-1 text-lg font-bold text-black">Pruebas</p>
+                                <a href="{{ route('book.index', $curso->id) }}"
+                                    class="flex-1 block p-4 border-b hover:bg-gray-400 focus:outline-none">
+                                    <p class="mb-1 text-lg font-bold text-black">Libros</p>
                                     <img src="{{ asset('images/language.png') }}" alt="">
                                 </a>
                                 <a href="#" class="flex-1 block p-4 hover:bg-gray-400 focus:outline-none">
