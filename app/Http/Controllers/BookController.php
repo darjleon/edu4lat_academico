@@ -7,6 +7,8 @@ use App\Models\Course;
 use App\Models\Course_Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class BookController extends Controller
 {
@@ -84,9 +86,12 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit($libro_id)
     {
-        //
+        $libro = Book::find($libro_id);
+        $cursos = Course::select('id', 'nombre')->get();
+        Session::flash('url', request()->headers->get('referer'));
+        return view('books.editBook', compact('libro', 'cursos'));
     }
 
     /**
@@ -96,9 +101,26 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request,  $libro_id)
     {
-        //
+        $request->validate(
+            [
+                "titulo" => ['required'],
+            ],
+            [
+                'required' => 'El :attribute es requerido.'
+            ]
+        );
+        $newBook = Book::find($libro_id);
+        $newBook->titulo = $request->titulo;
+        $newBook->descripcion = $request->descripcion;
+        $newBook->save();
+
+        if ($request->curso == null) {
+            return Redirect::to(Session::get('url'));
+        } else {
+            return redirect()->route('curso.libro.save', [$request->curso, $newBook]);
+        }
     }
 
     /**
