@@ -22,9 +22,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/libro/index/{curso_id?}', [BookController::class, 'index'])->name('book.index');
     Route::get('/libro/crear/{curso_id?}', [BookController::class, 'create'])->name('book.create');
     Route::post('/libro/guardar/{curso_id?}', [BookController::class, 'store'])->name('book.store');
-    /*  Route::get('/libro/mostrar/{libro_id}', [BookController::class, 'show'])->name('book.show');
     Route::get('/libro/editar/{libro_id}', [BookController::class, 'edit'])->name('book.edit');
     Route::post('/libro/actualizar/{libro_id}', [BookController::class, 'update'])->name('book.update');
+    /*  Route::get('/libro/mostrar/{libro_id}', [BookController::class, 'show'])->name('book.show');
     Route::delete('/libro/eliminar/{libro_id}', [BookController::class, 'destroy'])->name('book.destroy');
  */
     /*     Curso-Libros     */

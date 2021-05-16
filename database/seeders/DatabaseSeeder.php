@@ -6,8 +6,10 @@ use Illuminate\Database\Seeder;
 use App\Models\Activities_type;
 use App\Models\User;
 use App\Models\Area;
+use App\Models\Book;
 use App\Models\Grade;
 use App\Models\Course;
+use App\Models\Institution;
 use RolesYPermisos;
 
 class DatabaseSeeder extends Seeder
@@ -25,41 +27,63 @@ class DatabaseSeeder extends Seeder
 
         /* Creacion de usuarios y sus roles */
 
-        $estudiante = User::factory()->create([
-            'email' => 'daniel@gmail.com'
-        ]);
-        $estudiante->assignRole('Estudiante');
-
-
         $profesor = User::factory()->create([
-            'email' => 'jose@gmail.com'
+            'name' => 'Fernando Gutierrez',
+            'email' => 'f.g@camp.academy'
         ]);
         $profesor->assignRole('Docente');
 
-
-        $coordinador = User::factory()->create([
-            'email' => 'maria@gmail.com'
+        $profesor2 = User::factory()->create([
+            'name' => 'Kevin Romero',
+            'email' => 'k.r@camp.academy'
         ]);
-        $coordinador->assignRole('Coordinador');
-
+        $profesor2->assignRole('Docente');
 
         $admin = User::factory()->create([
-            'email' => 'pepe@gmail.com'
+            'name' => 'Darwin Leon',
+            'email' => 'djlramos93@gmail.com'
         ]);
         $admin->assignRole('Administrador');
+
+        $admin2 = User::factory()->create([
+            'name' => 'Daniel Alvarado',
+            'email' => 'daniel@gmail.com'
+        ]);
+        $admin2->assignRole('Administrador');
+
+        /* Creacion de institución */
+
+        $institucion = Institution::create([
+            'nombre' => 'Academia CAMP',
+        ]);
 
         /* Creacion de cursos */
 
         Course::create([
-            'nombre' => 'Alfa',
+            'institucion_id' => $institucion->id,
+            'nombre' => 'EAES',
         ]);
 
-        Course::create([
-            'nombre' => 'Omega',
+        /* Creacion de libros */
+
+        Book::create([
+            'docente_id' => $profesor->id,
+            'titulo' => 'Matemáticas',
         ]);
 
-        Course::create([
-            'nombre' => 'Gama',
+        Book::create([
+            'docente_id' => $profesor->id,
+            'titulo' => 'Ciencias Naturales',
+        ]);
+
+        Book::create([
+            'docente_id' => $profesor2->id,
+            'titulo' => 'Lengua y Literatura',
+        ]);
+
+        Book::create([
+            'docente_id' => $profesor2->id,
+            'titulo' => 'Ciencias Sociales',
         ]);
 
         /* Creacion de areas */

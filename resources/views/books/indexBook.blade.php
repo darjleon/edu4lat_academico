@@ -32,9 +32,9 @@
                             </div>
                             <p class="mb-4 text-base leading-relaxed"> {{ $libro->descripcion }}
                             </p>
-                            <a href="#"
+                            <a href="{{ route('book.edit', $libro->id) }}"
                                 class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
-                                Ver
+                                Editar
                                 <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                     width="20" height="20" fill="currentColor">
                                     <path fill="none" d="M0 0h24v24H0z" />
