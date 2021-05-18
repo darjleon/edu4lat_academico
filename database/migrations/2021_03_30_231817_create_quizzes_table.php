@@ -24,9 +24,9 @@ class CreateQuizzesTable extends Migration
             $table->string('nivel');
             $table->string('titulo');
             $table->text('descripcion')->nullable();
-            $table->date('fecha');
-            $table->Time('inicio');
-            $table->Time('fin');
+            $table->date('fecha')->nullable();
+            $table->Time('inicio')->nullable();
+            $table->Time('fin')->nullable();
             $table->enum('estado', ['Pendiente', 'Realizada'])->default('Pendiente');
             $table->timestamps();
         });

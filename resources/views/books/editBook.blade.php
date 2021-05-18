@@ -1,6 +1,9 @@
 <x-app-layout>
 
     <x-quiz-format-create>
+        <x-slot name="titulo">
+            Edita el un libro seleccionado
+        </x-slot>
         <div class="divide-y divide-gray-200">
             <form method="post" action={{ route('book.update', $libro->id) }}>
                 @csrf

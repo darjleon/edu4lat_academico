@@ -28,6 +28,9 @@ class TiempoConSentido implements Rule
      */
     public function passes($attribute, $value)
     {
+        if ($value == null or $this->inicio == null) {
+            return true;
+        }
         $IN = Carbon::createFromTimeString($this->inicio);
         $fin = Carbon::createFromTimeString($value);
         return $IN->lessThanOrEqualTo($fin);

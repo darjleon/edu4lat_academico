@@ -1,6 +1,10 @@
 <x-app-layout>
 
     <x-quiz-format-create>
+        <x-slot name="titulo">
+            Indica los datos e intrucciones necesarios para programar y realizar la prueba
+        </x-slot>
+
         <div class="divide-y divide-gray-200">
             <form method="post" action={{ route('quiz.store', $libro_id) }}>
                 @csrf
@@ -76,31 +80,41 @@
                             </select>
                         </div>
                     </div>
-                    <div class="flex flex-col">
-                        <label class="leading-loose" for="fecha">Fecha de la
-                            prueba</label>
-                        <input value="{{ old('fecha') }}"
-                            class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
-                            name="fecha" id="fecha" type="date" required>
+                    <div class="relative flex items-center border-b last:border-b-0">
+                        <input type="checkbox"
+                            class="absolute w-4 h-4 text-green-600 border border-gray-300 rounded-md cursor-pointer left-3"
+                            name="check" id="check" value="1" onchange="javascript:showContent()">
+                        <label class="flex-1 block py-2 pl-10 pr-2 cursor-pointer" for="check">Seleccionar una fecha?
+                        </label>
                     </div>
-                    <div class="flex justify-around space-x-4">
+                    <div id="content" style="display: none;">
                         <div class="flex flex-col">
-                            <label class="leading-loose" for="hora_de_inicio">Hora de inicio</label>
-                            <div class="flex flex-col text-gray-400 focus-within:text-gray-600">
-                                <input value="{{ old('hora_de_inicio') }}"
-                                    class="w-full px-8 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
-                                    name="hora_de_inicio" id="hora_de_inicio" type="time" required>
+                            <label class="leading-loose" for="fecha">Fecha de la
+                                prueba</label>
+                            <input value="{{ old('fecha') }}"
+                                class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
+                                name="fecha" id="fecha" type="date">
+                        </div>
+                        <div class="flex justify-around space-x-4">
+                            <div class="flex flex-col">
+                                <label class="leading-loose" for="hora_de_inicio">Hora de inicio</label>
+                                <div class="flex flex-col text-gray-400 focus-within:text-gray-600">
+                                    <input value="{{ old('hora_de_inicio') }}"
+                                        class="w-full px-8 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
+                                        name="hora_de_inicio" id="hora_de_inicio" type="time">
+                                </div>
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="leading-loose" for="hora_de_inicio">Hora de cierre</label>
+                                <div class="flex flex-col text-gray-400 focus-within:text-gray-600">
+                                    <input value="{{ old('hora_de_cierre') }}"
+                                        class="w-full px-8 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
+                                        name="hora_de_cierre" id="hora_de_cierre" type="time">
+                                </div>
                             </div>
                         </div>
-                        <div class="flex flex-col">
-                            <label class="leading-loose" for="hora_de_inicio">Hora de cierre</label>
-                            <div class="flex flex-col text-gray-400 focus-within:text-gray-600">
-                                <input value="{{ old('hora_de_cierre') }}"
-                                    class="w-full px-8 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
-                                    name="hora_de_cierre" id="hora_de_cierre" type="time" required>
-                            </div>
-                        </div>
                     </div>
+
                 </div>
                 <div class="flex justify-center pt-4 space-x-4">
                     <a href="#" onclick="history.back()"
@@ -124,6 +138,19 @@
                 </div>
             </form>
         </div>
+        <script type="text/javascript">
+            function showContent() {
+                element = document.getElementById("content");
+                check = document.getElementById("check");
+                if (check.checked) {
+                    element.style.display = 'block';
+                } else {
+                    element.style.display = 'none';
+                    $("#fecha , #hora_de_inicio, #hora_de_cierre").val("");
+                }
+            }
+
+        </script>
     </x-quiz-format-create>
 
 </x-app-layout>

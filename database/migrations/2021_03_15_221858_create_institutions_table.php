@@ -17,6 +17,20 @@ class CreateInstitutionsTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->text('descripcion')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('provincia')->nullable();
+            $table->string('ciudad')->nullable();
+            $table->string('parroquia')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('indicaciones extra')->nullable();
+            $table->string('web')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('correo')->nullable()->unique();
+            $table->string('telefono')->nullable()->unique();
+            $table->string('celular')->nullable()->unique();
             $table->timestamps();
         });
     }
