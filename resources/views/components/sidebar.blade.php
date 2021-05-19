@@ -205,7 +205,7 @@ use App\Models\Course;
 
                         <div x-show="open">
                             @foreach (Course::all() as $curso)
-                                <a href="{{ route('book.index', $curso->id) }}"
+                                <a href="{{ route('course.show', $curso->id) }}"
                                     class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
                                     <svg class="w-6 h-6 mr-3 text-gray-400 ml-7 group-hover:text-gray-300"
                                         x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg"
@@ -217,6 +217,17 @@ use App\Models\Course;
                                     Curso: {{ $curso->nombre }}
                                 </a>
                             @endforeach
+                            <a href="{{ route('course.create') }}"
+                                class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
+                                <svg class="w-6 h-6 mr-3 text-gray-400 ml-7 group-hover:text-gray-300"
+                                    x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z">
+                                    </path>
+                                </svg>
+                                Crear curso
+                            </a>
                         </div>
                     </div>
 

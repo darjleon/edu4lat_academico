@@ -1,16 +1,34 @@
+@php
+use App\Models\Course;
+$curso = Course::find($curso_id);
+@endphp
+
 <x-app-layout>
     <x-header-title>
-        <a href="{{ route('book.create', $curso_id) }}"
-            class="flex items-center justify-center w-1/2 px-4 py-3 text-white transform bg-blue-400 rounded-md hover:bg-blue-600 focus:outline-none">
-            Aqui crea un libro
-        </a>
+        <div class="flex justify-between">
 
+            <a href="{{ route('book.create', $curso_id) }}"
+                class="flex items-center justify-center w-1/2 px-4 py-3 text-white transform bg-blue-400 rounded-md hover:bg-blue-600 focus:outline-none">
+                @if ($curso_id == null)
+                    Aqui crea un libro
+                @else
+                    Crea un libro para el curso {{ $curso->nombre }}
+                @endif
+
+            </a>
+            @if ($curso_id != null)
+                <a href="{{ route('course.show', $curso_id) }}"
+                    class="flex items-center justify-center w-1/2 px-4 py-3 text-white transform bg-red-400 rounded-md hover:bg-red-600 focus:outline-none">
+                    Volver al curso {{ $curso->nombre }}
+                </a>
+            @endif
+        </div>
     </x-header-title>
 
     <x-container>
         <section class="text-gray-700 body-font">
             <div class="flex flex-wrap text-left">
-                @foreach ($libros as $libro)
+                @forelse ($libros as $libro)
                     <div class="px-8 py-6 lg:w-1/3 md:w-full">
                         <div class="p-6 bg-gray-200 rounded-md">
                             <h2 class="text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Libro:
@@ -44,6 +62,11 @@
                             </a>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <h2 class="m-8 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> No hay libros creados o
+                        asignados
+                    </h2>
+
+                @endforelse
     </x-container>
 </x-app-layout>

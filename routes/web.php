@@ -6,6 +6,7 @@ use App\Http\Controllers\ActivitiesQuizController;
 use App\Http\Controllers\CourseBookController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstitutionController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/institucion/index', [InstitutionController::class, 'index'])->name('institucion.index');
     Route::get('/institucion/editar/{institucion_id}', [InstitutionController::class, 'edit'])->name('institucion.edit');
     Route::post('/institucion/actualizar/{institucion_id}', [InstitutionController::class, 'update'])->name('institucion.update');
+
+    /*     Curso     */
+    Route::get('/curso/crear', [CourseController::class, 'create'])->name('course.create');
+    Route::post('/curso/guardar', [CourseController::class, 'store'])->name('course.store');
+    Route::get('/curso/mostrar/{curso_id}', [CourseController::class, 'show'])->name('course.show');
+    Route::get('/curso/editar/{curso_id}', [CourseController::class, 'edit'])->name('course.edit');
+    Route::post('/curso/actualizar/{curso_id}', [CourseController::class, 'update'])->name('course.update');
+    Route::delete('/curso/eliminar/{libcurso_idro_id}', [CourseController::class, 'destroy'])->name('course.destroy');
 
     /*     Libro     */
     Route::get('/libro/index/{curso_id?}', [BookController::class, 'index'])->name('book.index');
