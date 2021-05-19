@@ -6,6 +6,7 @@ use App\Http\Controllers\ActivitiesQuizController;
 use App\Http\Controllers\CourseBookController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\InstitutionController;
 use Illuminate\Support\Facades\Route;
 
 // Authentication routes
@@ -17,6 +18,11 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, '__invoke'])->name('home.index');
+
+    /*     Institucion     */
+    Route::get('/institucion/index', [InstitutionController::class, 'index'])->name('institucion.index');
+    Route::get('/institucion/editar/{institucion_id}', [InstitutionController::class, 'edit'])->name('institucion.edit');
+    Route::post('/institucion/actualizar/{institucion_id}', [InstitutionController::class, 'update'])->name('institucion.update');
 
     /*     Libro     */
     Route::get('/libro/index/{curso_id?}', [BookController::class, 'index'])->name('book.index');

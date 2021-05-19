@@ -16,13 +16,14 @@ class CreateInstitutionsTable extends Migration
         Schema::create('institutions', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->string('frase')->nullable();
             $table->text('descripcion')->nullable();
             $table->string('logo')->nullable();
             $table->string('provincia')->nullable();
             $table->string('ciudad')->nullable();
             $table->string('parroquia')->nullable();
             $table->string('direccion')->nullable();
-            $table->string('indicaciones extra')->nullable();
+            $table->string('indicaciones_extra')->nullable();
             $table->string('web')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();

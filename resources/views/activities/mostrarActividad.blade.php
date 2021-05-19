@@ -398,7 +398,7 @@
                 @endif
                 <div class="flex-grow p-6 px-4 pt-3 pb-4 mb-2 bg-white">
                     <div class="flex justify-end px-6 pt-3 border-t">
-                        <a href="{{ route('activity.index', $quiz_id) }}" onclick="history.back()"
+                        <a href="{{ route('activity.index', $quiz_id) }}"
                             class="px-4 py-2 mr-1 text-gray-100 bg-red-500 rounded">Volver</a>
                         <button type="submit" class="px-4 py-2 text-gray-200 bg-blue-600 rounded">Guardar
                             cambios</Button>
