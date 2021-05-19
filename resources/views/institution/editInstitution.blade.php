@@ -42,8 +42,6 @@
                             <h2 class="text-2xl font-semibold">
                                 Información de la institución
                             </h2>
-                            <a href="#" onclick="history.back()"
-                                class="px-4 py-2 mr-1 font-semibold text-center text-gray-900 bg-red-300 rounded hover:bg-red-600 hover:text-gray-100">Volver/Cancelar</a>
                         </div>
                         <div>
                             <div class="p-4 space-y-1 border-b md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0">
@@ -231,16 +229,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div
-                            class="items-center p-4 space-y-1 border-t-4 md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0">
-                            <a href="#" onclick="history.back()"
-                                class="px-4 py-2 mr-1 font-semibold text-center text-gray-900 bg-red-300 rounded hover:bg-red-600 hover:text-gray-100">Volver/Cancelar</a>
-                            <button type="submit"
-                                class="px-4 py-2 mr-1 font-semibold text-center text-gray-900 bg-blue-300 rounded hover:bg-blue-600 hover:text-gray-100">Actualizar
-                                datos</button>
-                        </div>
+
                     </div>
                 </div>
+                <div class="flex flex-col-reverse md:justify-end md:flex-row">
+                    <a href="#" onclick="history.back()">
+                        <x-button-end class="text-black bg-gray-300 hover:bg-gray-400">
+                            Cancelar
+                        </x-button-end>
+                    </a>
+                    <button type="submit">
+                        <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
+                            Guardar cambios
+                        </x-button-end>
+                    </button>
+                </div>
+
             </form>
         </div>
     </div>

@@ -4,27 +4,15 @@ $curso = Course::find($curso_id);
 @endphp
 
 <x-app-layout>
-    <x-header-title>
-        <div class="flex justify-between">
-
-            <a href="{{ route('book.create', $curso_id) }}"
-                class="flex items-center justify-center w-1/2 px-4 py-3 text-white transform bg-blue-400 rounded-md hover:bg-blue-600 focus:outline-none">
-                @if ($curso_id == null)
-                    Aqui crea un libro
-                @else
-                    Crea un libro para el curso {{ $curso->nombre }}
-                @endif
-
-            </a>
-            @if ($curso_id != null)
-                <a href="{{ route('course.show', $curso_id) }}"
-                    class="flex items-center justify-center w-1/2 px-4 py-3 text-white transform bg-red-400 rounded-md hover:bg-red-600 focus:outline-none">
-                    Volver al curso {{ $curso->nombre }}
-                </a>
+    <a href="{{ route('book.create', $curso_id) }}">
+        <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
+            @if ($curso_id == null)
+                Crear un libro
+            @else
+                Crear un libro para Curso: {{ $curso->nombre }}
             @endif
-        </div>
-    </x-header-title>
-
+        </x-button-end>
+    </a>
     <x-container>
         <section class="text-gray-700 body-font">
             <div class="flex flex-wrap text-left">
@@ -69,4 +57,12 @@ $curso = Course::find($curso_id);
 
                 @endforelse
     </x-container>
+
+    @if ($curso_id != null)
+        <a href="{{ route('course.show', $curso_id) }}">
+            <x-button-end class="text-black bg-white hover:bg-gray-200">
+                Volver al curso {{ $curso->nombre }}
+            </x-button-end>
+        </a>
+    @endif
 </x-app-layout>

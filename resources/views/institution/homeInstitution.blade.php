@@ -15,6 +15,11 @@
                 </div>
 
             </div>
+            <a href="{{ route('institucion.edit', $institucion->id) }}">
+                <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
+                    Editar información
+                </x-button-end>
+            </a>
             <div class="relative flex flex-col items-center justify-center h-full">
 
                 <div class="w-full max-w-4xl bg-white rounded-lg shadow-xl">
@@ -23,9 +28,6 @@
                         <h2 class="text-2xl font-semibold">
                             Información de la institución
                         </h2>
-                        <a href="{{ route('institucion.edit', $institucion->id) }}"
-                            class="px-4 py-2 mr-1 font-semibold text-center text-gray-900 bg-blue-300 rounded hover:bg-blue-600 hover:text-gray-100">Editar
-                            información</a>
                     </div>
                     <div>
                         <div class="p-4 space-y-1 border-b md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0">

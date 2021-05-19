@@ -1,21 +1,12 @@
 <x-app-layout>
 
-    <x-header-title>
-        <div class="flex justify-between">
-            <a href="{{ route('quiz.create', $libro_id) }}"
-                class="flex items-center justify-center w-1/2 px-4 py-3 text-white transform bg-blue-400 rounded-md hover:bg-blue-600 focus:outline-none">
-                Aqui crea tu prueba
-            </a>
-            @if ($libro_id != null)
-                <a href="#" onclick="history.back()"
-                    class="flex items-center justify-center w-1/2 px-4 py-3 text-white transform bg-red-400 rounded-md hover:bg-red-600 focus:outline-none">
-                    Volver a libros
-                </a>
-            @endif
-        </div>
+    <a href="{{ route('quiz.create', $libro_id) }}">
+        <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
+            Aqui crea tu prueba
+        </x-button-end>
+    </a>
 
-    </x-header-title>
-    <div id="aqui"></div>
+
     <x-container>
         <div class="flex flex-col">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -181,6 +172,14 @@
         </div><br>
         {{ $pruebas->links() }}
     </x-container>
+
+    @if ($libro_id != null)
+        <x-button-end class="text-black bg-white hover:bg-gray-200">
+            <a href="#" onclick="history.back()">
+                Volver a libros
+            </a>
+        </x-button-end>
+    @endif
 
     @section('js')
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
