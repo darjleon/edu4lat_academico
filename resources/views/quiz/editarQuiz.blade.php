@@ -75,7 +75,7 @@
                                 prueba</label>
                             <input value="{{ $prueba->fecha }}"
                                 class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
-                                name="fecha" id="fecha" type="date" required>
+                                name="fecha" id="fecha" type="date">
                         </div>
                         <div class="flex justify-around space-x-4">
                             <div class="flex flex-col">
@@ -83,7 +83,7 @@
                                 <div class="flex flex-col text-gray-400 focus-within:text-gray-600">
                                     <input value="{{ $prueba->inicio }}"
                                         class="w-full px-8 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
-                                        name="hora_de_inicio" id="hora_de_inicio" type="time" required>
+                                        name="hora_de_inicio" id="hora_de_inicio" type="time">
                                 </div>
                             </div>
                             <div class="flex flex-col">
@@ -91,7 +91,7 @@
                                 <div class="flex flex-col text-gray-400 focus-within:text-gray-600">
                                     <input value="{{ $prueba->fin }}"
                                         class="w-full px-8 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
-                                        name="hora_de_cierre" id="hora_de_cierre" type="time" required>
+                                        name="hora_de_cierre" id="hora_de_cierre" type="time">
                                 </div>
                             </div>
                         </div>

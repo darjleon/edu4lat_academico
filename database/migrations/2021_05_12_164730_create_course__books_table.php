@@ -20,6 +20,9 @@ class CreateCourseBooksTable extends Migration
                 ->references('id')
                 ->on('courses')->onDelete('cascade');
             $table->unsignedBigInteger('libro_id');
+            $table->foreign('libro_id')
+                ->references('id')
+                ->on('books')->onDelete('cascade');
             $table->timestamps();
         });
     }
