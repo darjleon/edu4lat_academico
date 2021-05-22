@@ -1,7 +1,11 @@
 <x-app-layout>
 
     <x-header-title>
-        Escoje las actividades que tendra la prueba
+        @if ($quiz_id != null)
+            Escoje las actividades que tendra la prueba
+        @else
+            Actividades
+        @endif
     </x-header-title>
 
     <x-container>
@@ -88,50 +92,56 @@
                                             <td class="px-4 py-2 text-center whitespace-nowrap">
                                                 <div class="flex justify-center item-center">
                                                     @if ($quiz_id != null)
+                                                        @can('Asignar_actividad')
+                                                            <div
+                                                                class="w-6 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                                                <a
+                                                                    href="{{ route('quiz.activity.saveInQuiz', [$quiz_id, $actividad->id]) }}"><svg
+                                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                                            stroke-width="2"
+                                                                            d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                                                                    </svg></a>
+                                                            </div>
+                                                        @endcan
+                                                    @endif
+                                                    @can('Editar_actividad')
                                                         <div
                                                             class="w-6 mr-2 transform hover:text-purple-500 hover:scale-110">
                                                             <a
-                                                                href="{{ route('quiz.activity.saveInQuiz', [$quiz_id, $actividad->id]) }}"><svg
+                                                                href="{{ route('activity.show', [$actividad->id, $quiz_id]) }}"><svg
                                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                                         stroke-width="2"
-                                                                        d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                                                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                                                 </svg></a>
                                                         </div>
-                                                    @endif
+                                                    @endcan
+                                                    @can('Eliminar_actividad')
+                                                        <div class="w-6 mr-2 hover:scale-110">
+                                                            <form class="prueba-eliminar"
+                                                                action="{{ route('activity.destroy', $actividad->id) }}"
+                                                                method="post">
+                                                                <input name="_method" type="hidden" value="DELETE">
+                                                                <input type="hidden" name="_token"
+                                                                    value="{{ csrf_token() }}">
+                                                                <button type="#">
+                                                                    <div
+                                                                        class="w-6 transform hover:text-purple-500 hover:scale-110">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                            viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                                        </svg>
+                                                                    </div>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    @endcan
 
-                                                    <div
-                                                        class="w-6 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                        <a
-                                                            href="{{ route('activity.show', [$actividad->id, $quiz_id]) }}"><svg
-                                                                xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2"
-                                                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                                            </svg></a>
-                                                    </div>
-                                                    <div class="w-6 mr-2 hover:scale-110">
-                                                        <form class="prueba-eliminar"
-                                                            action="{{ route('activity.destroy', $actividad->id) }}"
-                                                            method="post">
-                                                            <input name="_method" type="hidden" value="DELETE">
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}">
-                                                            <button type="#">
-                                                                <div
-                                                                    class="w-6 transform hover:text-purple-500 hover:scale-110">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                        viewBox="0 0 24 24" stroke="currentColor">
-                                                                        <path stroke-linecap="round"
-                                                                            stroke-linejoin="round" stroke-width="2"
-                                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                                    </svg>
-                                                                </div>
-                                                            </button>
-                                                        </form>
-                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -208,240 +218,242 @@
 
         </script>
     @endsection
+    @can('Crear_actividad')
+        <x-header-title>
+            Crea una nueva actividad
+        </x-header-title>
 
-    <x-header-title>
-        Crea una nueva actividad
-    </x-header-title>
+        <x-container>
+            <div class="grid w-full max-w-6xl gap-4 lg:grid-cols-3 md:grid-cols-2">
 
-    <x-container>
-        <div class="grid w-full max-w-6xl gap-4 lg:grid-cols-3 md:grid-cols-2">
+                <x-modal-form>
+                    <x-slot name="actividad">
+                        Respuesta única
+                    </x-slot>
 
-            <x-modal-form>
-                <x-slot name="actividad">
-                    Respuesta única
-                </x-slot>
+                    <x-slot name="variable">
+                        {{ $quiz_id }}
+                    </x-slot>
 
-                <x-slot name="variable">
-                    {{ $quiz_id }}
-                </x-slot>
-
-                <div class="form-group">
-                    <label for="descripcion">Enunciado</label>
-                    <textarea name="descripcion" id="descripcion"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba aquí"></textarea>
-                </div>
-                <div class="form-group">
-                    <div>
-                        <label for="respuesta">La opción correcta: </label>
-                        <input type="text" name="respuesta" id="respuesta"
+                    <div class="form-group">
+                        <label for="descripcion">Enunciado</label>
+                        <textarea name="descripcion" id="descripcion"
                             class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la respuesta (opcion 0)"></input>
+                            placeholder="Escriba aquí"></textarea>
                     </div>
-                    <div>
-                        <label for="opciones">Las opciones: </label>
+                    <div class="form-group">
+                        <div>
+                            <label for="respuesta">La opción correcta: </label>
+                            <input type="text" name="respuesta" id="respuesta"
+                                class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                                placeholder="Escriba la respuesta (opcion 0)"></input>
+                        </div>
+                        <div>
+                            <label for="opciones">Las opciones: </label>
 
-                        <input type="text" name="options1" id="options1"
-                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la opcion 1"></input>
-                        <input type="text" name="options2" id="options2"
-                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la opcion 2"></input>
-                        <input type="text" name="options3" id="options3"
-                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la opcion 3"></input>
+                            <input type="text" name="options1" id="options1"
+                                class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                                placeholder="Escriba la opcion 1"></input>
+                            <input type="text" name="options2" id="options2"
+                                class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                                placeholder="Escriba la opcion 2"></input>
+                            <input type="text" name="options3" id="options3"
+                                class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                                placeholder="Escriba la opcion 3"></input>
+                        </div>
                     </div>
-                </div>
 
-            </x-modal-form>
+                </x-modal-form>
 
-            <x-modal-form>
-                <x-slot name="actividad">
-                    Respuesta múltiple
-                </x-slot>
+                <x-modal-form>
+                    <x-slot name="actividad">
+                        Respuesta múltiple
+                    </x-slot>
 
-                <x-slot name="variable">
-                    {{ $quiz_id }}
-                </x-slot>
+                    <x-slot name="variable">
+                        {{ $quiz_id }}
+                    </x-slot>
 
-                <div class="form-group">
-                    <label for="descripcion">Enunciado</label>
-                    <textarea name="descripcion" id="descripcion"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba aquí"></textarea>
-                </div>
-                <div class="form-group">
-                    <div>
-                        <label for="respuesta">Las opciones correctas: </label>
+                    <div class="form-group">
+                        <label for="descripcion">Enunciado</label>
+                        <textarea name="descripcion" id="descripcion"
+                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                            placeholder="Escriba aquí"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="respuesta">Las opciones correctas: </label>
 
+                            <input type="text" name="respuesta1" id="respuesta1"
+                                class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                                placeholder="Escriba la respuesta"></input>
+                            <input type="text" name="respuesta2" id="respuesta2"
+                                class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                                placeholder="Escriba la respuesta"></input>
+                            <input type="text" name="respuesta3" id="respuesta3"
+                                class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                                placeholder="Escriba la respuesta"></input>
+                        </div>
+                        <div>
+                            <label for="opciones">Las opciones: </label>
+
+                            <input type="text" name="options1" id="options1"
+                                class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                                placeholder="Escriba la options 1"></input>
+                            <input type="text" name="options2" id="options2"
+                                class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                                placeholder="Escriba la options 2"></input>
+                            <input type="text" name="options3" id="options3"
+                                class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                                placeholder="Escriba la options 3"></input>
+                        </div>
+                    </div>
+
+                </x-modal-form>
+
+                <x-modal-form>
+                    <x-slot name="actividad">
+                        Relación única
+                    </x-slot>
+
+                    <x-slot name="variable">
+                        {{ $quiz_id }}
+                    </x-slot>
+
+                    <div class="form-group">
+                        <label for="descripcion">Enunciado</label>
+                        <textarea name="descripcion" id="descripcion"
+                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                            placeholder="Escriba aquí"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="relacion1">La relación 1: </label>
+                        <input type="text" name="relacion1" id="relacion1"
+                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                            placeholder="Escriba A-A"></input>
                         <input type="text" name="respuesta1" id="respuesta1"
                             class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la respuesta"></input>
+                            placeholder="Escriba A-A"></input>
+
+                        <label for="relacion2">La relación 2: </label>
+                        <input type="text" name="relacion2" id="relacion2"
+                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                            placeholder="Escriba B-B"></input>
                         <input type="text" name="respuesta2" id="respuesta2"
                             class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la respuesta"></input>
+                            placeholder="Escriba B-B"></input>
+
+                        <label for="relacion3">La relación 3: </label>
+                        <input type="text" name="relacion3" id="relacion3"
+                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                            placeholder="Escriba C-C"></input>
                         <input type="text" name="respuesta3" id="respuesta3"
                             class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la respuesta"></input>
-                    </div>
-                    <div>
-                        <label for="opciones">Las opciones: </label>
+                            placeholder="Escriba C-C"></input>
 
-                        <input type="text" name="options1" id="options1"
+                        <label for="relacion4">La relación 4: </label>
+                        <input type="text" name="relacion4" id="relacion4"
                             class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la options 1"></input>
-                        <input type="text" name="options2" id="options2"
+                            placeholder="Escriba D-D"></input>
+                        <input type="text" name="respuesta4" id="respuesta4"
                             class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la options 2"></input>
-                        <input type="text" name="options3" id="options3"
+                            placeholder="Escriba D-D"></input>
+                    </div>
+
+                </x-modal-form>
+
+                <x-modal-form>
+                    <x-slot name="actividad">
+                        Verdadero o Falso
+                    </x-slot>
+
+                    <x-slot name="variable">
+                        {{ $quiz_id }}
+                    </x-slot>
+
+                    <div class="form-group">
+                        <label for="descripcion">Enunciado</label>
+                        <textarea name="descripcion" id="descripcion"
                             class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                            placeholder="Escriba la options 3"></input>
+                            placeholder="Escriba aquí"></textarea>
                     </div>
-                </div>
-
-            </x-modal-form>
-
-            <x-modal-form>
-                <x-slot name="actividad">
-                    Relación única
-                </x-slot>
-
-                <x-slot name="variable">
-                    {{ $quiz_id }}
-                </x-slot>
-
-                <div class="form-group">
-                    <label for="descripcion">Enunciado</label>
-                    <textarea name="descripcion" id="descripcion"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba aquí"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="relacion1">La relación 1: </label>
-                    <input type="text" name="relacion1" id="relacion1"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba A-A"></input>
-                    <input type="text" name="respuesta1" id="respuesta1"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba A-A"></input>
-
-                    <label for="relacion2">La relación 2: </label>
-                    <input type="text" name="relacion2" id="relacion2"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba B-B"></input>
-                    <input type="text" name="respuesta2" id="respuesta2"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba B-B"></input>
-
-                    <label for="relacion3">La relación 3: </label>
-                    <input type="text" name="relacion3" id="relacion3"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba C-C"></input>
-                    <input type="text" name="respuesta3" id="respuesta3"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba C-C"></input>
-
-                    <label for="relacion4">La relación 4: </label>
-                    <input type="text" name="relacion4" id="relacion4"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba D-D"></input>
-                    <input type="text" name="respuesta4" id="respuesta4"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba D-D"></input>
-                </div>
-
-            </x-modal-form>
-
-            <x-modal-form>
-                <x-slot name="actividad">
-                    Verdadero o Falso
-                </x-slot>
-
-                <x-slot name="variable">
-                    {{ $quiz_id }}
-                </x-slot>
-
-                <div class="form-group">
-                    <label for="descripcion">Enunciado</label>
-                    <textarea name="descripcion" id="descripcion"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba aquí"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="options">La respuesta será: </label><br>
-                    <div class="inline ml-2">
-                        <input type="radio" name="respuesta" id="options" class="w-5 h-5 text-green-500 form-radio"
-                            value="true" checked>
-                        <span class="ml-2">Verdadera</span>
-                        <input type="radio" name="respuesta" id="options" class="w-5 h-5 ml-4 text-red-500 form-radio"
-                            value="false">
-                        <span class="ml-2">Falsa</span>
+                    <div class="form-group">
+                        <label for="options">La respuesta será: </label><br>
+                        <div class="inline ml-2">
+                            <input type="radio" name="respuesta" id="options" class="w-5 h-5 text-green-500 form-radio"
+                                value="true" checked>
+                            <span class="ml-2">Verdadera</span>
+                            <input type="radio" name="respuesta" id="options" class="w-5 h-5 ml-4 text-red-500 form-radio"
+                                value="false">
+                            <span class="ml-2">Falsa</span>
+                        </div>
                     </div>
-                </div>
 
-            </x-modal-form>
+                </x-modal-form>
 
-            <x-modal-form>
-                <x-slot name="actividad">
-                    Dar respuesta
-                </x-slot>
+                <x-modal-form>
+                    <x-slot name="actividad">
+                        Dar respuesta
+                    </x-slot>
 
-                <x-slot name="variable">
-                    {{ $quiz_id }}
-                </x-slot>
+                    <x-slot name="variable">
+                        {{ $quiz_id }}
+                    </x-slot>
 
-                <div class="form-group">
-                    <label for="descripcion">Enunciado</label>
-                    <textarea name="descripcion" id="descripcion"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba aquí"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="opcion">Pregunta</label>
-                    <textarea name="opcion" id="opcion"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba aquí"></textarea>
-                </div>
+                    <div class="form-group">
+                        <label for="descripcion">Enunciado</label>
+                        <textarea name="descripcion" id="descripcion"
+                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                            placeholder="Escriba aquí"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="opcion">Pregunta</label>
+                        <textarea name="opcion" id="opcion"
+                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                            placeholder="Escriba aquí"></textarea>
+                    </div>
 
-            </x-modal-form>
+                </x-modal-form>
 
-            <x-modal-form>
-                <x-slot name="actividad">
-                    Completar
-                </x-slot>
+                <x-modal-form>
+                    <x-slot name="actividad">
+                        Completar
+                    </x-slot>
 
-                <x-slot name="variable">
-                    {{ $quiz_id }}
-                </x-slot>
+                    <x-slot name="variable">
+                        {{ $quiz_id }}
+                    </x-slot>
 
-                <div class="form-group">
-                    <label for="descripcion">Enunciado</label>
-                    <textarea name="descripcion" id="descripcion"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escriba aquí"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="inicio">Inicio de la frase</label>
-                    <textarea name="inicio" id="inicio"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escribe lo que irá antes del recuadro faltante"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="respuesta">Parte faltante</label>
-                    <input type="text" name="respuesta" id="respuesta" placeholder="Escribe la palabra faltante"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none">
-                </div>
-                <div class="pt-4 form-group">
-                    <label for="final">Final de la frase</label>
-                    <textarea name="final" id="final"
-                        class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
-                        placeholder="Escribe lo que irá después del recuadro faltante"></textarea>
-                </div>
+                    <div class="form-group">
+                        <label for="descripcion">Enunciado</label>
+                        <textarea name="descripcion" id="descripcion"
+                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                            placeholder="Escriba aquí"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inicio">Inicio de la frase</label>
+                        <textarea name="inicio" id="inicio"
+                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                            placeholder="Escribe lo que irá antes del recuadro faltante"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="respuesta">Parte faltante</label>
+                        <input type="text" name="respuesta" id="respuesta" placeholder="Escribe la palabra faltante"
+                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none">
+                    </div>
+                    <div class="pt-4 form-group">
+                        <label for="final">Final de la frase</label>
+                        <textarea name="final" id="final"
+                            class="w-full px-2 py-1 mr-3 leading-tight text-gray-700 bg-transparent border-none appearance-none focus:outline-none"
+                            placeholder="Escribe lo que irá después del recuadro faltante"></textarea>
+                    </div>
 
-            </x-modal-form>
+                </x-modal-form>
 
-        </div>
-    </x-container>
+            </div>
+        </x-container>
+    @endcan
+
 
     @if ($quiz_id != null)
         <a href="#" onclick="history.back()">
