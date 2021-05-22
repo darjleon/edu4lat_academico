@@ -174,11 +174,11 @@
     </x-container>
 
     @if ($libro_id != null)
-        <x-button-end class="text-black bg-white hover:bg-gray-200">
-            <a href="#" onclick="history.back()">
+        <a href="#" onclick="history.back()">
+            <x-button-end class="text-black bg-white hover:bg-gray-200">
                 Volver a libros
-            </a>
-        </x-button-end>
+            </x-button-end>
+        </a>
     @endif
 
     @section('js')

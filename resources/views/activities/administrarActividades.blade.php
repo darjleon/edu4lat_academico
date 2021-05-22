@@ -113,7 +113,9 @@
                                                             </svg></a>
                                                     </div>
                                                     <div class="w-6 mr-2 hover:scale-110">
-                                                        <form class="prueba-eliminar" action="#" method="post">
+                                                        <form class="prueba-eliminar"
+                                                            action="{{ route('activity.destroy', $actividad->id) }}"
+                                                            method="post">
                                                             <input name="_method" type="hidden" value="DELETE">
                                                             <input type="hidden" name="_token"
                                                                 value="{{ csrf_token() }}">
@@ -440,4 +442,12 @@
 
         </div>
     </x-container>
+
+    @if ($quiz_id != null)
+        <a href="#" onclick="history.back()">
+            <x-button-end class="text-black bg-white hover:bg-gray-200">
+                Volver
+            </x-button-end>
+        </a>
+    @endif
 </x-app-layout>

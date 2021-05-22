@@ -18,7 +18,7 @@ class CreateQuizzesTable extends Migration
             $table->unsignedBigInteger('libro_id');
             $table->foreign('libro_id')
                 ->references('id')
-                ->on('books');
+                ->on('books')->onDelete('cascade');
             $table->unsignedBigInteger('creador_id');
             $table->string('area');
             $table->string('nivel');

@@ -174,8 +174,10 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Activity $activity)
+    public function destroy($activity_id)
     {
-        //
+        $actividad = Activity::find($activity_id);
+        $actividad->delete();
+        return redirect()->back();
     }
 }
