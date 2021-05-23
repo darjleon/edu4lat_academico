@@ -18,7 +18,7 @@ class CreateActivitiesTable extends Migration
             $table->unsignedBigInteger('activity_type_id');
             $table->foreign('activity_type_id')
                 ->references('id')
-                ->on('activities_types');
+                ->on('activities_types')->onDelete('cascade');
             $table->string('area');
             $table->string('nivel')->nullable();
             $table->text('enunciado');

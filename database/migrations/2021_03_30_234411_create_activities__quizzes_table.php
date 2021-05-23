@@ -18,8 +18,11 @@ class CreateActivitiesQuizzesTable extends Migration
             $table->unsignedBigInteger('prueba_id');
             $table->foreign('prueba_id')
                 ->references('id')
-                ->on('quizzes');
+                ->on('quizzes')->onDelete('cascade');
             $table->unsignedBigInteger('actividad');
+            $table->foreign('actividad')
+                ->references('id')
+                ->on('activities')->onDelete('cascade');
             $table->timestamps();
         });
     }

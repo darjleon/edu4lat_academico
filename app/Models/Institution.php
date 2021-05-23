@@ -8,8 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Institution extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'id', 'nombre', 'descripcion',
+        'logo', 'provincia', 'ciudad',
+        'parroquia', 'direccion', 'indicaciones_extra',
+        'web', 'facebook', 'twitter',
+        'instagram', 'youtube', 'correo',
+        'telefono', 'celular', 'frase',
     ];
 }

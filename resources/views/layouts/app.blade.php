@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <!-- Scripts -->
+    <script src="https://kit.fontawesome.com/25bc89a4e6.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     @yield('js')
@@ -39,7 +40,7 @@
                 </button>
             </div>
             <main class="relative z-0 flex-1 overflow-y-auto focus:outline-none" tabindex="0">
-                <div class="py-6">
+                <div class="">
                     {{ $slot }}
                 </div>
             </main>

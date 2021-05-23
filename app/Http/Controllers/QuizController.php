@@ -58,9 +58,7 @@ class QuizController extends Controller
                 "area" => ['required'],
                 "libro" => ['required'],
                 "nivel" => ['required'],
-                "hora_de_inicio" => ['required'],
-                "hora_de_cierre" => ['required', new TiempoConSentido($request->hora_de_inicio)],
-                "fecha" => ['required']
+                "hora_de_cierre" => [new TiempoConSentido($request->hora_de_inicio)]
             ],
             [
                 'required' => 'El :attribute es requerido.'
@@ -105,9 +103,7 @@ class QuizController extends Controller
                 "area" => ['required'],
                 "nivel" => ['required'],
                 "libro" => ['required'],
-                "hora_de_inicio" => ['required'],
-                "hora_de_cierre" => ['required', new TiempoConSentido($request->hora_de_inicio)],
-                "fecha" => ['required']
+                "hora_de_cierre" => [new TiempoConSentido($request->hora_de_inicio)],
             ],
             [
                 'required' => 'El :attribute es requerido.'

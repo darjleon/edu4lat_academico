@@ -14,8 +14,7 @@
                 </svg>
             </div>
             <div class="self-center block pl-2 text-lg font-semibold text-gray-700">
-                <h2 class="leading-relaxed">Indica los datos e
-                    intrucciones necesarios para programar y realizar la prueba</h2>
+                <h2 class="leading-relaxed">{{ $titulo }}</h2>
             </div>
         </div>
         @if (!empty($errors->all()))
