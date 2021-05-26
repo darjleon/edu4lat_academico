@@ -9,6 +9,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Authentication routes
@@ -20,6 +21,17 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [HomeController::class, '__invoke'])->name('home.index');
+
+    /*     Usuarios     */
+
+    Route::get('/usuario', [UserController::class, 'index'])->name('usuario.index')
+        ->middleware('permission:Ver_usuario');
+    Route::post('/usuario/guardar', [UserController::class, 'store'])->name('usuario.store')
+        ->middleware('permission:Crear_usuario');
+    Route::post('/usuario/actualizar/{user_id}', [UserController::class, 'update'])->name('usuario.update')
+        ->middleware('permission:Editar_usuario');
+    Route::delete('/usuario/eliminar/{user_id}', [UserController::class, 'destroy'])->name('usuario.destroy')
+        ->middleware('permission:Eliminar_usuario');
 
     /*     Institucion     */
     Route::get('/institucion/index', [InstitutionController::class, 'index'])->name('institucion.index')

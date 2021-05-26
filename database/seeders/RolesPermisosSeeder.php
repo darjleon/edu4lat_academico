@@ -19,6 +19,10 @@ class RolesPermisosSeeder extends Seeder
         app()['cache']->forget('spatie.permission.cache');
 
         // creacion de permisos
+        Permission::create(['name' => 'Ver_usuario']);
+        Permission::create(['name' => 'Crear_usuario']);
+        Permission::create(['name' => 'Editar_usuario']);
+        Permission::create(['name' => 'Eliminar_usuario']);
 
         Permission::create(['name' => 'Ver_institución']);
         Permission::create(['name' => 'Editar_institución']);
