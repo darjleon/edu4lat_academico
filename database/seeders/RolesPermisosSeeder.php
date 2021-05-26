@@ -45,6 +45,11 @@ class RolesPermisosSeeder extends Seeder
         Permission::create(['name' => 'Editar_actividad']);
         Permission::create(['name' => 'Eliminar_actividad']);
 
+        Permission::create(['name' => 'Ver_area']);
+        Permission::create(['name' => 'Crear_area']);
+        Permission::create(['name' => 'Editar_area']);
+        Permission::create(['name' => 'Eliminar_area']);
+
         Permission::create(['name' => 'Resolver_prueba']);
         Permission::create(['name' => 'Ver_estadisticas']);
 

@@ -22,7 +22,7 @@ $curso = Course::find($curso_id);
                 @forelse ($libros as $libro)
                     <div class="px-8 py-6 lg:w-1/3 md:w-full">
                         <div class="p-6 bg-gray-200 rounded-md">
-                            <h2 class="text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Libro:
+                            <h2 class="text-lg font-semibold text-gray-700 lg:text-2xl title-font">
                                 {{ $libro->titulo }}
                             </h2>
                             <div class="items-center justify-center w-full py-4 font-sans bg-blue-darker">

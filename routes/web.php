@@ -8,6 +8,7 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\AreaController;
 use Illuminate\Support\Facades\Route;
 
 // Authentication routes
@@ -101,4 +102,15 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:Asignar_actividad');
     Route::get('/actividad-prueba/{quiz_id}/{activity_id}/{lugar_quiz?}', [ActivitiesQuizController::class, 'saveInActivity'])->name('quiz.activity.saveInActivity')
         ->middleware('permission:Asignar_actividad');
+
+    /*     Areas     */
+
+    Route::get('/area', [AreaController::class, 'index'])->name('area.index')
+        ->middleware('permission:Ver_area');
+    Route::post('/area/guardar', [AreaController::class, 'store'])->name('area.store')
+        ->middleware('permission:Crear_area');
+    Route::post('/area/actualizar/{type_id}', [AreaController::class, 'update'])->name('area.update')
+        ->middleware('permission:Editar_area');
+    Route::delete('/area/eliminar/{type_id}', [AreaController::class, 'destroy'])->name('area.destroy')
+        ->middleware('permission:Eliminar_area');
 });
