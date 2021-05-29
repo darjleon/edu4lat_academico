@@ -90,18 +90,24 @@ class DatabaseSeeder extends Seeder
 
         Area::create([
             'nombre' => 'Matematicas',
+            'descripcion' => 'Los números son los unicos que no te mienten en esta vida ',
         ]);
 
         Area::create([
             'nombre' => 'Lengua y Literatura',
+            'descripcion' => 'Para que tu labia sea tan poderosa, como para que seas presidente',
+
         ]);
 
         Area::create([
             'nombre' => 'Ciencias Sociales',
+            'descripcion' => 'No recuerdo que vi estas area',
+
         ]);
 
         Area::create([
             'nombre' => 'Ciencias Naturales',
+            'descripcion' => 'Para que tu conección con la madre tierra sea esperitual... A otro nivel ;)',
         ]);
 
         /* Creacion de grados/niveles */

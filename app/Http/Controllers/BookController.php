@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Course;
 use App\Models\Course_Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -58,6 +59,7 @@ class BookController extends Controller
         $newBook = new Book();
         $newBook->titulo = $request->titulo;
         $newBook->descripcion = $request->descripcion;
+        $newBook->docente_id = Auth::id();
         $newBook->save();
 
         if ($curso_id != null) {
@@ -111,15 +113,16 @@ class BookController extends Controller
                 'required' => 'El :attribute es requerido.'
             ]
         );
-        $newBook = Book::find($libro_id);
-        $newBook->titulo = $request->titulo;
-        $newBook->descripcion = $request->descripcion;
-        $newBook->save();
+        $editBook = Book::find($libro_id);
+        $editBook->titulo = $request->titulo;
+        $editBook->descripcion = $request->descripcion;
+        $editBook->docente_id = Auth::id();
+        $editBook->save();
 
         if ($request->curso == null) {
             return Redirect::to(Session::get('url'));
         } else {
-            return redirect()->route('curso.libro.save', [$request->curso, $newBook]);
+            return redirect()->route('curso.libro.save', [$request->curso, $editBook]);
         }
     }
 
@@ -129,7 +132,7 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $book_id)
+    public function destroy($book_id)
     {
         $libro = Book::find($book_id);
         $libro->delete();

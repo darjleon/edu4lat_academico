@@ -121,7 +121,7 @@
                                                     @endcan
                                                     @can('Eliminar_actividad')
                                                         <div class="w-6 mr-2 hover:scale-110">
-                                                            <form class="prueba-eliminar"
+                                                            <form class="actividad-eliminar"
                                                                 action="{{ route('activity.destroy', $actividad->id) }}"
                                                                 method="post">
                                                                 <input name="_method" type="hidden" value="DELETE">
@@ -197,7 +197,7 @@
 
         <script>
             $(document).ready(function() {
-                $('.prueba-eliminar').submit(function(e) {
+                $('.actividad-eliminar').submit(function(e) {
                     e.preventDefault();
                     Swal.fire({
                         title: 'Desea eliminar esta actividad?',
