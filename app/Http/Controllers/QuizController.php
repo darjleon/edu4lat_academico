@@ -22,18 +22,19 @@ class QuizController extends Controller
     {
         $usuario_id = Auth::id();
         $usuario = User::find($usuario_id);
-
+        $libros = Book::all();
         if ($libro_id == null) {
-            $pruebas = DB::table('quizzes')->where('creador_id', '=', $usuario_id)
+            $pruebas = DB::table('quizzes')
+                ->where('creador_id', '=', $usuario_id)
                 ->orderBy('id', 'desc')->paginate(5);
-            return view('quiz.opcionQuiz', compact('pruebas', 'libro_id'), compact('usuario'));
+            return view('quiz.opcionQuiz', compact('pruebas', 'libro_id'), compact('usuario', 'libros'));
         }
 
-        $pruebas = DB::table('quizzes')->where('creador_id', '=', $usuario_id)
+        $pruebas = DB::table('quizzes')
             ->where('libro_id', '=', $libro_id)
             ->orderBy('id', 'desc')->paginate(5);
 
-        return view('quiz.opcionQuiz', compact('pruebas', 'libro_id'), compact('usuario'));
+        return view('quiz.opcionQuiz', compact('pruebas', 'libro_id'), compact('usuario', 'libros'));
     }
 
 
@@ -82,8 +83,9 @@ class QuizController extends Controller
     public function show($quizId)
     {
         $prueba = Quiz::find($quizId);
+        $libro = Book::find($prueba->libro_id);
         $actividades = $prueba->activities;
-        return view('quiz.mostrarQuiz', compact('prueba'), compact('actividades'));
+        return view('quiz.mostrarQuiz', compact('prueba', 'libro'), compact('actividades'));
     }
 
     public function edit($quizId)

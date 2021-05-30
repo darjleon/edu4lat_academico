@@ -154,229 +154,168 @@ use App\Models\Course;
                 <nav class="flex-1 px-2 mt-5 space-y-1 bg-gray-800">
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     @hasanyrole('Estudiante')
-                    <a href="#"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
-                            x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                            </path>
-                        </svg>
+                    <x-link-sidebar href="#">
+                        <x-slot name="icono">
+                            M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4
+                            0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6
+                            0v-1m6 0H9
+                        </x-slot>
                         Notificaciones
-                    </a>
+                    </x-link-sidebar>
                     @endhasanyrole
 
                     @hasanyrole('Coordinador|Administrador|Docente|Estudiante')
-                    <a href="{{ route('home.index') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <!-- Current: "text-gray-300", Default: "text-gray-400 group-hover:text-gray-300" -->
-                        <svg class="w-6 h-6 mr-3 text-gray-300" x-description="Heroicon name: outline/home"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                            </path>
-                        </svg>
+                    <x-link-sidebar href="{{ route('home.index') }}">
+                        <x-slot name="icono">
+                            M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0
+                            001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6
+                        </x-slot>
                         Home
-                    </a>
+                    </x-link-sidebar>
                     @endhasanyrole
 
                     @hasanyrole('Administrador|Docente')
-                    <a href="{{ route('institucion.index') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-300" x-description="Heroicon name: outline/home"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z">
-                            </path>
-                        </svg>
+                    <x-link-sidebar href="{{ route('institucion.index') }}">
+                        <x-slot name="icono">
+                            M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z
+                        </x-slot>
                         Institución
-                    </a>
+                    </x-link-sidebar>
                     @endhasanyrole
 
-                    @hasanyrole('Administrador|Docente|Estudiante')
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open"
-                            class="flex items-center w-full px-2 py-2 text-sm font-medium text-gray-300 rounded-md cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white group">
-                            <span class="flex items-center">
-                                <svg class="w-5 h-5 mr-3" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"></path>
-                                </svg>
-                                Cursos
-                            </span>
+                    @hasanyrole('Administrador|Coordinador|Docente|Estudiante')
+                    <x-dropdown-sidebar>
+                        <x-slot name="iconoGeneral">
+                            M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3
+                            20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543
+                            5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17
+                        </x-slot>
+                        <x-slot name="nombre">
+                            Cursos
+                        </x-slot>
+                        @foreach (Course::all() as $curso)
+                            <x-link-sidebar href="{{ route('course.show', $curso->id) }}">
+                                <x-slot name="icono">
+                                    M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7
+                                    20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0
+                                    019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0
+                                    11-4 0 2 2 0 014 0z
+                                </x-slot>
+                                Curso: {{ $curso->nombre }}
+                            </x-link-sidebar>
+                        @endforeach
+                        @hasanyrole('Administrador')
+                        <x-link-sidebar href="{{ route('course.create') }}">
+                            <x-slot name="icono">
+                                M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z
+                            </x-slot>
+                            Crear curso
+                        </x-link-sidebar>
+                        @endhasanyrole
+                    </x-dropdown-sidebar>
+                    @endhasanyrole
 
-                            <span>
-                                <svg class="w-4 h-4 ml-10" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path x-show="! open" d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" style="display: none;"></path>
-                                    <path x-show="open" d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </span>
-                        </button>
+                    @hasanyrole('Administrador|Coordinador|Docente|Estudiante')
+                    <x-dropdown-sidebar>
+                        <x-slot name="iconoGeneral">
+                            M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732
+                            3.732z
+                        </x-slot>
+                        <x-slot name="nombre">
+                            Administrar
+                        </x-slot>
 
-                        <div x-show="open">
-                            @foreach (Course::all() as $curso)
-                                <a href="{{ route('course.show', $curso->id) }}"
-                                    class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                                    <svg class="w-6 h-6 mr-3 text-gray-400 ml-7 group-hover:text-gray-300"
-                                        x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
-                                        </path>
-                                    </svg>
-                                    Curso: {{ $curso->nombre }}
-                                </a>
-                            @endforeach
-                            @hasanyrole('Administrador')
-                            <a href="{{ route('course.create') }}"
-                                class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                                <svg class="w-6 h-6 mr-3 text-gray-400 ml-7 group-hover:text-gray-300"
-                                    x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z">
-                                    </path>
-                                </svg>
-                                Crear curso
-                            </a>
-                            @endhasanyrole
-                        </div>
-                    </div>
+                        @hasanyrole('Administrador')
+                        <x-link-sidebar href="{{ route('book.index') }}">
+                            <x-slot name="icono">
+                                M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5
+                                21.036H3v-3.572L16.732 3.732z
+                            </x-slot>
+                            Libros
+                        </x-link-sidebar>
+                        @endhasanyrole
+
+                        @hasanyrole('Administrador|Docente|Estudiante')
+                        <x-link-sidebar href="{{ route('quiz.index') }}">
+                            <x-slot name="icono">
+                                M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5
+                                21.036H3v-3.572L16.732 3.732z
+                            </x-slot>
+                            Pruebas
+                        </x-link-sidebar>
+                        @endhasanyrole
+
+                        @hasanyrole('Administrador|Docente|Estudiante')
+                        <x-link-sidebar href="{{ route('activity.index') }}">
+                            <x-slot name="icono">
+                                M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5
+                                21.036H3v-3.572L16.732 3.732z
+                            </x-slot>
+                            Actividades
+                        </x-link-sidebar>
+                        @endhasanyrole
+
+                        @hasanyrole('Administrador')
+                        <x-link-sidebar href="{{ route('area.index') }}">
+                            <x-slot name="icono">
+                                M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5
+                                21.036H3v-3.572L16.732 3.732z
+                            </x-slot>
+                            Área
+                        </x-link-sidebar>
+                        @endhasanyrole
+
+                    </x-dropdown-sidebar>
                     @endhasanyrole
 
                     @hasanyrole('Estudiante')
-                    <a href="#"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
-                            x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
-                            </path>
-                        </svg>
+                    <x-link-sidebar href="#">
+                        <x-slot name="icono">
+                            M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0
+                            002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01
+                        </x-slot>
                         Clases
-                    </a>
+                    </x-link-sidebar>
                     @endhasanyrole
 
-                    @hasanyrole('Administrador')
-                    <a href="{{ route('book.index') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
-                            x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                            </path>
-                        </svg>
-                        Libros
-                    </a>
-                    @endhasanyrole
-
-                    @hasanyrole('Administrador|Docente|Estudiante')
-                    <a href="{{ route('quiz.index') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
-                            x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                            </path>
-                        </svg>
-                        Pruebas
-                    </a>
-                    @endhasanyrole
-
-                    @hasanyrole('Administrador|Docente|Estudiante')
-                    <a href="{{ route('activity.index') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
-                            x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                            </path>
-                        </svg>
-                        Actividades
-                    </a>
-                    @endhasanyrole
-
-                    @hasanyrole('Administrador')
-                    <a href="{{ route('area.index') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
-                            x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                            </path>
-                        </svg>
-                        Área
-                    </a>
-                    @endhasanyrole
-
-                    @hasanyrole('Administrador|Docente')
-                    <a href="{{ route('home.index') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
-                            x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-                            </path>
-                        </svg>
+                    @hasanyrole('Administrador|Coordinador')
+                    <x-link-sidebar href="#">
+                        <x-slot name="icono">
+                            M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0
+                            11-8 0 4 4 0 018 0z
+                        </x-slot>
                         Estudiantes
-                    </a>
+                    </x-link-sidebar>
                     @endhasanyrole
 
                     @hasanyrole('Administrador')
-                    <a href="{{ route('usuario.index') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-400 group-hover:text-gray-300"
-                            x-description="Heroicon name: outline/pencil" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
-                            </path>
-                        </svg>
+                    <x-link-sidebar href="{{ route('usuario.index') }}">
+                        <x-slot name="icono">
+                            M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3
+                            0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0
+                            11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z
+                        </x-slot>
                         Usuarios
-                    </a>
+                    </x-link-sidebar>
                     @endhasanyrole
 
                     @hasanyrole('Administrador')
-                    <a href="{{ route('home.index') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-300" x-description="Heroicon name: outline/home"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4">
-                            </path>
-                        </svg>
+                    <x-link-sidebar href="#">
+                        <x-slot name="icono">
+                            M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6
+                            6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4
+                        </x-slot>
                         Configuración
-                    </a>
+                    </x-link-sidebar>
                     @endhasanyrole
 
                     @hasanyrole('Administrador|Docente|Estudiante')
-                    <a href="{{ route('home.index') }}"
-                        class="flex items-center px-2 py-2 text-sm font-medium text-gray-300 rounded-md hover:bg-gray-700 hover:text-white group">
-                        <svg class="w-6 h-6 mr-3 text-gray-300" x-description="Heroicon name: outline/home"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                            </path>
-                        </svg>
+                    <x-link-sidebar href="#">
+                        <x-slot name="icono">
+                            M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z
+                        </x-slot>
                         Ayuda
-                    </a>
+                    </x-link-sidebar>
                     @endhasanyrole
 
                 </nav>

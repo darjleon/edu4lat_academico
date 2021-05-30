@@ -70,7 +70,7 @@ class RolesPermisosSeeder extends Seeder
             'Ver_institución', 'Ver_curso',
             'Ver_libro', 'Resolver_prueba', 'Ver_estadisticas',
             'Crear_actividad', 'Crear_prueba',
-            'Editar_prueba', 'Editar_actividad', 'Asignar_libro',
+            'Editar_prueba', 'Editar_actividad',
             'Asignar_actividad', 'Eliminar_actividad', 'Eliminar_prueba'
         ]);
 

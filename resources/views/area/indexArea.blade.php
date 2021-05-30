@@ -22,7 +22,7 @@
                     <label class="leading-loose" for="nombre">Nombre del area</label>
                     <input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}"
                         class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
-                        placeholder="Nombre del curso" required>
+                        placeholder="Nombre del area" required>
                 </div>
                 <div class="flex flex-col">
                     <label class="leading-loose" for="descripcion">Descripcion</label>
@@ -123,9 +123,11 @@
                                                     @endcan
                                                     @can('Eliminar_area')
                                                         <div class="w-6 mr-2 hover:scale-110">
-                                                            <form class="area-eliminar" action="#" method="post">
+                                                            <form class="area-eliminar"
+                                                                action="{{ route('area.destroy', $area->id) }}" method="post">
                                                                 <input name="_method" type="hidden" value="DELETE">
-                                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                                <input type="hidden" name="_token"
+                                                                    value="{{ csrf_token() }}">
                                                                 <button type="submit">
                                                                     <div
                                                                         class="w-6 transform hover:text-purple-500 hover:scale-110">

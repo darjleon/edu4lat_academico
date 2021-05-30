@@ -19,6 +19,6 @@ class Book extends Model
             'course__books',
             'libro_id',
             'curso_id'
-        );
+        )->withPivot('docente_id', 'updated_at');
     }
 }

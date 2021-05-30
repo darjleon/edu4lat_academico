@@ -22,9 +22,11 @@ $curso = Course::find($curso_id);
                 @forelse ($libros as $libro)
                     <div class="px-8 py-6 lg:w-1/3 md:w-full">
                         <div class="p-6 bg-gray-200 rounded-md">
-                            <h2 class="text-lg font-semibold text-gray-700 lg:text-2xl title-font">
-                                {{ $libro->titulo }}
-                            </h2>
+                            <a href="{{ route('book.show', ['libro_id' => $libro->id, 'curso_id' => $curso_id]) }}">
+                                <h2 class="text-lg font-semibold text-gray-700 lg:text-2xl title-font">
+                                    {{ $libro->titulo }}
+                                </h2>
+                            </a>
                             <div class="items-center justify-center w-full py-4 font-sans bg-blue-darker">
                                 <div
                                     class="flex flex-row w-full max-w-lg overflow-hidden leading-normal bg-white rounded shadow-lg">
@@ -47,7 +49,7 @@ $curso = Course::find($curso_id);
                             <p class="mb-4 text-base leading-relaxed"> {{ $libro->descripcion }}
                             </p>
                             @can('Editar_libro')
-                                <a href="{{ route('book.edit', $libro->id) }}"
+                                <a href="{{ route('book.edit', ['libro_id' => $libro->id, 'curso_id' => $curso_id]) }}"
                                     class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
                                     Editar
                                     <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"

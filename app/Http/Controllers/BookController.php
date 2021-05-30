@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Course;
 use App\Models\Course_Book;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +38,8 @@ class BookController extends Controller
     public function create($curso_id = null)
     {
         $cursos = Course::select('id', 'nombre')->get();
-        return view('books.createBook', compact('curso_id', 'cursos'));
+        $docentes = User::role('Docente')->get();
+        return view('books.createBook', compact('curso_id', 'cursos'), compact('docentes'));
     }
 
     /**
@@ -56,18 +58,29 @@ class BookController extends Controller
                 'required' => 'El :attribute es requerido.'
             ]
         );
+
+        if ($request->docente != null) {
+            $request->validate(
+                [
+                    "curso" => ['required'],
+                ],
+                [
+                    'required' => 'El :attribute es requerido si asigna un docente.'
+                ]
+            );
+        }
+
         $newBook = new Book();
         $newBook->titulo = $request->titulo;
         $newBook->descripcion = $request->descripcion;
-        $newBook->docente_id = Auth::id();
         $newBook->save();
 
         if ($curso_id != null) {
-            return redirect()->route('curso.libro.save', [$curso_id, $newBook]);
+            return redirect()->route('curso.libro.save', [$curso_id, $newBook, $request->docente]);
         } elseif ($request->curso == null) {
             return redirect()->route('book.index', $curso_id);
         } else {
-            return redirect()->route('curso.libro.save', [$request->curso, $newBook]);
+            return redirect()->route('curso.libro.save', [$request->curso, $newBook, $request->docente]);
         }
     }
 
@@ -77,9 +90,13 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show($libro_id, $curso_id = null)
     {
-        //
+        $libro = Book::find($libro_id);
+        $docentes = User::role('Docente')->get();
+        $cursos = $libro->cursos;
+        Session::flash('url', request()->headers->get('referer'));
+        return view('books.mostrarBook', compact('cursos', 'curso_id'), compact('libro', 'docentes'));
     }
 
     /**
@@ -88,12 +105,19 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit($libro_id)
+    public function edit($libro_id, $curso_id = null)
     {
         $libro = Book::find($libro_id);
-        $cursos = Course::select('id', 'nombre')->get();
+        $docentes = User::role('Docente')->get();
         Session::flash('url', request()->headers->get('referer'));
-        return view('books.editBook', compact('libro', 'cursos'));
+        $encargado = null;
+        if ($curso_id != null) {
+            $id = $libro->cursos->where('id', $curso_id)->first()->pivot->docente_id;
+            if ($id != null) {
+                $encargado =  User::find($id);
+            }
+        }
+        return view('books.editBook', compact('libro', 'encargado'), compact('docentes', 'curso_id'));
     }
 
     /**
@@ -103,7 +127,7 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $libro_id)
+    public function update(Request $request,  $libro_id, $curso_id = null)
     {
         $request->validate(
             [
@@ -113,17 +137,21 @@ class BookController extends Controller
                 'required' => 'El :attribute es requerido.'
             ]
         );
+
         $editBook = Book::find($libro_id);
         $editBook->titulo = $request->titulo;
         $editBook->descripcion = $request->descripcion;
-        $editBook->docente_id = Auth::id();
         $editBook->save();
 
-        if ($request->curso == null) {
-            return Redirect::to(Session::get('url'));
-        } else {
-            return redirect()->route('curso.libro.save', [$request->curso, $editBook]);
+        if ($curso_id != null) {
+            $id = $editBook->cursos->where('id', $curso_id)->first()->pivot->docente_id;
+            if ($id == $request->docente) {
+                return Redirect::to(Session::get('url'));
+            } elseif ($request->docente != null) {
+                return redirect()->route('curso.libro.update', [$curso_id, $editBook, $request->docente]);
+            }
         }
+        return Redirect::to(Session::get('url'));
     }
 
     /**

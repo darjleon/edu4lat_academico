@@ -23,6 +23,7 @@ class CreateCourseBooksTable extends Migration
             $table->foreign('libro_id')
                 ->references('id')
                 ->on('books')->onDelete('cascade');
+            $table->unsignedBigInteger('docente_id')->nullable();
             $table->timestamps();
         });
     }

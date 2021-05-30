@@ -67,22 +67,18 @@ class DatabaseSeeder extends Seeder
         /* Creacion de libros */
 
         Book::create([
-            'docente_id' => $profesor->id,
             'titulo' => 'Matemáticas',
         ]);
 
         Book::create([
-            'docente_id' => $profesor->id,
             'titulo' => 'Ciencias Naturales',
         ]);
 
         Book::create([
-            'docente_id' => $profesor2->id,
             'titulo' => 'Lengua y Literatura',
         ]);
 
         Book::create([
-            'docente_id' => $profesor2->id,
             'titulo' => 'Ciencias Sociales',
         ]);
 
