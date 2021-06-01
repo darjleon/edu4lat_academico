@@ -10,6 +10,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CourseUserController;
 use Illuminate\Support\Facades\Route;
 
 // Authentication routes
@@ -92,18 +93,33 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:Eliminar_libro');
 
     /*     Curso-Libros     */
-    Route::get('/guardar/curso-libro/{curso_id}/{libro_id}/{docente_id?}', [CourseBookController::class, 'save'])
+    Route::get('/curso/libro/guardar/{curso_id}/{libro_id}/{docente_id?}', [CourseBookController::class, 'save'])
         ->name('curso.libro.save')
         ->middleware('permission:Asignar_libro');
-    Route::get('/actualizar/curso-libro/{curso_id}/{libro_id}/{docente_id?}', [CourseBookController::class, 'saveUpdate'])
+    Route::get('/curso/libro/actualizar/{curso_id}/{libro_id}/{docente_id?}', [CourseBookController::class, 'saveUpdate'])
         ->name('curso.libro.update')
         ->middleware('permission:Asignar_libro');
-    Route::post('/relación/guardar/{libro_id}', [CourseBookController::class, 'guardar'])
+    Route::post('/curso/libro/relación/guardar/{libro_id}', [CourseBookController::class, 'guardar'])
         ->name('curso.libro.guardar')
         ->middleware('permission:Asignar_libro');
-    Route::delete('/relación/borrar/{curso_id}/{libro_id}', [CourseBookController::class, 'destroy'])
+    Route::delete('/curso/libro/relación/borrar/{curso_id}/{libro_id}', [CourseBookController::class, 'destroy'])
         ->name('curso.libro.borrar')
         ->middleware('permission:Asignar_libro');
+
+    /*     Estudiantes_Cursos     */
+    Route::get('/curso/estudiantes/index', [CourseUserController::class, 'index'])
+        ->name('student.index')
+        ->middleware('permission:Asignar_estudiante');
+    Route::post('/curso/estudiantes/guardar', [CourseUserController::class, 'store'])
+        ->name('student.store')
+        ->middleware('permission:Asignar_estudiante');
+    /* Route::post('/curso/estudiantes/actualizar/{type_id}', [CourseUserController::class, 'update'])
+        ->name('student.update')
+        ->middleware('permission:Asignar_estudiante'); */
+    Route::delete('/curso/estudiantes/eliminar/{type_id}', [CourseUserController::class, 'destroy'])
+        ->name('student.destroy')
+        ->middleware('permission:Asignar_estudiante');
+
     /*     Prueba     */
 
     Route::get('/prueba/index/{libro_id?}', [QuizController::class, 'index'])

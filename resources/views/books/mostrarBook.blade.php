@@ -10,11 +10,13 @@ $escojerCurso = Course::all();
             </x-slot>
 
             <x-slot name="boton">
-                <a href="#">
-                    <x-button-end class="text-white bg-blue-600 hover:bg-blue-700" @click="libro_asignar = true">
-                        Asignar a un curso
-                    </x-button-end>
-                </a>
+                <div class="flex justify-end">
+                    <a href="#">
+                        <x-button-end class="text-white bg-blue-600 hover:bg-blue-700" @click="libro_asignar = true">
+                            Asignar a un curso
+                        </x-button-end>
+                    </a>
+                </div>
             </x-slot>
 
             <x-slot name="titulo">
@@ -169,7 +171,9 @@ $escojerCurso = Course::all();
 
                                                     @can('Asignar_libro')
                                                         <div class="w-6 mr-2 hover:scale-110">
-                                                            <form class="libro-curso-eliminar" action="{{ route('curso.libro.borrar', ['curso_id'=>$curso->id,'libro_id'=>$libro->id]) }}" method="post">
+                                                            <form class="libro-curso-eliminar"
+                                                                action="{{ route('curso.libro.borrar', ['curso_id' => $curso->id, 'libro_id' => $libro->id]) }}"
+                                                                method="post">
                                                                 <input name="_method" type="hidden" value="DELETE">
                                                                 <input type="hidden" name="_token"
                                                                     value="{{ csrf_token() }}">
@@ -200,12 +204,13 @@ $escojerCurso = Course::all();
             </div><br>
         </x-container>
     @endcan
-
-    <a href="{{ route('book.index', $curso_id) }}">
-        <x-button-end class="text-black bg-white hover:bg-gray-200">
-            Volver
-        </x-button-end>
-    </a>
+    <div class="flex justify-end">
+        <a href="{{ route('book.index', $curso_id) }}">
+            <x-button-end class="text-black bg-white hover:bg-gray-200">
+                Volver
+            </x-button-end>
+        </a>
+    </div>
 
     @section('js')
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>

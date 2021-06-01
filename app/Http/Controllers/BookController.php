@@ -22,7 +22,7 @@ class BookController extends Controller
     public function index($curso_id = null)
     {
         if ($curso_id == null) {
-            $libros = Book::all();
+            $libros = Book::paginate(12);
             return view('books.indexBook', compact('libros', 'curso_id'));
         }
         $curso = Course::find($curso_id);

@@ -1,7 +1,25 @@
 <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
 @php
 use App\Models\Course;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+$usuario = Auth::user();
+
+if ($usuario->hasRole('Estudiante')) {
+    $cursos = $usuario->cursos;
+} elseif ($usuario->hasRole('Docente')) {
+    $cursos = DB::table('courses')
+        ->leftJoin('course__books', 'courses.id', '=', 'course__books.curso_id')
+        ->select('courses.*')
+        ->where('course__books.docente_id', '=', $usuario->id)
+        ->distinct()
+        ->get();
+} elseif ($usuario->hasRole(['Coordinador', 'Administrador'])) {
+    $cursos = Course::all();
+}
 @endphp
+
 <div x-show="open" class="fixed inset-0 z-40 flex md:hidden"
     x-description="Off-canvas menu for mobile, show/hide based on off-canvas menu state." x-ref="dialog" role="dialog"
     aria-modal="true">
@@ -193,17 +211,25 @@ use App\Models\Course;
                         <x-slot name="nombre">
                             Cursos
                         </x-slot>
-                        @foreach (Course::all() as $curso)
+                        @forelse ($cursos as $curso)
                             <x-link-sidebar href="{{ route('course.show', $curso->id) }}">
                                 <x-slot name="icono">
                                     M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7
                                     20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0
-                                    019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0
+                                    019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2
+                                    0
                                     11-4 0 2 2 0 014 0z
                                 </x-slot>
                                 Curso: {{ $curso->nombre }}
                             </x-link-sidebar>
-                        @endforeach
+                        @empty
+                            <x-link-sidebar href="#">
+                                <x-slot name="icono">
+                                    M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z
+                                </x-slot>
+                                Pedir curso
+                            </x-link-sidebar>
+                        @endforelse
                         @hasanyrole('Administrador')
                         <x-link-sidebar href="{{ route('course.create') }}">
                             <x-slot name="icono">
@@ -222,7 +248,7 @@ use App\Models\Course;
                             3.732z
                         </x-slot>
                         <x-slot name="nombre">
-                            Administrar
+                            LPAA
                         </x-slot>
 
                         @hasanyrole('Administrador')
@@ -279,7 +305,7 @@ use App\Models\Course;
                     @endhasanyrole
 
                     @hasanyrole('Administrador|Coordinador')
-                    <x-link-sidebar href="#">
+                    <x-link-sidebar href="{{ route('student.index') }}">
                         <x-slot name="icono">
                             M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0
                             11-8 0 4 4 0 018 0z

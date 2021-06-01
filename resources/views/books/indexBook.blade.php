@@ -5,15 +5,17 @@ $curso = Course::find($curso_id);
 
 <x-app-layout>
     @can('Crear_libro')
-        <a href="{{ route('book.create', $curso_id) }}">
-            <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
-                @if ($curso_id == null)
-                    Crear un libro
-                @else
-                    Crear un libro para Curso: {{ $curso->nombre }}
-                @endif
-            </x-button-end>
-        </a>
+        <div class="flex justify-end">
+            <a href="{{ route('book.create', $curso_id) }}">
+                <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
+                    @if ($curso_id == null)
+                        Crear un libro
+                    @else
+                        Crear un libro para Curso: {{ $curso->nombre }}
+                    @endif
+                </x-button-end>
+            </a>
+        </div>
     @endcan
 
     <x-container>
@@ -72,10 +74,17 @@ $curso = Course::find($curso_id);
     </x-container>
 
     @if ($curso_id != null)
-        <a href="{{ route('course.show', $curso_id) }}">
-            <x-button-end class="text-black bg-white hover:bg-gray-200">
-                Volver al curso {{ $curso->nombre }}
-            </x-button-end>
-        </a>
+        <div class="flex justify-end">
+            <a href="{{ route('course.show', $curso_id) }}">
+                <x-button-end class="text-black bg-white hover:bg-gray-200">
+                    Volver al curso {{ $curso->nombre }}
+                </x-button-end>
+            </a>
+        </div>
+    @else
+        <x-container>
+            {!! $libros->links() !!}
+        </x-container>
     @endif
+
 </x-app-layout>

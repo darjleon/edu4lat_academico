@@ -9,7 +9,7 @@ class Book extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id', 'titulo', 'descripcion', 'portada', 'docente_id',
+        'id', 'titulo', 'descripcion', 'portada',
     ];
 
     public function cursos()
@@ -19,6 +19,6 @@ class Book extends Model
             'course__books',
             'libro_id',
             'curso_id'
-        )->withPivot('docente_id', 'updated_at');
+        )->withPivot('docente_id', 'updated_at', 'id');
     }
 }

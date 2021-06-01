@@ -6,11 +6,13 @@
             </x-slot>
 
             <x-slot name="boton">
-                <a href="#">
-                    <x-button-end class="text-white bg-blue-600 hover:bg-blue-700" @click="nuevo_usuario = true">
-                        Agregar usuario
-                    </x-button-end>
-                </a>
+                <div class="flex justify-end">
+                    <a href="#">
+                        <x-button-end class="text-white bg-blue-600 hover:bg-blue-700" @click="nuevo_usuario = true">
+                            Agregar usuario
+                        </x-button-end>
+                    </a>
+                </div>
             </x-slot>
 
             <x-slot name="titulo">
@@ -18,7 +20,7 @@
             </x-slot>
 
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="name" :value="__('nombre')" />
 
                 <x-input id="name" class="block w-full mt-1" type="text" name="name" :value="old('name')" required
                     autofocus />
@@ -33,7 +35,7 @@
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-label for="password" :value="__('Contraseña')" />
 
                 <x-input id="password" class="block w-full mt-1" type="password" name="password" required
                     autocomplete="new-password" />
@@ -41,7 +43,7 @@
 
             <!-- Confirm Password -->
             <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                <x-label for="password_confirmation" :value="__('Confirmar Contraseña')" />
 
                 <x-input id="password_confirmation" class="block w-full mt-1" type="password" name="password_confirmation"
                     required />
@@ -102,18 +104,25 @@
                                             </td>
                                             <td class="px-3 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                    <div class="ml-4">
-                                                        <div class="text-sm font-medium text-gray-900">
+                                                    <div class="ml-4 text-sm">
+                                                        <div class="font-medium text-gray-900 ">
                                                             {{ $usuario->name }}
                                                         </div>
-                                                        <div class="text-sm text-gray-500">
+                                                        <div class="text-gray-500 ">
                                                             {{ $usuario->email }}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="px-3 py-4 text-sm text-gray-800 whitespace-nowrap">
-                                                {{ $usuario->getRoleNames() ?? 'Sin roles' }}
+                                                @if (empty($usuario->getRoleNames()->First()))
+                                                    <span
+                                                        class="inline-flex px-2 text-base font-semibold leading-5 text-red-500 bg-yellow-200 rounded-full">
+                                                        Sin roles
+                                                    </span>
+                                                @else
+                                                    {{ $usuario->getRoleNames() }}
+                                                @endif
                                             </td>
                                             <td class="px-4 py-2 text-center whitespace-nowrap">
                                                 <div class="flex justify-center item-center">
@@ -228,6 +237,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        {!! $usuarios->links() !!}
                     </div>
                 </div>
             </div><br>

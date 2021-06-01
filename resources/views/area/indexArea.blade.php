@@ -6,11 +6,13 @@
             </x-slot>
 
             <x-slot name="boton">
-                <a href="#">
-                    <x-button-end class="text-white bg-blue-600 hover:bg-blue-700" @click="nueva_area = true">
-                        Agregar área
-                    </x-button-end>
-                </a>
+                <div class="flex justify-end">
+                    <a href="#">
+                        <x-button-end class="text-white bg-blue-600 hover:bg-blue-700" @click="nueva_area = true">
+                            Agregar área
+                        </x-button-end>
+                    </a>
+                </div>
             </x-slot>
 
             <x-slot name="titulo">
@@ -150,10 +152,10 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{ $areas->links() }}
                     </div>
                 </div>
-            </div><br>
-            {{ $areas->links() }}
+            </div>
         </x-container>
     @endcan
 
