@@ -22,7 +22,7 @@ class BookController extends Controller
     public function index($curso_id = null)
     {
         if ($curso_id == null) {
-            $libros = Book::paginate(12);
+            $libros = Book::paginate(8);
             return view('books.indexBook', compact('libros', 'curso_id'));
         }
         $curso = Course::find($curso_id);
@@ -109,7 +109,6 @@ class BookController extends Controller
     {
         $libro = Book::find($libro_id);
         $docentes = User::role('Docente')->get();
-        Session::flash('url', request()->headers->get('referer'));
         $encargado = null;
         if ($curso_id != null) {
             $id = $libro->cursos->where('id', $curso_id)->first()->pivot->docente_id;
@@ -146,12 +145,12 @@ class BookController extends Controller
         if ($curso_id != null) {
             $id = $editBook->cursos->where('id', $curso_id)->first()->pivot->docente_id;
             if ($id == $request->docente) {
-                return Redirect::to(Session::get('url'));
+                return redirect()->route('book.index', $curso_id);
             } elseif ($request->docente != null) {
                 return redirect()->route('curso.libro.update', [$curso_id, $editBook, $request->docente]);
             }
         }
-        return Redirect::to(Session::get('url'));
+        return redirect()->route('book.index', $curso_id);
     }
 
     /**

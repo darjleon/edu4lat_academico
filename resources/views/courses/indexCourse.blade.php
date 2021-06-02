@@ -1,27 +1,15 @@
-@php
-use App\Models\Course;
-use App\Models\User;
-
-$curso = Course::find($curso_id);
-$users = User::role('Docente')->get();
-@endphp
-
 <x-app-layout>
-    @can('Crear_libro')
+    @can('Crear_curso')
         <div class="flex justify-end">
-            <a href="{{ route('book.create', $curso_id) }}">
+            <a href="{{ route('course.create') }}">
                 <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
-                    @if ($curso_id == null)
-                        Crear un libro
-                    @else
-                        Crear un libro para Curso: {{ $curso->nombre }}
-                    @endif
+                    Crear un curso
                 </x-button-end>
             </a>
         </div>
     @endcan
 
-    @can('Ver_libro')
+    @can('Ver_curso')
         <x-container>
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -36,55 +24,37 @@ $users = User::role('Docente')->get();
                                         </th>
                                         <th scope="col"
                                             class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                            Titulo
+                                            Nombre
                                         </th>
                                         <th scope="col"
                                             class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Descripción
                                         </th>
-                                        @if ($curso_id != null)
-                                            <th scope="col"
-                                                class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                                Encargado
-                                            </th>
-                                        @endif
                                         <th colspan="1" class="relative px-3 py-3">
                                             <span class="sr-only">Accion</span>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    @foreach ($libros as $libro)
+                                    @foreach ($cursos as $curso)
                                         <tr>
                                             <td class="px-5 py-4 whitespace-normal">
                                                 <div class="text-sm text-gray-900">
-                                                    {{ \Carbon\Carbon::parse($libro->created_at)->diffForHumans() }}
+                                                    {{ \Carbon\Carbon::parse($curso->created_at)->diffForHumans() }}
                                                 </div>
                                             </td>
                                             <td class="px-3 py-4 whitespace-nowrap">
-                                                <div class="text-sm font-medium text-gray-900">{{ $libro->titulo }}
+                                                <div class="text-sm font-medium text-gray-900">{{ $curso->nombre }}
                                                 </div>
                                             </td>
                                             <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                                {{ $libro->descripcion }}
+                                                {{ $curso->descripcion }}
                                             </td>
-                                            @if ($curso_id != null)
-                                                <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                                    @forelse ($users->where('id', $libro->pivot->docente_id) as $user)
-                                                        @if ($user->id == $libro->pivot->docente_id)
-                                                            {{ $user->name }}
-                                                        @endif
-                                                    @empty
-                                                        Sin encargado
-                                                    @endforelse
-                                                </td>
-                                            @endif
                                             <td class="px-4 py-2 text-center whitespace-nowrap">
                                                 <div class="flex justify-center item-center">
-                                                    @can('Ver_libro')
+                                                    @can('Ver_curso')
                                                         <div class="w-6 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                            <a
-                                                                href="{{ route('book.show', ['libro_id' => $libro->id, 'curso_id' => $curso_id]) }}"><svg
+                                                            <a href=" {{ route('course.show', $curso->id) }}"><svg
                                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -95,10 +65,9 @@ $users = User::role('Docente')->get();
                                                                 </svg></a>
                                                         </div>
                                                     @endcan
-                                                    @can('Editar_libro')
+                                                    @can('Editar_curso')
                                                         <div class="w-6 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                            <a
-                                                                href="{{ route('book.edit', ['libro_id' => $libro->id, 'curso_id' => $curso_id]) }}"><svg
+                                                            <a href="{{ route('course.edit', $curso->id) }}"><svg
                                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -107,10 +76,10 @@ $users = User::role('Docente')->get();
                                                                 </svg></a>
                                                         </div>
                                                     @endcan
-                                                    @can('Eliminar_libro')
+                                                    @can('Eliminar_curso')
                                                         <div class="w-6 mr-2 hover:scale-110">
-                                                            <form class="libro-eliminar"
-                                                                action="{{ route('book.destroy', $libro->id) }}"
+                                                            <form class="curso-eliminar"
+                                                                action="{{ route('course.destroy', $curso->id) }}"
                                                                 method="post">
                                                                 <input name="_method" type="hidden" value="DELETE">
                                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -135,89 +104,24 @@ $users = User::role('Docente')->get();
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $cursos->links() }}
                         </div>
                     </div>
                 </div>
             </div>
         </x-container>
     @endcan
-    {{-- <x-container>
-        <section class="text-gray-700 body-font">
-            <div class="flex flex-wrap text-left">
-                @forelse ($libros as $libro)
-                    <div class="px-8 py-6 lg:w-1/3 md:w-full">
-                        <div class="p-6 bg-gray-200 rounded-md">
-                            <a href="{{ route('book.show', ['libro_id' => $libro->id, 'curso_id' => $curso_id]) }}">
-                                <h2 class="text-lg font-semibold text-gray-700 lg:text-2xl title-font">
-                                    {{ $libro->titulo }}
-                                </h2>
-                            </a>
-                            <div class="items-center justify-center w-full py-4 font-sans bg-blue-darker">
-                                <div
-                                    class="flex flex-row w-full max-w-lg overflow-hidden leading-normal bg-white rounded shadow-lg">
-                                    @can('Ver_prueba')
-                                        <a href="{{ route('quiz.index', $libro->id) }}"
-                                            class="flex-1 block p-4 border-b hover:bg-gray-400 focus:outline-none">
-                                            <p class="mb-1 text-lg font-bold text-black">Pruebas</p>
-                                            <img src="{{ asset('images/language.png') }}" alt="">
-                                        </a>
-                                    @endcan
-                                    @can('Ver_actividad')
-                                        <a href="#" class="flex-1 block p-4 hover:bg-gray-400 focus:outline-none">
-                                            <p class="mb-1 text-lg font-bold text-black">Actividades</p>
-                                            <img src="{{ asset('images/social.png') }}" alt="">
-                                        </a>
-                                    @endcan
-                                </div>
-                            </div>
-                            <p class="mb-4 text-base leading-relaxed"> {{ $libro->descripcion }}
-                            </p>
-                            @can('Editar_libro')
-                                <a href="{{ route('book.edit', ['libro_id' => $libro->id, 'curso_id' => $curso_id]) }}"
-                                    class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
-                                    Editar
-                                    <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                        width="20" height="20" fill="currentColor">
-                                        <path fill="none" d="M0 0h24v24H0z" />
-                                        <path
-                                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
-                                    </svg>
-                                </a>
-                            @endcan
 
-                        </div>
-                    </div>
-                @empty
-                    <h2 class="m-8 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> No hay libros creados o
-                        asignados
-                    </h2>
-
-                @endforelse
-    </x-container> --}}
-
-    @if ($curso_id != null)
-        <div class="flex justify-end">
-            <a href="{{ route('course.show', $curso_id) }}">
-                <x-button-end class="text-black bg-white hover:bg-gray-200">
-                    Volver al curso {{ $curso->nombre }}
-                </x-button-end>
-            </a>
-        </div>
-    @else
-        <x-container>
-            {!! $libros->links() !!}
-        </x-container>
-    @endif
     @section('js')
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
         <script>
             $(document).ready(function() {
-                $('.libro-eliminar').submit(function(e) {
+                $('.curso-eliminar').submit(function(e) {
                     e.preventDefault();
                     Swal.fire({
-                        title: 'Desea eliminar este libro?',
-                        text: "Se eliminará toda la información relacionda al libro",
+                        title: 'Desea eliminar este curso?',
+                        text: "Se eliminará toda la información relacionda al curso",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',

@@ -221,7 +221,7 @@ $escojerCurso = Course::all();
                     e.preventDefault();
                     Swal.fire({
                         title: 'Desea eliminar esta relación?',
-                        text: "Libro no se encontrará en el curso.",
+                        text: "Ellibro no se encontrará en el curso.",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',

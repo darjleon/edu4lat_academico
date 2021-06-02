@@ -50,9 +50,7 @@
                 </div>
             </div>
         </x-modal-basic>
-    @endcan
 
-    @can('Asignar_estudiante')
         <x-container>
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

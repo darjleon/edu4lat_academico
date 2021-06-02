@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+    public function index()
+    {
+        $cursos = Course::paginate(8);
+        return view('courses.indexCourse', compact('cursos'));
+    }
     public function create()
     {
         return view('courses.crearCourse');
@@ -67,6 +72,6 @@ class CourseController extends Controller
     {
         $curso = Course::find($course_id);
         $curso->delete();
-        return redirect()->route('home.index');
+        return redirect()->back();
     }
 }

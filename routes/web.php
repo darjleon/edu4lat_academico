@@ -50,6 +50,9 @@ Route::middleware('auth')->group(function () {
         ->middleware('permission:Editar_institución');
 
     /*     Curso     */
+    Route::get('/curso/index', [CourseController::class, 'index'])
+        ->name('course.index')
+        ->middleware('permission:Editar_curso');
     Route::get('/curso/crear', [CourseController::class, 'create'])
         ->name('course.create')
         ->middleware('permission:Crear_curso');
