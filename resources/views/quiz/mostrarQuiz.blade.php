@@ -5,7 +5,7 @@
                 {{ $prueba->titulo }}
             </x-slot>
             <x-slot name="libro">
-                <span class="px-2 text-gray-900 underline bg-green-100 rounded-full">{{ $prueba->libro_id }}</span>
+                {{ $libro->titulo }}
             </x-slot>
             <x-slot name="area">
                 {{ $prueba->area }}
@@ -14,20 +14,16 @@
                 {{ $prueba->nivel }}
             </x-slot>
             <x-slot name="fecha">
-                {{ $prueba->fecha }}
+                {{ $prueba->fecha ?? 'Sin fecha' }}
             </x-slot>
             <x-slot name="horaInicio">
-                {{ $prueba->inicio }}
+                {{ $prueba->inicio ?? 'Sin hora' }}
             </x-slot>
             <x-slot name="horaFin">
-                {{ $prueba->fin }}
+                {{ $prueba->fin ?? 'Sin hora' }}
             </x-slot>
             <x-slot name="descripcion">
-                @if (empty($prueba->descripcion))
-                    Sin instrucciones
-                @else
-                    {{ $prueba->descripcion }}
-                @endif
+                {{ $prueba->descripcion ?? 'Sin instrucciones' }}
             </x-slot>
             @foreach ($actividades->shuffle() as $actividad)
 

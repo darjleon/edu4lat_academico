@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $roles = Role::all()->pluck('name');
-        $usuarios = User::with('roles')->orderby('id', 'DESC')->get();
+        $usuarios = User::with('roles')->orderby('id', 'DESC')->paginate(10);
         /* DB::table('users')
             ->orderBy('id', 'desc')->paginate(15); */
         return view('users.indexUser', compact('usuarios', 'roles'));

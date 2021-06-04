@@ -1,10 +1,25 @@
 <x-app-layout>
     @can('Crear_prueba')
-        <a href="{{ route('quiz.create', $libro_id) }}">
-            <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
-                Aqui crea tu prueba
-            </x-button-end>
-        </a>
+        @if ($libro_id == null)
+            <div class="flex justify-end">
+                <a href="{{ route('quiz.create', $libro_id) }}">
+                    <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
+                        Crea una prueba
+                    </x-button-end>
+                </a>
+            </div>
+        @else
+            <x-header-title>
+                Libro: {{ $libros->where('id', $libro_id)->first()->titulo }}
+            </x-header-title>
+            <div class="flex justify-end">
+                <a href="{{ route('quiz.create', $libro_id) }}">
+                    <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
+                        Crea una prueba para {{ $libros->where('id', $libro_id)->first()->titulo }}
+                    </x-button-end>
+                </a>
+            </div>
+        @endif
     @endcan
 
 
@@ -185,11 +200,13 @@
 
 
     @if ($libro_id != null)
-        <a href="#" onclick="history.back()">
-            <x-button-end class="text-black bg-white hover:bg-gray-200">
-                Volver a libros
-            </x-button-end>
-        </a>
+        <div class="flex justify-end">
+            <a href="#" onclick="history.back()">
+                <x-button-end class="text-black bg-white hover:bg-gray-200">
+                    Volver a libros
+                </x-button-end>
+            </a>
+        </div>
     @endif
 
     @section('js')

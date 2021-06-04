@@ -41,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function cursos()
+    {
+        return $this->belongsToMany(
+            Course::class,
+            'course__users',
+            'usuario_id',
+            'curso_id'
+        )->withPivot('updated_at','id');
+    }
 }

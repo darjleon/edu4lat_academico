@@ -20,32 +20,58 @@
                                 class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
                                 placeholder="Opcional">{{ old('descripcion') }}</textarea>
                         </div>
-                        @if ($curso_id != null)
-                            <div class="flex flex-col">
-                                <div class="input-group-prepend">
-                                    <label class="leading-loose input-group-text" for="curso">Curso:</label>
-                                </div>
-                                <input type="text" id="curso" name="curso" value="{{ $cursos->find($curso_id)->nombre }}"
-                                    class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
-                                    readonly>
+                        @can('Asignar_libro')
+                            <div class="relative flex items-center border-b last:border-b-0">
+                                <input type="checkbox"
+                                    class="absolute w-4 h-4 text-green-600 border border-gray-300 rounded-md cursor-pointer left-3"
+                                    name="check" id="check" value="1" onchange="javascript:showContent()">
+                                <label class="flex-1 block py-2 pl-10 pr-2 text-base cursor-pointer" for="check">Desea asignar
+                                    este libro a un curso y/o un encargado?
+                                </label>
                             </div>
-                        @else
-                            <div class="flex flex-col">
-                                <div class="input-group-prepend">
-                                    <label class="leading-loose input-group-text" for="curso">Curso:</label>
+                            <div id="content" style="display: none;">
+                                @if ($curso_id != null)
+                                    <div class="flex flex-col">
+                                        <div class="input-group-prepend">
+                                            <label class="leading-loose input-group-text" for="curso">Curso:</label>
+                                        </div>
+                                        <input type="text" id="curso" name="curso"
+                                            value="{{ $cursos->find($curso_id)->nombre }}"
+                                            class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
+                                            readonly>
+                                    </div>
+                                @else
+                                    <div class="flex flex-col">
+                                        <div class="input-group-prepend">
+                                            <label class="leading-loose input-group-text" for="curso">Curso:</label>
+                                        </div>
+                                        <select id="curso"
+                                            class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                            name="curso">
+                                            <option value="{{ old('curso') }}">Curso:
+                                                {{ $cursos->find(old('curso'))->nombre ?? '' }}</option>
+                                            @foreach ($cursos as $curso)
+                                                <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+                                <div class="flex flex-col">
+                                    <div class="input-group-prepend">
+                                        <label class="leading-loose input-group-text" for="docente">Docente encargado:</label>
+                                    </div>
+                                    <select id="docente"
+                                        class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                        name="docente">
+                                        <option value="{{ old('docente') }}">Docente:
+                                            {{ $docentes->find(old('docente'))->name ?? '' }}</option>
+                                        @foreach ($docentes as $docente)
+                                            <option value="{{ $docente->id }}">{{ $docente->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <select id="curso"
-                                    class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
-                                    name="curso">
-                                    <option value="{{ old('curso') }}">Curso:
-                                        {{ $cursos->find(old('curso'))->nombre ?? '' }}</option>
-                                    @foreach ($cursos as $curso)
-                                        <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
-                                    @endforeach
-                                </select>
                             </div>
-                        @endif
-
+                        @endcan
                     </div>
                     <div class="flex justify-center pt-4 space-x-4">
                         <a href="#" onclick="history.back()"
@@ -69,6 +95,19 @@
                     </div>
                 </form>
             </div>
+            <script type="text/javascript">
+                function showContent() {
+                    element = document.getElementById("content");
+                    check = document.getElementById("check");
+                    if (check.checked) {
+                        element.style.display = 'block';
+                    } else {
+                        element.style.display = 'none';
+                        $("#curso , #docente").val("");
+                    }
+                }
+
+            </script>
         </x-quiz-format-create>
     @endcan
 

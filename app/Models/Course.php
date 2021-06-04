@@ -19,6 +19,16 @@ class Course extends Model
             'course__books',
             'curso_id',
             'libro_id'
-        );
+        )->withPivot('docente_id', 'updated_at', 'id');
+    }
+
+    public function usuarios()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'course__users',
+            'curso_id',
+            'usuario_id'
+        )->withPivot('updated_at', 'id');
     }
 }

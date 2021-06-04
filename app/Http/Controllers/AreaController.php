@@ -55,6 +55,6 @@ class AreaController extends Controller
     {
         $tipo = Area::find($area_id);
         $tipo->delete();
-        return view('area.indexArea');
+        return redirect()->back();
     }
 }
