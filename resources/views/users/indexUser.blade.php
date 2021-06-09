@@ -18,6 +18,15 @@
             <x-slot name="titulo">
                 Crea un nuevo usuario y asignale un rol
             </x-slot>
+            <x-slot name="guardar">
+                Crear
+            </x-slot>
+
+            <x-slot name="icono">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                </path>
+            </x-slot>
 
             <div>
                 <x-label for="name" :value="__('nombre')" />
@@ -77,10 +86,7 @@
                             <table class="min-w-full ">
                                 <thead class="bg-gray-50">
                                     <tr>
-                                        <th scope="col"
-                                            class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                            Creado
-                                        </th>
+
                                         <th scope="col"
                                             class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Usuario
@@ -97,11 +103,6 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     @foreach ($usuarios as $usuario)
                                         <tr>
-                                            <td class="px-5 py-4 whitespace-normal">
-                                                <div class="text-sm text-gray-900">
-                                                    {{ \Carbon\Carbon::parse($usuario->created_at)->diffForHumans() }}
-                                                </div>
-                                            </td>
                                             <td class="px-3 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
                                                     <div class="ml-4 text-sm">
@@ -126,6 +127,18 @@
                                             </td>
                                             <td class="px-4 py-2 text-center whitespace-nowrap">
                                                 <div class="flex justify-center item-center">
+                                                    @can('Ver_usuario')
+                                                        <div class="w-6 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                                            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                                </svg></a>
+                                                        </div>
+                                                    @endcan
                                                     @can('Editar_usuario')
                                                         <div class="w-6 mr-2 hover:scale-110">
                                                             <x-modal-basic
@@ -148,7 +161,13 @@
                                                                 </x-slot>
 
                                                                 <x-slot name="titulo">
-                                                                    Edita el usuario seleccionado
+                                                                    Edición de usuario
+                                                                </x-slot>
+                                                                <x-slot name="icono">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2"
+                                                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                                                    </path>
                                                                 </x-slot>
                                                                 <div class="mt-4">
                                                                     <x-label for="name" :value="__('Name')" />
@@ -240,7 +259,7 @@
                         {!! $usuarios->links() !!}
                     </div>
                 </div>
-            </div><br>
+            </div>
         </x-container>
     @endcan
 
@@ -253,8 +272,8 @@
                 $('.usuario-eliminar').submit(function(e) {
                     e.preventDefault();
                     Swal.fire({
-                        title: 'Desea eliminar este usuario?',
-                        text: "Se eliminara la cuenta de este usuario y la información relacionada a él.",
+                        title: 'Está segur@ de eliminar el usuario ?',
+                        text: "Recuerde que al eliminar el usuario también eliminará los datos que le pertenecen.",
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',

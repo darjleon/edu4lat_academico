@@ -17,11 +17,13 @@
 
                 </div>
                 @can('Editar_institución')
-                    <a href="{{ route('institucion.edit', $institucion->id) }}">
-                        <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
-                            Editar información
-                        </x-button-end>
-                    </a>
+                    <div class="flex justify-end">
+                        <a href="{{ route('institucion.edit', $institucion->id) }}">
+                            <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
+                                Editar información
+                            </x-button-end>
+                        </a>
+                    </div>
                 @endcan
 
                 <div class="relative flex flex-col items-center justify-center h-full">

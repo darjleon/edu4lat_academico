@@ -9,7 +9,7 @@
                 <div class="flex justify-end">
                     <a href="#">
                         <x-button-end class="text-white bg-blue-600 hover:bg-blue-700" @click="estudiante_asignar = true">
-                            Asignar un estudiante a un curso
+                            Crear Estudiante
                         </x-button-end>
                     </a>
                 </div>

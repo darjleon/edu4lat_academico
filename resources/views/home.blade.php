@@ -1,114 +1,221 @@
-@php
-use App\Models\Course;
-@endphp
 <x-app-layout>
+    <div class="w-full pb-2 bg-white border-b-4 rounded-lg shadow-xl">
+        <x-header-title>
+            Notificaciones
+        </x-header-title>
+    </div>
 
-    <x-dropdown>
-        <x-slot name="align">
-            top
-        </x-slot>
-        <x-slot name="trigger">
-            <x-header-title>
-                Áreas
-                @role('Estudiante')
-                Bienvenido Estudiante
-                @endrole
-                @role('Docente')
-                Bienvenido Docente
-                @endrole
-                @role('Coordinador')
-                Bienvenido Coordinador
-                @endrole
-                @role('Administrador')
-                Bienvenido Admin
-                @endrole
-            </x-header-title>
-        </x-slot>
-        <x-slot name="content">
-            Te la creiste wey
-        </x-slot>
-    </x-dropdown>
+    <div class="relative flex flex-col items-center justify-center h-full">
 
-
-
+        <div class="w-full bg-white rounded-lg shadow-xl">
+            <div class="items-center px-4 pt-2 space-y-1 md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0">
+                <h2 class="text-xl font-semibold">
+                    Categorias:
+                </h2>
+            </div>
+            <div>
+                <div class="px-4 py-2 space-y-1 border-b md:grid md:grid-cols-2 hover:bg-gray-50 md:space-y-0">
+                    <p class="flex items-center font-medium rounded-md group">
+                        <svg class="w-6 h-6 mr-3 text-gray-900" x-description="Heroicon name: outline/home"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3
+                        0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0
+                        11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                        Cursos
+                    </p>
+                    <p class="flex items-center font-medium rounded-md group">
+                        <svg class="w-6 h-6 mr-3 text-gray-900" x-description="Heroicon name: outline/home"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                            </path>
+                        </svg>
+                        Libros
+                    </p>
+                    <p class="flex items-center font-medium rounded-md group">
+                        <svg class="w-6 h-6 mr-3 text-gray-900" x-description="Heroicon name: outline/home"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg>
+                        Pruebas
+                    </p>
+                    <p class="flex items-center font-medium rounded-md group">
+                        <svg class="w-6 h-6 mr-3 text-gray-900" x-description="Heroicon name: outline/home"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                            </path>
+                        </svg>
+                        Actividades
+                    </p>
+                    <p class="flex items-center font-medium rounded-md group">
+                        <svg class="w-6 h-6 mr-3 text-gray-900" x-description="Heroicon name: outline/home"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3
+                        0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0
+                        11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                        Estudiantes
+                    </p>
+                    <p class="flex items-center font-medium rounded-md group">
+                        <svg class="w-6 h-6 mr-3 text-gray-900" x-description="Heroicon name: outline/home"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                            </path>
+                        </svg>
+                        Areas
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col justify-start md:flex-row">
+        <div class="flex flex-wrap md:flex-col">
+            <a href="#">
+                <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
+                    <p class="flex items-center font-medium rounded-md group">Sin leer
+                        <svg class="w-6 h-6 ml-3 text-white" x-description="Heroicon name: outline/home"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21">
+                            </path>
+                        </svg>
+                    </p>
+                </x-button-end>
+            </a>
+        </div>
+        <div class="flex flex-wrap md:flex-col">
+            <a href="#">
+                <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
+                    <p class="flex items-center font-medium rounded-md group">
+                        Leido<svg class="w-6 h-6 ml-3 text-white" x-description="Heroicon name: outline/home"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                            </path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
+                        </svg>
+                    </p>
+                </x-button-end>
+            </a>
+        </div>
+    </div>
 
     <x-container>
-        <div class="container">
-            <div class="items-center justify-center w-full py-8 font-sans bg-blue-darker">
-                <div class="flex flex-row w-full max-w-lg overflow-hidden leading-normal bg-white rounded shadow-lg">
-                    <a href="#" class="flex-1 block p-4 border-b hover:bg-gray-200 focus:outline-none">
-                        <p class="mb-1 text-lg font-bold text-black">Lengua y Literatura</p>
-                        <img src="{{ asset('images/language.png') }}" alt="">
-                    </a>
-                    <a href="#" class="flex-1 block p-4 hover:bg-gray-200 focus:outline-none">
-                        <p class="mb-1 text-lg font-bold text-black">Matemáticas</p>
-                        <img src="{{ asset('images/math.png') }}" alt="">
-                    </a>
-                    <a href="#" class="flex-1 block p-4 border-b hover:bg-gray-200 focus:outline-none">
-                        <p class="mb-1 text-lg font-bold text-black">Ciencias Naturales</p>
-                        <img src="{{ asset('images/science.png') }}" alt="">
-                    </a>
-                    <a href="#" class="flex-1 block p-4 hover:bg-gray-200 focus:outline-none">
-                        <p class="mb-1 text-lg font-bold text-black">Ciencias Sociales</p>
-                        <img src="{{ asset('images/social.png') }}" alt="">
-                    </a>
+        <div class="flex flex-col">
+            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
+                        <table class="min-w-full ">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th colspan="1" class="relative px-3 py-3">
+                                        <span class="sr-only">Accion</span>
+                                    </th>
+                                    <th scope="col"
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                        De:
+                                    </th>
+                                    <th scope="col"
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                        Asunto:
+                                    </th>
+                                    <th scope="col"
+                                        class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                        recibido:
+                                    </th>
+                                    <th colspan="1" class="relative px-3 py-3">
+                                        <span class="sr-only">Accion</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </x-container>
 
+    {{-- <x-dropdown>
+        <x-slot name="align">
+            top
+        </x-slot>
+        <x-slot name="trigger">
+            <div class="flex px-4 pt-3">
+                <x-button>
+                    Categorias
+                </x-button>
+            </div>
+        </x-slot>
+        <x-slot name="content">
+            @hasanyrole('Estudiante')
+            <x-link-sidebar href="#">
+                <x-slot name="icono">
+                    M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0
+                    002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01
+                </x-slot>
+                Clases
+            </x-link-sidebar>
+            @endhasanyrole
 
-    <section class="text-gray-700 body-font">
-        <div class="flex flex-wrap text-left">
-            @can('Ver_curso')
-                @foreach (Course::all() as $curso)
-                    <div class="px-8 py-6 lg:w-1/3 md:w-full">
-                        <div class="p-6 bg-gray-200 rounded-md">
-                            <h2 class="text-lg font-semibold text-gray-700 lg:text-2xl title-font">
-                                {{ $curso->nombre }}
-                            </h2>
-                            <div class="items-center justify-center w-full py-4 font-sans bg-blue-darker">
-                                <div
-                                    class="flex flex-row w-full max-w-lg overflow-hidden leading-normal bg-white rounded shadow-lg">
-                                    @can('Ver_libro')
-                                        <a href="{{ route('book.index', $curso->id) }}"
-                                            class="flex-1 block p-4 border-b hover:bg-gray-400 focus:outline-none">
-                                            <p class="mb-1 text-lg font-bold text-black">Libros</p>
-                                            <img src="{{ asset('images/language.png') }}" alt="">
-                                        </a>
-                                    @endcan
+            @hasanyrole('Administrador|Coordinador')
+            <x-link-sidebar href="{{ route('student.index') }}">
+                <x-slot name="icono">
+                    M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0
+                    11-8 0 4 4 0 018 0z
+                </x-slot>
+                Estudiantes
+            </x-link-sidebar>
+            @endhasanyrole
 
-                                    <a href="#" class="flex-1 block p-4 hover:bg-gray-400 focus:outline-none">
-                                        <p class="mb-1 text-lg font-bold text-black">Alumnos</p>
-                                        <img src="{{ asset('images/social.png') }}" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                            <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit
-                                waistcoat.
-                                Distillery
-                                hexagon disrupt edison bulbche.</p>
-                            @can('Editar_curso')
-                                <a href="{{ route('course.edit', $curso->id) }}"
-                                    class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
-                                    editar
-                                    <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                                        height="20" fill="currentColor">
-                                        <path fill="none" d="M0 0h24v24H0z" />
-                                        <path
-                                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
-                                    </svg>
-                                </a>
-                            @endcan
-                        </div>
-                    </div>
-                @endforeach
-            @endcan
-        </div>
-    </section>
+            @hasanyrole('Administrador')
+            <x-link-sidebar href="{{ route('usuario.index') }}">
+                <x-slot name="icono">
+                    M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3
+                    0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0
+                    11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z
+                </x-slot>
+                Usuarios
+            </x-link-sidebar>
+            @endhasanyrole
 
+            @hasanyrole('Administrador')
+            <x-link-sidebar href="#">
+                <x-slot name="icono">
+                    M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6
+                    6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4
+                </x-slot>
+                Configuración
+            </x-link-sidebar>
+            @endhasanyrole
 
-
-
-
+            @hasanyrole('Administrador|Docente|Estudiante')
+            <x-link-sidebar href="#">
+                <x-slot name="icono">
+                    M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z
+                </x-slot>
+                Ayuda
+            </x-link-sidebar>
+            @endhasanyrole
+        </x-slot>
+    </x-dropdown> --}}
 </x-app-layout>
