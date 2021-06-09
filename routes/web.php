@@ -28,6 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/usuario', [UserController::class, 'index'])
         ->name('usuario.index')
         ->middleware('permission:Ver_usuario');
+    Route::get('/usuario/perfil/{user_id}', [UserController::class, 'show'])
+        ->name('usuario.show')
+        ->middleware('permission:Ver_usuario');
     Route::post('/usuario/guardar', [UserController::class, 'store'])
         ->name('usuario.store')
         ->middleware('permission:Crear_usuario');

@@ -62,13 +62,13 @@ class RolesPermisosSeeder extends Seeder
 
         $role = Role::create(['name' => 'Estudiante']);
         $role->syncPermissions([
-            'Ver_institución', 'Ver_curso',
+            'Ver_institución', 'Ver_curso', 'Ver_usuario',
             'Ver_libro', 'Resolver_prueba', 'Ver_estadisticas'
         ]);
 
         $role = Role::create(['name' => 'Docente']);
         $role->syncPermissions([
-            'Ver_institución', 'Ver_curso','Ver_prueba',
+            'Ver_institución', 'Ver_curso', 'Ver_prueba', 'Ver_usuario',
             'Ver_libro', 'Resolver_prueba', 'Ver_estadisticas',
             'Crear_actividad', 'Crear_prueba',
             'Editar_prueba', 'Editar_actividad',
@@ -77,7 +77,7 @@ class RolesPermisosSeeder extends Seeder
 
         $role = Role::create(['name' => 'Coordinador']);
         $role->syncPermissions([
-            'Ver_institución', 'Ver_curso',
+            'Ver_institución', 'Ver_curso', 'Ver_usuario',
             'Ver_libro', 'Resolver_prueba', 'Ver_estadisticas',
             'Editar_curso', 'Crear_actividad', 'Crear_prueba',
             'Crear_curso', 'Crear_libro',

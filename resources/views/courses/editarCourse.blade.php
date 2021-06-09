@@ -6,7 +6,9 @@
                     <p class="pr-4">Edita el curso {{ $curso->nombre }} </p>
                 </div>
             </x-slot>
-
+            <x-slot name="icono">
+                no
+            </x-slot>
             <div class="divide-y divide-gray-200">
                 <form method="post" action={{ route('course.update', $curso->id) }}>
                     @csrf

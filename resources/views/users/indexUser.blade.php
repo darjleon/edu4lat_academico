@@ -129,7 +129,8 @@
                                                 <div class="flex justify-center item-center">
                                                     @can('Ver_usuario')
                                                         <div class="w-6 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                                            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            <a href="{{ route('usuario.show', $usuario->id) }}"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                                         stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />

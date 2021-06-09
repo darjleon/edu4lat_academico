@@ -4,7 +4,9 @@
             <x-slot name="titulo">
                 Indica los datos e intrucciones necesarios para programar y realizar la prueba
             </x-slot>
-
+            <x-slot name="icono">
+                no
+            </x-slot>
             <div class="divide-y divide-gray-200">
                 <form method="post" action={{ route('quiz.store', $libro_id) }}>
                     @csrf

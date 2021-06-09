@@ -4,6 +4,9 @@
             <x-slot name="titulo">
                 Crea un nuevo curso
             </x-slot>
+            <x-slot name="icono">
+                no
+            </x-slot>
             <div class="divide-y divide-gray-200">
                 <form method="post" action={{ route('course.store') }}>
                     @csrf

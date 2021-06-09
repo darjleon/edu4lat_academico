@@ -4,6 +4,9 @@
             <x-slot name="titulo">
                 Edita el un libro seleccionado
             </x-slot>
+            <x-slot name="icono">
+                no
+            </x-slot>
             <div class="divide-y divide-gray-200">
                 <form method="post"
                     action={{ route('book.update', ['libro_id' => $libro->id, 'curso_id' => $curso_id]) }}>

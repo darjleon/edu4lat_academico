@@ -314,7 +314,7 @@ if ($usuario->hasRole('Estudiante')) {
                     </x-link-sidebar>
                     @endhasanyrole
 
-                    @hasanyrole('Administrador')
+                    @hasanyrole('Administrador|Coordinador|Docente|Estudiante')
                     <x-link-sidebar href="{{ route('usuario.index') }}">
                         <x-slot name="icono">
                             M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3
@@ -376,7 +376,7 @@ if ($usuario->hasRole('Estudiante')) {
 
                 <div x-show="open">
                     <nav class="flex-1 space-y-1 bg-gray-800">
-                        <x-link-sidebar href="#">
+                        <x-link-sidebar href="{{ route('usuario.show', $usuario->id) }}">
                             <x-slot name="icono">
                                 M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3
                                 0

@@ -4,6 +4,9 @@
             <x-slot name="titulo">
                 Edita los datos o intrucciones necesarios para programar y realizar la prueba
             </x-slot>
+            <x-slot name="icono">
+                no
+            </x-slot>
             <div class="divide-y divide-gray-200">
                 <form method="post" action={{ route('quiz.update', $prueba->id) }}>
                     @csrf

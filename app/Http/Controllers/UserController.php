@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -18,6 +17,16 @@ class UserController extends Controller
         /* DB::table('users')
             ->orderBy('id', 'desc')->paginate(15); */
         return view('users.indexUser', compact('usuarios', 'roles'));
+    }
+
+    public function show($user_id)
+    {
+
+        $user = User::find($user_id);
+        if ($user->hasRole('Administrador')) {
+            return view('users.verPerfil', compact('user'));
+        }
+        return view('users.verPerfil', compact('user'));
     }
 
     public function store(Request $request)
