@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Book;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BookFactory extends Factory
@@ -22,11 +21,11 @@ class BookFactory extends Factory
      */
     public function definition()
     {
-        $docente = User::role('Docente')->pluck('id')->toArray();
         return [
-            'docente_id' => $this->faker->randomElement($docente),
             'titulo' => $this->faker->sentence(2),
             'descripcion' => $this->faker->sentence(6),
+            'area' => $this->faker->randomElement(['Matematicas', 'Ciencias Sociales', 'Ciencias Naturales', 'Lengua y Literatura']),
+            'nivel' => $this->faker->randomElement(['2do grado', '3ero grado', '4to grado', '5to grado']),
         ];
     }
 }

@@ -26,6 +26,21 @@
                                 placeholder="Opcional">{{ $curso->descripcion }}</textarea>
                         </div>
                     </div>
+                    <div class="flex flex-col">
+                        <div class="input-group-prepend">
+                            <label class="leading-loose input-group-text" for="coordinador">Coordinador
+                                encargado:</label>
+                        </div>
+                        <select id="coordinador"
+                            class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                            name="coordinador">
+                            <option value="{{ $curso->coordinador_id ?? '' }}">Coordinador:
+                                {{ $coordinadores->find($curso->coordinador_id)->name ?? '' }}</option>
+                            @foreach ($coordinadores as $coordinador)
+                                <option value="{{ $coordinador->id }}">{{ $coordinador->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="flex justify-center pt-4 space-x-4">
                         <a href="#" onclick="history.back()"
                             class="flex items-center justify-center w-full px-4 py-3 text-gray-900 bg-green-400 rounded-md hover:bg-green-600 focus:outline-none">

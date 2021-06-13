@@ -42,6 +42,14 @@ $users = User::role('Docente')->get();
                                             class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Descripción
                                         </th>
+                                        <th scope="col"
+                                            class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                            Area
+                                        </th>
+                                        <th scope="col"
+                                            class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                            Grado
+                                        </th>
                                         @if ($curso_id != null)
                                             <th scope="col"
                                                 class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -67,6 +75,12 @@ $users = User::role('Docente')->get();
                                             </td>
                                             <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                 {{ $libro->descripcion }}
+                                            </td>
+                                            <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                {{ $libro->area }}
+                                            </td>
+                                            <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                                {{ $libro->nivel }}
                                             </td>
                                             @if ($curso_id != null)
                                                 <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">

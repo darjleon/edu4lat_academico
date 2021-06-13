@@ -43,7 +43,7 @@ class QuizController extends Controller
         $niveles =  Grade::select('nombre')->get();
         $areas =  Area::select('nombre')->get();
         if ($libro_id == null) {
-            $libros = Book::select('id', 'titulo')->get();
+            $libros = Book::select('id', 'titulo', 'area', 'nivel')->get();
         } else {
             $libros = Book::find($libro_id);
         }
@@ -56,21 +56,20 @@ class QuizController extends Controller
         $request->validate(
             [
                 "titulo" => ['required'],
-                "area" => ['required'],
                 "libro" => ['required'],
-                "nivel" => ['required'],
                 "hora_de_cierre" => [new TiempoConSentido($request->hora_de_inicio)]
             ],
             [
                 'required' => 'El :attribute es requerido.'
             ]
         );
+        $libro = Book::find($request->libro);
         $nuevaPrueba = new Quiz();
         $nuevaPrueba->libro_id = $request->libro;
         $nuevaPrueba->creador_id = Auth::id();
         $nuevaPrueba->titulo = $request->titulo;
-        $nuevaPrueba->area = $request->area;
-        $nuevaPrueba->nivel = $request->nivel;
+        $nuevaPrueba->area = $libro->area;
+        $nuevaPrueba->nivel = $libro->nivel;
         $nuevaPrueba->descripcion = $request->descripcion;
         $nuevaPrueba->fecha = $request->fecha;
         $nuevaPrueba->inicio = $request->hora_de_inicio;
@@ -93,7 +92,7 @@ class QuizController extends Controller
         $prueba = Quiz::find($quizId);
         $niveles =  Grade::select('nombre')->get();
         $areas =  Area::select('nombre')->get();
-        $libros = Book::select('id', 'titulo')->get();
+        $libros = Book::select('id', 'titulo', 'area', 'nivel')->get();
         return view('quiz.editarQuiz', compact('niveles', 'areas'), compact('prueba', 'libros'));
     }
 
@@ -102,8 +101,6 @@ class QuizController extends Controller
         $request->validate(
             [
                 "titulo" => ['required'],
-                "area" => ['required'],
-                "nivel" => ['required'],
                 "libro" => ['required'],
                 "hora_de_cierre" => [new TiempoConSentido($request->hora_de_inicio)],
             ],
@@ -111,10 +108,11 @@ class QuizController extends Controller
                 'required' => 'El :attribute es requerido.'
             ]
         );
+        $libro = Book::find($request->libro);
         $pruebaEditada = Quiz::find($quizId);
         $pruebaEditada->titulo = $request->titulo;
-        $pruebaEditada->area = $request->area;
-        $pruebaEditada->nivel = $request->nivel;
+        $pruebaEditada->area = $libro->area;
+        $pruebaEditada->nivel = $libro->nivel;
         $pruebaEditada->libro_id = $request->libro;
         $pruebaEditada->descripcion = $request->descripcion;
         $pruebaEditada->fecha = $request->fecha;

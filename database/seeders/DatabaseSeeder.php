@@ -68,18 +68,26 @@ class DatabaseSeeder extends Seeder
 
         Book::create([
             'titulo' => 'Matemáticas',
+            'area' => 'Matemáticas',
+            'nivel' => '2do grado',
         ]);
 
         Book::create([
             'titulo' => 'Ciencias Naturales',
+            'area' => 'Ciencias Naturales',
+            'nivel' => '2do grado',
         ]);
 
         Book::create([
             'titulo' => 'Lengua y Literatura',
+            'area' => 'Lengua y Literatura',
+            'nivel' => '2do grado',
         ]);
 
         Book::create([
             'titulo' => 'Ciencias Sociales',
+            'area' => 'Ciencias Sociales',
+            'nivel' => '2do grado',
         ]);
 
         /* Creacion de areas */

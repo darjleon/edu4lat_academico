@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Institution;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -11,11 +12,13 @@ class CourseController extends Controller
     public function index()
     {
         $cursos = Course::paginate(8);
-        return view('courses.indexCourse', compact('cursos'));
+        $coordinadores = User::role('Coordinador')->get();
+        return view('courses.indexCourse', compact('cursos', 'coordinadores'));
     }
     public function create()
     {
-        return view('courses.crearCourse');
+        $coordinadores = User::role('Coordinador')->get();
+        return view('courses.crearCourse', compact('coordinadores'));
     }
 
     public function store(Request $request)
@@ -31,6 +34,7 @@ class CourseController extends Controller
         $newCurso = new Course();
         $newCurso->institucion_id = Institution::first()->id;
         $newCurso->nombre = $request->nombre;
+        $newCurso->coordinador_id = $request->coordinador;
         $newCurso->descripcion = $request->descripcion;
         $newCurso->save();
         return redirect()->route('course.show', $newCurso->id);
@@ -47,7 +51,8 @@ class CourseController extends Controller
     public function edit($course_id)
     {
         $curso = Course::find($course_id);
-        return view('courses.editarCourse', compact('curso'));
+        $coordinadores = User::role('Coordinador')->get();
+        return view('courses.editarCourse', compact('curso', 'coordinadores'));
     }
 
 
@@ -63,6 +68,7 @@ class CourseController extends Controller
         );
         $editCurso = Course::find($course_id);
         $editCurso->nombre = $request->nombre;
+        $editCurso->coordinador_id = $request->coordinador;
         $editCurso->descripcion = $request->descripcion;
         $editCurso->save();
         return redirect()->route('course.show', $course_id);

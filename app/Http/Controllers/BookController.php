@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
 use App\Models\Book;
 use App\Models\Course;
 use App\Models\Course_Book;
+use App\Models\Grade;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,8 +40,10 @@ class BookController extends Controller
     public function create($curso_id = null)
     {
         $cursos = Course::select('id', 'nombre')->get();
+        $niveles =  Grade::select('nombre')->get();
+        $areas =  Area::select('nombre')->get();
         $docentes = User::role('Docente')->get();
-        return view('books.createBook', compact('curso_id', 'cursos'), compact('docentes'));
+        return view('books.createBook', compact('curso_id', 'cursos', 'areas', 'niveles'), compact('docentes'));
     }
 
     /**
@@ -53,6 +57,8 @@ class BookController extends Controller
         $request->validate(
             [
                 "titulo" => ['required'],
+                "area" => ['required'],
+                "nivel" => ['required'],
             ],
             [
                 'required' => 'El :attribute es requerido.'
@@ -72,6 +78,8 @@ class BookController extends Controller
 
         $newBook = new Book();
         $newBook->titulo = $request->titulo;
+        $newBook->area = $request->area;
+        $newBook->nivel = $request->nivel;
         $newBook->descripcion = $request->descripcion;
         $newBook->save();
 
@@ -109,6 +117,8 @@ class BookController extends Controller
     {
         $libro = Book::find($libro_id);
         $docentes = User::role('Docente')->get();
+        $niveles =  Grade::select('nombre')->get();
+        $areas =  Area::select('nombre')->get();
         $encargado = null;
         if ($curso_id != null) {
             $id = $libro->cursos->where('id', $curso_id)->first()->pivot->docente_id;
@@ -116,7 +126,7 @@ class BookController extends Controller
                 $encargado =  User::find($id);
             }
         }
-        return view('books.editBook', compact('libro', 'encargado'), compact('docentes', 'curso_id'));
+        return view('books.editBook', compact('libro', 'encargado', 'areas'), compact('docentes', 'curso_id', 'niveles'));
     }
 
     /**
@@ -131,6 +141,8 @@ class BookController extends Controller
         $request->validate(
             [
                 "titulo" => ['required'],
+                "area" => ['required'],
+                "nivel" => ['required'],
             ],
             [
                 'required' => 'El :attribute es requerido.'
@@ -139,6 +151,8 @@ class BookController extends Controller
 
         $editBook = Book::find($libro_id);
         $editBook->titulo = $request->titulo;
+        $editBook->area = $request->area;
+        $editBook->nivel = $request->nivel;
         $editBook->descripcion = $request->descripcion;
         $editBook->save();
 

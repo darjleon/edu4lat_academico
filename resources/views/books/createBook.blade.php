@@ -23,6 +23,32 @@
                                 class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
                                 placeholder="Opcional">{{ old('descripcion') }}</textarea>
                         </div>
+                        <div class="flex flex-col">
+                            <div class="input-group-prepend">
+                                <label class="leading-loose input-group-text" for="area">Area</label>
+                            </div>
+                            <select
+                                class="w-full py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                id="area" name="area" required>
+                                <option value="{{ old('area') }}">Area: {{ old('area') }}</option>
+                                @foreach ($areas as $area)
+                                    <option value="{{ $area->nombre }}">{{ $area->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="flex flex-col">
+                            <div class="leading-loose input-group-prepend">
+                                <label class="input-group-text" for="nivel">Nivel</label>
+                            </div>
+                            <select
+                                class="w-full py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                id="nivel" name="nivel" required>
+                                <option value="{{ old('nivel') }}">Nivel: {{ old('nivel') }}</option>
+                                @foreach ($niveles as $nivel)
+                                    <option value="{{ $nivel->nombre }}">{{ $nivel->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         @can('Asignar_libro')
                             <div class="relative flex items-center border-b last:border-b-0">
                                 <input type="checkbox"

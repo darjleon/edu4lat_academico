@@ -3,59 +3,66 @@ use App\Models\Course;
 $escojerCurso = Course::all();
 @endphp
 <x-app-layout>
-    @can('Asignar_libro')
-        <x-modal-basic action="{{ route('curso.libro.guardar', $libro->id) }}">
-            <x-slot name="id">
-                libro_asignar
-            </x-slot>
+    <div class="flex justify-end">
+        @can('Asignar_libro')
+            <x-modal-basic action="{{ route('curso.libro.guardar', $libro->id) }}">
+                <x-slot name="id">
+                    libro_asignar
+                </x-slot>
 
-            <x-slot name="boton">
-                <div class="flex justify-end">
+                <x-slot name="boton">
                     <a href="#">
                         <x-button-end class="text-white bg-blue-600 hover:bg-blue-700" @click="libro_asignar = true">
                             Asignar a un curso
                         </x-button-end>
                     </a>
-                </div>
-            </x-slot>
+                </x-slot>
 
-            <x-slot name="titulo">
-                Escoje un curso y su encargado
-            </x-slot>
+                <x-slot name="titulo">
+                    Escoje un curso y su encargado
+                </x-slot>
 
-            <div class="py-8 space-y-4 text-base leading-6 text-gray-700 sm:text-lg sm:leading-7">
-                <div class="flex flex-col">
-                    <div class="input-group-prepend">
-                        <label class="leading-loose input-group-text" for="curso">Curso:</label>
+                <div class="py-8 space-y-4 text-base leading-6 text-gray-700 sm:text-lg sm:leading-7">
+                    <div class="flex flex-col">
+                        <div class="input-group-prepend">
+                            <label class="leading-loose input-group-text" for="curso">Curso:</label>
+                        </div>
+                        <select id="curso"
+                            class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                            name="curso" required>
+                            <option value="{{ old('curso') }}">Curso:
+                                {{ $escojerCurso->find(old('curso'))->nombre ?? '' }}</option>
+                            @foreach ($escojerCurso as $curso)
+                                <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <select id="curso"
-                        class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
-                        name="curso" required>
-                        <option value="{{ old('curso') }}">Curso:
-                            {{ $escojerCurso->find(old('curso'))->nombre ?? '' }}</option>
-                        @foreach ($escojerCurso as $curso)
-                            <option value="{{ $curso->id }}">{{ $curso->nombre }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="flex flex-col">
-                    <div class="input-group-prepend">
-                        <label class="leading-loose input-group-text" for="docente">Docente encargado:</label>
+                    <div class="flex flex-col">
+                        <div class="input-group-prepend">
+                            <label class="leading-loose input-group-text" for="docente">Docente encargado:</label>
+                        </div>
+                        <select id="docente"
+                            class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                            name="docente">
+                            <option value="{{ old('docente') }}">Docente:
+                                {{ $docentes->find(old('docente'))->name ?? '' }}</option>
+                            @foreach ($docentes as $docente)
+                                <option value="{{ $docente->id }}">{{ $docente->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <select id="docente"
-                        class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
-                        name="docente">
-                        <option value="{{ old('docente') }}">Docente:
-                            {{ $docentes->find(old('docente'))->name ?? '' }}</option>
-                        @foreach ($docentes as $docente)
-                            <option value="{{ $docente->id }}">{{ $docente->name }}</option>
-                        @endforeach
-                    </select>
                 </div>
-            </div>
-        </x-modal-basic>
-    @endcan
+            </x-modal-basic>
+        @endcan
+        @can('Ver_prueba')
+            <a href="{{ route('quiz.index', $libro->id) }}">
+                <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
+                    Ver pruebas
+                </x-button-end>
+            </a>
 
+        @endcan
+    </div>
     @can('Ver_libro')
         <x-container>
             <div class="flex flex-col">

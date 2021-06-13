@@ -28,6 +28,10 @@
                                         </th>
                                         <th scope="col"
                                             class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                            Coordinador
+                                        </th>
+                                        <th scope="col"
+                                            class="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Descripción
                                         </th>
                                         <th colspan="1" class="relative px-3 py-3">
@@ -46,6 +50,18 @@
                                             <td class="px-3 py-4 whitespace-nowrap">
                                                 <div class="text-sm font-medium text-gray-900">{{ $curso->nombre }}
                                                 </div>
+                                            </td>
+                                            <td class="px-3 py-4 whitespace-nowrap">
+                                                @if ($curso->coordinador_id == null)
+                                                    <span
+                                                        class="inline-flex px-2 text-base font-semibold leading-5 text-red-500 bg-yellow-200 rounded-full">
+                                                        Sin coordinador
+                                                    </span>
+                                                @else
+                                                    <div class="text-sm font-medium text-gray-900">
+                                                        {{ $coordinadores->find($curso->coordinador_id)->name }}
+                                                    </div>
+                                                @endif
                                             </td>
                                             <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap">
                                                 {{ $curso->descripcion }}
