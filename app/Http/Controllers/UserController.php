@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+use App\Models\Course;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -14,19 +17,46 @@ class UserController extends Controller
     {
         $roles = Role::all()->pluck('name');
         $usuarios = User::with('roles')->orderby('id', 'DESC')->paginate(10);
-        /* DB::table('users')
-            ->orderBy('id', 'desc')->paginate(15); */
         return view('users.indexUser', compact('usuarios', 'roles'));
     }
 
     public function show($user_id)
     {
+        $actual = Auth::user();
+        $user_ver = User::find($user_id);
+        $cursos = '';
+        $libros = '';
+        $editar = false;
 
-        $user = User::find($user_id);
-        if ($user->hasRole('Administrador')) {
-            return view('users.verPerfil', compact('user'));
+        if ($user_ver->hasRole('Estudiante')) {
+
+            $cursos = $user_ver->cursos;
+        } elseif ($user_ver->hasRole('Docente')) {
+            $libros = DB::table('books')
+                ->leftJoin('course__books', 'books.id', '=', 'course__books.libro_id')
+                ->select('books.*')
+                ->where('course__books.docente_id', '=', $user_id)
+                ->distinct()
+                ->get();
+            $cursos = DB::table('courses')
+                ->leftJoin('course__books', 'courses.id', '=', 'course__books.curso_id')
+                ->select('courses.*', 'course__books.libro_id')
+                ->where('course__books.docente_id', '=', $user_id)
+                ->distinct()
+                ->get();
+        } elseif ($user_ver->hasRole('Coordinador')) {
+
+            $cursos = Course::where('coordinador_id', $user_id)->get();
+        } elseif ($user_ver->hasRole('Administrador')) {
+
+            $cursos = Course::all();
         }
-        return view('users.verPerfil', compact('user'));
+
+        if ($actual->id == $user_id) {
+            $editar = true;
+        }
+
+        return view('users.verPerfil', compact('user_ver', 'editar'), compact('cursos', 'libros'));
     }
 
     public function store(Request $request)

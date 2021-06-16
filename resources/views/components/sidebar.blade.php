@@ -15,7 +15,9 @@ if ($usuario->hasRole('Estudiante')) {
         ->where('course__books.docente_id', '=', $usuario->id)
         ->distinct()
         ->get();
-} elseif ($usuario->hasRole(['Coordinador', 'Administrador'])) {
+} elseif ($usuario->hasRole('Coordinador')) {
+    $cursos = Course::where('coordinador_id', $usuario->id);
+} elseif ($usuario->hasRole('Administrador')) {
     $cursos = Course::all();
 }
 @endphp

@@ -1,7 +1,7 @@
 <x-app-layout>
     @can('Ver_institución')
-        <div class="bg-white ">
-
+        <div class="bg-white">
+            
             <div class="relative w-full overflow-hidden rounded shadow-2xl">
                 <div class="relative w-full h-full overflow-hidden bg-blue-600 top">
                     <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"

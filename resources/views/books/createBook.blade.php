@@ -132,7 +132,11 @@
                         element.style.display = 'block';
                     } else {
                         element.style.display = 'none';
-                        $("#curso , #docente").val("");
+                        if ($curso_id != null) {
+                            $("#docente").val("");
+                        } else {
+                            $("#curso , #docente").val("");
+                        }
                     }
                 }
 
