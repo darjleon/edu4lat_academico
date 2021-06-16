@@ -28,6 +28,18 @@ class DatabaseSeeder extends Seeder
         /* Creacion de usuarios y sus roles */
 
         $profesor = User::factory()->create([
+            'name' => 'Jose jose',
+            'email' => 'jose@camp.academy'
+        ]);
+        $profesor->assignRole('Estudiante');
+
+        $profesor = User::factory()->create([
+            'name' => 'Pepe pepin',
+            'email' => 'pepe@camp.academy'
+        ]);
+        $profesor->assignRole('Estudiante');
+
+        $profesor = User::factory()->create([
             'name' => 'Fernando Gutierrez',
             'email' => 'f.g@camp.academy'
         ]);
@@ -39,11 +51,17 @@ class DatabaseSeeder extends Seeder
         ]);
         $profesor2->assignRole('Docente');
 
-        $admin = User::factory()->create([
+        $profesor3 = User::factory()->create([
+            'name' => 'Erick Nuñez',
+            'email' => 'ErickN@camp.academy'
+        ]);
+        $profesor3->assignRole('Docente');
+
+        $coordinador = User::factory()->create([
             'name' => 'Darwin Leon',
             'email' => 'djlramos93@gmail.com'
         ]);
-        $admin->assignRole('Administrador');
+        $coordinador->assignRole('Coordinador');
 
         $admin2 = User::factory()->create([
             'name' => 'Daniel Alvarado',
@@ -61,10 +79,17 @@ class DatabaseSeeder extends Seeder
 
         Course::create([
             'institucion_id' => $institucion->id,
-            'nombre' => 'EAES',
+            'nombre' => 'Programción Kids 0',
+            'coordinador_id' => $coordinador->id,
         ]);
 
         /* Creacion de libros */
+
+        Book::create([
+            'titulo' => 'Programación en Scratch',
+            'area' => 'Programación',
+            'nivel' => '7mo grado',
+        ]);
 
         Book::create([
             'titulo' => 'Matemáticas',
@@ -91,6 +116,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         /* Creacion de areas */
+
+        Area::create([
+            'nombre' => 'Programación',
+            'descripcion' => 'Es el proceso de tomar un algoritmo y codificarlo en una notación',
+        ]);
 
         Area::create([
             'nombre' => 'Matematicas',
@@ -188,5 +218,19 @@ class DatabaseSeeder extends Seeder
             'descripcion' => 'Debe llenar los espacios en blanco con la frase correcta ',
             'tipo' => 'escrito'
         ]);
+
+        /* Creacion de Pruebas */
+
+        $this->call(QuizSeeder::class);
+
+        /* Creacion de Actividades 
+        
+        $this->call(ActivitiesSeeder::class);
+
+        */
+
+        /* Creacion de relaciones */
+
+        $this->call(RelationSeeder::class);
     }
 }
