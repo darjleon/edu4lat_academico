@@ -1,6 +1,6 @@
 <x-app-layout>
     @can('Ver_usuario')
-        <div class="bg-white ">
+        <div class="h-screen bg-white">
 
             <div class="relative w-full overflow-hidden rounded ">
                 <div class="relative w-full h-full overflow-hidden bg-blue-600 top">
@@ -8,7 +8,7 @@
                         alt="" class="absolute object-center w-full h-full ">
                     <div
                         class="relative flex flex-col items-center justify-center h-full p-4 text-white bg-black bg-opacity-50">
-                        <img src="" class="object-cover w-24 h-24 rounded-full"
+                        <img src="{{ asset('storage/userPerfilFoto/' . $user_ver->foto) }}" class="object-cover w-24 h-24 rounded-full"
                             onerror="this.onerror=null; this.src='{{ asset('images/defecto.jpg') }}';">
                         <h1 class="text-2xl font-semibold">{{ $user_ver->name }}</h1>
                         <h4 class="text-sm font-semibold">{{ $user_ver->getRoleNames()->First() }}</h4>
@@ -17,7 +17,7 @@
 
                 @if ($editar)
                     <div class="flex justify-end">
-                        <a href="#">
+                        <a href="{{ route('usuario.edit', $user_ver->id) }}">
                             <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
                                 Editar perfil
                             </x-button-end>
@@ -183,9 +183,7 @@
                 </div>
             </div>
         </div>
-        <div class="h-full py-4 bg-white">
 
-        </div>
     @endcan
     @section('js')
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>

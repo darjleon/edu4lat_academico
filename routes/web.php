@@ -31,6 +31,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/usuario/perfil/{user_id}', [UserController::class, 'show'])
         ->name('usuario.show')
         ->middleware('permission:Ver_usuario');
+    Route::get('/usuario/perfil/editar/{user_id}', [UserController::class, 'edit'])
+        ->name('usuario.edit')
+        ->middleware('IsAuth');
+    Route::post('/usuario/perfil/update/{user_id}', [UserController::class, 'updatePF'])
+        ->name('usuario.perfilActualizar')
+        ->middleware('IsAuth');
     Route::post('/usuario/guardar', [UserController::class, 'store'])
         ->name('usuario.store')
         ->middleware('permission:Crear_usuario');

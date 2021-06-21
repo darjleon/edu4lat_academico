@@ -352,7 +352,8 @@ if ($usuario->hasRole('Estudiante')) {
                     class="flex items-center w-full px-2 py-2 text-sm font-medium text-gray-300 rounded-md cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white group">
                     <div class="flex items-center">
                         <div>
-                            <img src="#" class="inline-block rounded-full h-9 w-9"
+                            <img src="{{ asset('storage/userPerfilFoto/' . $usuario->foto) }}"
+                                class="object-cover w-10 h-10 rounded-full"
                                 onerror="this.onerror=null; this.src='{{ asset('images/defecto.jpg') }}';">
                         </div>
                         <div class="ml-2 ">

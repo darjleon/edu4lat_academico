@@ -59,6 +59,56 @@ class UserController extends Controller
         return view('users.verPerfil', compact('user_ver', 'editar'), compact('cursos', 'libros'));
     }
 
+    public function edit($user_id)
+    {
+        $user_edit = User::find($user_id);
+
+        return view('users.editPerfil', compact('user_edit'));
+    }
+
+    public function updatePF(Request $request, $user_id)
+    {
+        $request->validate(
+            [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255'],
+                "foto" => ['image', 'max:2048', 'mimes:jpeg,png,jpg,gif,svg'],
+
+            ],
+            [
+                'required' => 'El :attribute de la institución es requerido.',
+                'image' => 'El :attribute debe ser una imagen.',
+                'mimes' => 'El :attribute debe tener ser del tipo: :values.',
+                'max' => 'El :attribute debe pesar menos de :max KB.',
+            ]
+        );
+
+        $user_edit = User::find($user_id);
+
+        if ($user_edit->email != $request->email) {
+            $request->validate([
+                'email' => 'unique:users',
+            ]);
+            $user_edit->email = $request->email;
+        }
+
+        $user_edit->name = $request->name;
+
+        if ($user_edit->foto != null && $request->hasFile('foto')) {
+            unlink('storage/userPerfilFoto/' . $user_edit->foto);
+            $user_edit->foto = null;
+        }
+
+        if ($request->hasFile('foto')) {
+            $imagen =  str_replace(" ", "_", $request->name) . '.' . time() . '.' . $request->file('foto')->getClientOriginalExtension();
+            $user_edit->foto = $imagen;
+            $request->foto->storeAs('public/userPerfilFoto', $imagen);
+        }
+
+        $user_edit->save();
+        return redirect()->route('usuario.show',  $user_id);
+    }
+
     public function store(Request $request)
     {
 
@@ -85,8 +135,8 @@ class UserController extends Controller
     {
 
         $request->validate([
-            'name' => 'string|max:255',
-            'email' => 'string|email|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
         ]);
 
         $usuario = User::find($user_id);
