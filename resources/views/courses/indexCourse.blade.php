@@ -1,4 +1,7 @@
 <x-app-layout>
+
+    {{ Breadcrumbs::render('Cursos') }}
+
     @can('Crear_curso')
         <div class="flex justify-end">
             <a href="{{ route('course.create') }}">
@@ -151,7 +154,6 @@
                     })
                 });
             });
-
         </script>
     @endsection
 </x-app-layout>

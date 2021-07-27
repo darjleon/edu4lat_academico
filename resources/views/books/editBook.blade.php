@@ -1,4 +1,7 @@
 <x-app-layout>
+
+    {{ Breadcrumbs::render('Libro.edit', $libro, $curso_id) }}
+
     @can('Editar_libro')
         <x-quiz-format-create>
             <x-slot name="titulo">
@@ -113,7 +116,6 @@
                         $("#docente").val("");
                     }
                 }
-
             </script>
         </x-quiz-format-create>
     @endcan

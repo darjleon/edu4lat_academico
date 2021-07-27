@@ -1,4 +1,7 @@
 <x-app-layout>
+    
+    {{ Breadcrumbs::render('Curso.home.edit', $curso) }}
+
     @can('Editar_curso')
         <x-quiz-format-create>
             <x-slot name="titulo">

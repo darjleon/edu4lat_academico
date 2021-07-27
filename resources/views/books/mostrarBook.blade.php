@@ -3,6 +3,9 @@ use App\Models\Course;
 $escojerCurso = Course::all();
 @endphp
 <x-app-layout>
+    
+    {{ Breadcrumbs::render('Libros.ver', $libro, $curso_id) }}
+
     <div class="flex justify-end">
         @can('Asignar_libro')
             <x-modal-basic action="{{ route('curso.libro.guardar', $libro->id) }}">
@@ -242,7 +245,6 @@ $escojerCurso = Course::all();
                     })
                 });
             });
-
         </script>
     @endsection
 </x-app-layout>

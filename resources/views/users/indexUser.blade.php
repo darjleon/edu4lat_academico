@@ -1,4 +1,7 @@
 <x-app-layout>
+
+    {{ Breadcrumbs::render('Usuarios') }}
+
     @can('Crear_usuario')
         <x-modal-basic action="{{ route('usuario.store') }}">
             <x-slot name="id">
@@ -288,7 +291,6 @@
                     })
                 });
             });
-
         </script>
     @endsection
 </x-app-layout>

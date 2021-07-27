@@ -1,4 +1,6 @@
 <x-app-layout>
+    {{ Breadcrumbs::render('Actividades.edit', null, $actividad->id) }}
+
     @can('Ver_actividad')
         <x-container>
             <div class="flex-grow p-3 px-4 pt-3 pb-4 mb-2 bg-white">
@@ -587,7 +589,6 @@
                         toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
                 })
-
             </script>
 
             @if (session('estado') == 'Guardada')
@@ -598,7 +599,6 @@
                             title: 'Actividad guardada en la prueba'
                         })
                     });
-
                 </script>
             @elseif (session('estado')=='Eliminada')
                 <script>
@@ -608,7 +608,6 @@
                             title: 'Actividad eliminada de la prueba'
                         })
                     });
-
                 </script>
             @endif
         @endsection

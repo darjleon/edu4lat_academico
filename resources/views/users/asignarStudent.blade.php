@@ -1,4 +1,7 @@
 <x-app-layout>
+
+    {{ Breadcrumbs::render('Estudiantes') }}
+
     @can('Asignar_estudiante')
         <x-modal-basic action="{{ route('student.store') }}">
             <x-slot name="id">
@@ -250,7 +253,6 @@
                     })
                 });
             });
-
         </script>
     @endsection
 </x-app-layout>

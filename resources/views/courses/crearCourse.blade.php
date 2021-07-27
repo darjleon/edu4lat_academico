@@ -1,4 +1,7 @@
 <x-app-layout>
+
+    {{ Breadcrumbs::render('Curso.crear') }}
+
     @can('Crear_curso')
         <x-quiz-format-create>
             <x-slot name="titulo">

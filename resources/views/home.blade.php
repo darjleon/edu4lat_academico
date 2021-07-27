@@ -4,7 +4,6 @@
             Notificaciones
         </x-header-title>
     </div>
-
     <div class="relative flex flex-col items-center justify-center h-full">
 
         <div class="w-full bg-white rounded-lg shadow-xl">
@@ -16,7 +15,7 @@
             <div class="py-3 pl-5 overflow-hidden rounded-t-xl bg-gradient-to-r from-light-blue-50 to-light-blue-100">
                 <div class="flex flex-wrap -m-2">
                     <div class="flex items-center font-medium rounded-md group">
-                        <svg class="w-6 h-6 mr-1 text-gray-900" x-description="Heroicon name: outline/home"
+                        <svg class="w-6 h-6 ml-3 mr-1 text-gray-900" x-description="Heroicon name: outline/home"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                             aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3

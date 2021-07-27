@@ -7,6 +7,8 @@ $users = User::role('Docente')->get();
 @endphp
 
 <x-app-layout>
+    {{ Breadcrumbs::render('Libros', $curso_id) }}
+
     @can('Crear_libro')
         <div class="flex justify-end">
             <a href="{{ route('book.create', $curso_id) }}">
@@ -127,7 +129,8 @@ $users = User::role('Docente')->get();
                                                                 action="{{ route('book.destroy', $libro->id) }}"
                                                                 method="post">
                                                                 <input name="_method" type="hidden" value="DELETE">
-                                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                                <input type="hidden" name="_token"
+                                                                    value="{{ csrf_token() }}">
                                                                 <button type="submit">
                                                                     <div
                                                                         class="w-6 transform hover:text-purple-500 hover:scale-110">
@@ -245,7 +248,6 @@ $users = User::role('Docente')->get();
                     })
                 });
             });
-
         </script>
     @endsection
 </x-app-layout>

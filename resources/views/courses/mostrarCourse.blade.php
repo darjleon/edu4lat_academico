@@ -1,5 +1,7 @@
 <x-app-layout>
 
+    {{ Breadcrumbs::render('Curso.home', $curso) }}
+
     <div class="flex flex-col justify-end md:flex-row">
         @can('Editar_curso')
             <div class="flex flex-wrap md:flex-col">

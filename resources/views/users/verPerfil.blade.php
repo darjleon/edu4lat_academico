@@ -1,19 +1,21 @@
 <x-app-layout>
     @can('Ver_usuario')
         <div class="h-screen bg-white">
-
             <div class="relative w-full overflow-hidden rounded ">
                 <div class="relative w-full h-full overflow-hidden bg-blue-600 top">
                     <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
                         alt="" class="absolute object-center w-full h-full ">
                     <div
                         class="relative flex flex-col items-center justify-center h-full p-4 text-white bg-black bg-opacity-50">
-                        <img src="{{ asset('storage/userPerfilFoto/' . $user_ver->foto) }}" class="object-cover w-24 h-24 rounded-full"
+                        <img src="{{ asset('storage/userPerfilFoto/' . $user_ver->foto) }}"
+                            class="object-cover w-24 h-24 rounded-full"
                             onerror="this.onerror=null; this.src='{{ asset('images/defecto.jpg') }}';">
                         <h1 class="text-2xl font-semibold">{{ $user_ver->name }}</h1>
                         <h4 class="text-sm font-semibold">{{ $user_ver->getRoleNames()->First() }}</h4>
                     </div>
                 </div>
+
+                {{ Breadcrumbs::render('Usuario.perfil', $user_ver) }}
 
                 @if ($editar)
                     <div class="flex justify-end">
@@ -24,7 +26,6 @@
                         </a>
                     </div>
                 @endif
-
                 <div class="relative flex flex-col items-center justify-center ">
                     <div class="w-full h-full max-w-4xl bg-white rounded-lg shadow-xl">
                         <div
@@ -208,7 +209,6 @@
                     })
                 });
             });
-
         </script>
     @endsection
 </x-app-layout>

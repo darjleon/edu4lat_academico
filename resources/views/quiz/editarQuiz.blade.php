@@ -1,4 +1,6 @@
 <x-app-layout>
+    {{ Breadcrumbs::render('Prueba.edit', $prueba) }}
+
     @can('Editar_prueba')
         <x-quiz-format-create>
             <x-slot name="titulo">
@@ -107,7 +109,6 @@
                         $("#fecha , #hora_de_inicio, #hora_de_cierre").val("");
                     }
                 }
-
             </script>
         </x-quiz-format-create>
     @endcan

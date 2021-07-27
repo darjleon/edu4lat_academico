@@ -212,7 +212,7 @@ if ($usuario->hasRole('Estudiante')) {
                                     0
                                     11-4 0 2 2 0 014 0z
                                 </x-slot>
-                                Curso: {{ $curso->nombre }}
+                                {{ $curso->nombre }}
                             </x-link-sidebar>
                         @empty
                             <x-link-sidebar href="#">
