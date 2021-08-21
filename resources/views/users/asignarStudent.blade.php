@@ -1,4 +1,7 @@
 <x-app-layout>
+
+    {{ Breadcrumbs::render('Estudiantes') }}
+
     @can('Asignar_estudiante')
         <x-modal-basic action="{{ route('student.store') }}">
             <x-slot name="id">
@@ -9,7 +12,7 @@
                 <div class="flex justify-end">
                     <a href="#">
                         <x-button-end class="text-white bg-blue-600 hover:bg-blue-700" @click="estudiante_asignar = true">
-                            Asignar un estudiante a un curso
+                            Crear Estudiante
                         </x-button-end>
                     </a>
                 </div>
@@ -250,7 +253,6 @@
                     })
                 });
             });
-
         </script>
     @endsection
 </x-app-layout>

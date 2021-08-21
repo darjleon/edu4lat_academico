@@ -15,7 +15,9 @@ if ($usuario->hasRole('Estudiante')) {
         ->where('course__books.docente_id', '=', $usuario->id)
         ->distinct()
         ->get();
-} elseif ($usuario->hasRole(['Coordinador', 'Administrador'])) {
+} elseif ($usuario->hasRole('Coordinador')) {
+    $cursos = Course::where('coordinador_id', $usuario->id);
+} elseif ($usuario->hasRole('Administrador')) {
     $cursos = Course::all();
 }
 @endphp
@@ -175,8 +177,9 @@ if ($usuario->hasRole('Estudiante')) {
                     @hasanyrole('Coordinador|Administrador|Docente|Estudiante')
                     <x-link-sidebar href="{{ route('home.index') }}">
                         <x-slot name="icono">
-                            M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0
-                            002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z
+                            M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4
+                            0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6
+                            0v-1m6 0H9
                         </x-slot>
                         Notificaciones
                     </x-link-sidebar>
@@ -209,7 +212,7 @@ if ($usuario->hasRole('Estudiante')) {
                                     0
                                     11-4 0 2 2 0 014 0z
                                 </x-slot>
-                                Curso: {{ $curso->nombre }}
+                                {{ $curso->nombre }}
                             </x-link-sidebar>
                         @empty
                             <x-link-sidebar href="#">
@@ -313,7 +316,7 @@ if ($usuario->hasRole('Estudiante')) {
                     </x-link-sidebar>
                     @endhasanyrole
 
-                    @hasanyrole('Administrador')
+                    @hasanyrole('Administrador|Coordinador|Docente|Estudiante')
                     <x-link-sidebar href="{{ route('usuario.index') }}">
                         <x-slot name="icono">
                             M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3
@@ -349,7 +352,8 @@ if ($usuario->hasRole('Estudiante')) {
                     class="flex items-center w-full px-2 py-2 text-sm font-medium text-gray-300 rounded-md cursor-pointer focus:outline-none hover:bg-gray-700 hover:text-white group">
                     <div class="flex items-center">
                         <div>
-                            <img src="#" class="inline-block rounded-full h-9 w-9"
+                            <img src="{{ asset('storage/userPerfilFoto/' . $usuario->foto) }}"
+                                class="object-cover w-10 h-10 rounded-full"
                                 onerror="this.onerror=null; this.src='{{ asset('images/defecto.jpg') }}';">
                         </div>
                         <div class="ml-2 ">
@@ -375,7 +379,7 @@ if ($usuario->hasRole('Estudiante')) {
 
                 <div x-show="open">
                     <nav class="flex-1 space-y-1 bg-gray-800">
-                        <x-link-sidebar href="#">
+                        <x-link-sidebar href="{{ route('usuario.show', $usuario->id) }}">
                             <x-slot name="icono">
                                 M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3
                                 0

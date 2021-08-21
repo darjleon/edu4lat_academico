@@ -1,8 +1,13 @@
 <x-app-layout>
+    {{ Breadcrumbs::render('Prueba.edit', $prueba) }}
+
     @can('Editar_prueba')
         <x-quiz-format-create>
             <x-slot name="titulo">
                 Edita los datos o intrucciones necesarios para programar y realizar la prueba
+            </x-slot>
+            <x-slot name="icono">
+                no
             </x-slot>
             <div class="divide-y divide-gray-200">
                 <form method="post" action={{ route('quiz.update', $prueba->id) }}>
@@ -20,47 +25,21 @@
                                 class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
                                 placeholder="Opcional">{{ $prueba->descripcion }}</textarea>
                         </div>
-                        <div class="flex justify-around space-x-4">
-                            <div class="flex flex-col">
-                                <div class="input-group-prepend">
-                                    <label class="leading-loose input-group-text" for="libro">Libro</label>
-                                </div>
-                                <select id="libro"
-                                    class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
-                                    name="libro" required>
-                                    <option value="{{ $prueba->libro_id }}">Libro:
-                                        {{ $libros->find($prueba->libro_id)->titulo }}</option>
-                                    @foreach ($libros as $libro)
-                                        <option value="{{ $libro->id }}">{{ $libro->titulo }}</option>
-                                    @endforeach
-                                </select>
+                        <div class="flex flex-col">
+                            <div class="input-group-prepend">
+                                <label class="leading-loose input-group-text" for="libro">Libro</label>
                             </div>
-                            <div class="flex flex-col">
-                                <div class="input-group-prepend">
-                                    <label class="leading-loose input-group-text" for="area">Area</label>
-                                </div>
-                                <select
-                                    class="w-full py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
-                                    id="area" name="area" required>
-                                    <option value="{{ $prueba->area }}">Area: {{ $prueba->area }}</option>
-                                    @foreach ($areas as $area)
-                                        <option value="{{ $area->nombre }}">{{ $area->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="flex flex-col">
-                                <div class="leading-loose input-group-prepend">
-                                    <label class="input-group-text" for="nivel">Nivel</label>
-                                </div>
-                                <select
-                                    class="w-full py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
-                                    id="nivel" name="nivel" required>
-                                    <option value="{{ $prueba->nivel }}">Nivel: {{ $prueba->nivel }}</option>
-                                    @foreach ($niveles as $nivel)
-                                        <option value="{{ $nivel->nombre }}">{{ $nivel->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                            <select id="libro"
+                                class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                name="libro" required>
+                                <option value="{{ $prueba->libro_id }}">Libro:
+                                    {{ $libros->find($prueba->libro_id)->titulo }}-{{ $libros->find($prueba->libro_id)->area }}-{{ $libros->find($prueba->libro_id)->nivel }}
+                                </option>
+                                @foreach ($libros as $libro)
+                                    <option value="{{ $libro->id }}">
+                                        {{ $libro->titulo }}-{{ $libro->area }}-{{ $libro->nivel }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="relative flex items-center border-b last:border-b-0">
                             <input type="checkbox"
@@ -130,7 +109,6 @@
                         $("#fecha , #hora_de_inicio, #hora_de_cierre").val("");
                     }
                 }
-
             </script>
         </x-quiz-format-create>
     @endcan

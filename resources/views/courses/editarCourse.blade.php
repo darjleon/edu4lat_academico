@@ -1,4 +1,7 @@
 <x-app-layout>
+    
+    {{ Breadcrumbs::render('Curso.home.edit', $curso) }}
+
     @can('Editar_curso')
         <x-quiz-format-create>
             <x-slot name="titulo">
@@ -6,7 +9,9 @@
                     <p class="pr-4">Edita el curso {{ $curso->nombre }} </p>
                 </div>
             </x-slot>
-
+            <x-slot name="icono">
+                no
+            </x-slot>
             <div class="divide-y divide-gray-200">
                 <form method="post" action={{ route('course.update', $curso->id) }}>
                     @csrf
@@ -23,6 +28,21 @@
                                 class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
                                 placeholder="Opcional">{{ $curso->descripcion }}</textarea>
                         </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="input-group-prepend">
+                            <label class="leading-loose input-group-text" for="coordinador">Coordinador
+                                encargado:</label>
+                        </div>
+                        <select id="coordinador"
+                            class="w-full py-2 text-gray-600 border border-gray-300 rounded-md form-multiselect focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                            name="coordinador">
+                            <option value="{{ $curso->coordinador_id ?? '' }}">Coordinador:
+                                {{ $coordinadores->find($curso->coordinador_id)->name ?? '' }}</option>
+                            @foreach ($coordinadores as $coordinador)
+                                <option value="{{ $coordinador->id }}">{{ $coordinador->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="flex justify-center pt-4 space-x-4">
                         <a href="#" onclick="history.back()"

@@ -23,27 +23,21 @@
                             </svg>
                         </button>
                     </x-slot>
+                    <x-slot name="icono">
+                        {{ $icono ?? 'no' }}
+                    </x-slot>
                     <div class="divide-y divide-gray-200">
                         <form method="post" {{ $attributes->merge(['action']) }}>
                             @csrf
                             {{ $slot }}
                             <div class="flex justify-center pt-4 space-x-4">
                                 <a href="#" @click="{{ $id }} = false"
-                                    class="flex items-center justify-center w-full px-4 py-3 text-gray-900 bg-red-400 rounded-md hover:bg-red-600 focus:outline-none">
-                                    <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M6 18L18 6M6 6l12 12">
-                                        </path>
-                                    </svg>Cancelar
+                                    class="flex items-center justify-center py-2 font-medium text-gray-900 bg-red-400 rounded-md w-60 hover:bg-red-600 focus:outline-none">
+                                    Cancelar
                                 </a>
                                 <button type="submit"
-                                    class="flex items-center justify-center w-full px-4 py-3 text-white bg-blue-400 rounded-md hover:bg-blue-600 focus:outline-none">Guardar
-                                    <svg class="w-12 h-12 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
+                                    class="flex items-center justify-center py-2 font-medium text-gray-900 bg-green-400 rounded-md w-60 hover:bg-green-600 focus:outline-none">
+                                    {{ $guardar ?? 'Guardar' }}
                                 </button>
                             </div>
                         </form>

@@ -1,8 +1,14 @@
 <x-app-layout>
+    
+    {{ Breadcrumbs::render('Libros.crear', $curso_id) }}
+    
     @can('Crear_libro')
         <x-quiz-format-create>
             <x-slot name="titulo">
                 Crea un libro nuevo
+            </x-slot>
+            <x-slot name="icono">
+                no
             </x-slot>
             <div class="divide-y divide-gray-200">
                 <form method="post" action={{ route('book.store', $curso_id) }}>
@@ -19,6 +25,32 @@
                             <textarea id="descripcion" name="descripcion"
                                 class="w-full px-4 py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none"
                                 placeholder="Opcional">{{ old('descripcion') }}</textarea>
+                        </div>
+                        <div class="flex flex-col">
+                            <div class="input-group-prepend">
+                                <label class="leading-loose input-group-text" for="area">Area</label>
+                            </div>
+                            <select
+                                class="w-full py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                id="area" name="area" required>
+                                <option value="{{ old('area') }}">Area: {{ old('area') }}</option>
+                                @foreach ($areas as $area)
+                                    <option value="{{ $area->nombre }}">{{ $area->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="flex flex-col">
+                            <div class="leading-loose input-group-prepend">
+                                <label class="input-group-text" for="nivel">Nivel</label>
+                            </div>
+                            <select
+                                class="w-full py-2 text-gray-600 border border-gray-300 rounded-md focus:ring-gray-500 focus:border-gray-900 sm:text-sm focus:outline-none custom-select"
+                                id="nivel" name="nivel" required>
+                                <option value="{{ old('nivel') }}">Nivel: {{ old('nivel') }}</option>
+                                @foreach ($niveles as $nivel)
+                                    <option value="{{ $nivel->nombre }}">{{ $nivel->nombre }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         @can('Asignar_libro')
                             <div class="relative flex items-center border-b last:border-b-0">
@@ -103,7 +135,11 @@
                         element.style.display = 'block';
                     } else {
                         element.style.display = 'none';
-                        $("#curso , #docente").val("");
+                        if ($curso_id != null) {
+                            $("#docente").val("");
+                        } else {
+                            $("#curso , #docente").val("");
+                        }
                     }
                 }
 

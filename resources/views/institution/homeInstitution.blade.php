@@ -1,7 +1,7 @@
 <x-app-layout>
     @can('Ver_institución')
-        <div class="bg-white ">
-
+        <div class="bg-white">
+            
             <div class="relative w-full overflow-hidden rounded shadow-2xl">
                 <div class="relative w-full h-full overflow-hidden bg-blue-600 top">
                     <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
@@ -17,11 +17,13 @@
 
                 </div>
                 @can('Editar_institución')
-                    <a href="{{ route('institucion.edit', $institucion->id) }}">
-                        <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
-                            Editar información
-                        </x-button-end>
-                    </a>
+                    <div class="flex justify-end">
+                        <a href="{{ route('institucion.edit', $institucion->id) }}">
+                            <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
+                                Editar información
+                            </x-button-end>
+                        </a>
+                    </div>
                 @endcan
 
                 <div class="relative flex flex-col items-center justify-center h-full">

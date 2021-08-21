@@ -1,4 +1,7 @@
 <x-app-layout>
+
+    {{ Breadcrumbs::render('Areas') }}
+
     @can('Crear_area')
         <x-modal-basic action="{{ route('area.store') }}">
             <x-slot name="id">
@@ -126,7 +129,8 @@
                                                     @can('Eliminar_area')
                                                         <div class="w-6 mr-2 hover:scale-110">
                                                             <form class="area-eliminar"
-                                                                action="{{ route('area.destroy', $area->id) }}" method="post">
+                                                                action="{{ route('area.destroy', $area->id) }}"
+                                                                method="post">
                                                                 <input name="_method" type="hidden" value="DELETE">
                                                                 <input type="hidden" name="_token"
                                                                     value="{{ csrf_token() }}">
@@ -183,7 +187,6 @@
                     })
                 });
             });
-
         </script>
     @endsection
 </x-app-layout>

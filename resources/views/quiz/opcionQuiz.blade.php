@@ -1,4 +1,6 @@
 <x-app-layout>
+    {{ Breadcrumbs::render('Pruebas', $libro_id) }}
+
     @can('Crear_prueba')
         @if ($libro_id == null)
             <div class="flex justify-end">
@@ -9,9 +11,6 @@
                 </a>
             </div>
         @else
-            <x-header-title>
-                Libro: {{ $libros->where('id', $libro_id)->first()->titulo }}
-            </x-header-title>
             <div class="flex justify-end">
                 <a href="{{ route('quiz.create', $libro_id) }}">
                     <x-button-end class="text-white bg-blue-600 hover:bg-blue-700">
@@ -232,7 +231,6 @@
                     })
                 });
             });
-
         </script>
     @endsection
 </x-app-layout>

@@ -50,11 +50,17 @@ class InstitutionController extends Controller
         $institucion->correo = $request->correo;
         $institucion->telefono = $request->telefono;
         $institucion->celular = $request->celular;
+
+        if ($institucion->logo != null && $request->hasFile('logo')) {
+            unlink('storage/institucion/' . $institucion->logo);
+            $institucion->logo = null;
+        }
+
         if ($request->hasFile('logo')) {
-            $imagen = $request->nombre . '.' . time() . '.' . $request->file('logo')->getClientOriginalExtension();
+            $imagen = str_replace(" ", "_", $request->nombre) . '.' . time() . '.' . $request->file('logo')->getClientOriginalExtension();
             $institucion->logo = $imagen;
             $request->logo->storeAs('public/institucion', $imagen);
-        };
+        }
         $institucion->save();
         return redirect()->route('institucion.index');
     }

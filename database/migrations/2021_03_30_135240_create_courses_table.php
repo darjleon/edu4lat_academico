@@ -20,6 +20,7 @@ class CreateCoursesTable extends Migration
                 ->references('id')
                 ->on('institutions');
             $table->string('nombre');
+            $table->unsignedBigInteger('coordinador_id')->nullable();
             $table->text('descripcion')->nullable();
             $table->timestamps();
         });

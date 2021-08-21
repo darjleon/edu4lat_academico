@@ -18,6 +18,8 @@ class CreateBooksTable extends Migration
             $table->string('titulo');
             $table->text('descripcion')->nullable();
             $table->text('portada')->nullable();
+            $table->string('area');
+            $table->string('nivel');
             $table->timestamps();
         });
     }

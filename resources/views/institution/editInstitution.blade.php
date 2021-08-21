@@ -144,7 +144,7 @@
                                         Correo de la institución
                                     </p>
                                     <p>
-                                        <input type="text" value="{{ $institucion->correo }}" name="correo" id="correo"
+                                        <input type="email" value="{{ $institucion->correo }}" name="correo" id="correo"
                                             placeholder="Escriba aquí"
                                             class="w-full px-2 py-1 mr-2 text-black rounded shadow appearance-none text-opacity-60 focus:outline-none focus:shadow-outline focus:border-blue-400">
                                     </p>

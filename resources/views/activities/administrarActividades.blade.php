@@ -1,10 +1,9 @@
 <x-app-layout>
+    {{ Breadcrumbs::render('Actividades', $quiz_id) }}
 
     <x-header-title>
         @if ($quiz_id != null)
             Escoje las actividades que tendra la prueba
-        @else
-            Actividades
         @endif
     </x-header-title>
 
@@ -170,7 +169,6 @@
                     toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
             })
-
         </script>
 
         @if (session('estado') == 'Guardada')
@@ -181,7 +179,6 @@
                         title: 'Actividad guardada en la prueba'
                     })
                 });
-
             </script>
         @elseif (session('estado')=='Eliminada')
             <script>
@@ -191,7 +188,6 @@
                         title: 'Actividad eliminada de la prueba'
                     })
                 });
-
             </script>
         @endif
 
@@ -215,7 +211,6 @@
                     })
                 });
             });
-
         </script>
     @endsection
     @can('Crear_actividad')

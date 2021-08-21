@@ -12,7 +12,7 @@ class CourseUserController extends Controller
 
     public function index()
     {
-        $estudiantes = User::role('Estudiante')->paginate(10);
+        $estudiantes = User::role('Estudiante')->paginate(25);
         $cursos = Course::all();
         return view('users.asignarStudent', compact('estudiantes', 'cursos'));
     }

@@ -49,6 +49,16 @@ class User extends Authenticatable
             'course__users',
             'usuario_id',
             'curso_id'
-        )->withPivot('updated_at','id');
+        )->withPivot('updated_at', 'id');
+    }
+
+    public function areas()
+    {
+        return $this->belongsToMany(
+            Area::class,
+            'area__grade__docentes',
+            'usuario_id',
+            'area_id'
+        )->withPivot('nivel', 'id');
     }
 }
